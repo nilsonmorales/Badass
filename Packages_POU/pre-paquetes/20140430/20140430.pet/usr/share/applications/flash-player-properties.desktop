@@ -20,5 +20,5 @@ Icon=flash-player-properties
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=Settings;GNOME;GTK;X-GNOME-PersonalSettings;
+Categories=X-Internet;
 NotShowIn=KDE;
