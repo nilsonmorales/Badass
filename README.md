@@ -16,7 +16,7 @@ Aqui se trabajará en las actualizaciones de forma comunitaria, para ir
 mejorando la versión de Puppy-es.
 
 [Descarga imagén .iso] 
-(http://cut07.tk/cDq) [recomendada] 
+(http://ubuntuone.com/6jKxI0p7LimD0ap78GeEiO) [recomendada] 
 
 MD5sum:    958f96ed300bdb2704444b53ff517cb2
 
