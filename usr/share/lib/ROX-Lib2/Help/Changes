@@ -1,0 +1,1086 @@
+			ROX-Lib2
+			Shared code for ROX applications
+			by Thomas Leonard
+			http://rox.sourceforge.net
+
+Note: for a detailed changelog use the GIT history.
+
+
+Release 2.0.6:
+
+New features:
+
+- When parsing AppInfo files, get the menu icons too (Dennis Tomas).
+  The new version of TaskTray needs this to show icons in menu entries
+  for app options.
+
+- Updated the code for loading MIME icons (and moved it into mime.py from
+  saving.py) (Stephen Watson).
+
+- Added interface for gtk.StatusIcon (Stephen Watson). Wrap the
+  StatusIcon class with toplevel_ref/toplevel_unref calls and default to
+  using the scaled .DirIcon
+
+- Added module to aid in writing single instance applications (Stephen
+  Watson).
+
+Bug fixes:
+
+- Fixed deprecation warning with Python 2.6.
+
+- Fix problem installing handlers which are zero-install aware (Stephen
+  Watson) (reported by Mark Williams).
+
+- Handle thumbnail creation failure according to the standard (Stephen
+  Watson).
+
+- Fix hang in exception reporting dialog (Tony Houghton). ROX-Lib's
+  exception dialog often fails to work correctly. It appears, but
+  doesn't respond to any events, and neither does the rest of the
+  application. I don't think it always happens, but I haven't figured
+  out the circumstances of when it works and when it doesn't. Note that
+  this reverses a previous change (8c8822a3), so presumably the code was
+  like this for a reason. However, the reason wasn't documented so let's
+  just try it and see...
+
+- Fixed some icon-loading bugs (Lennon Cook).
+
+- Ensure version is updated when making releases. Added
+  <release-management> section in local feed. Reported by Lucas Hazel.
+
+- Correctly call mime.image_for_type now (Stephen Watson).
+
+
+Release 2.0.5:
+
+General:
+
+- Added a 'parent' argument to the SaveBox constructor (Thomas Leonard).
+
+- Python 2.4 is now the base version, so test against that.
+
+- Fix example Menu definition. Allow option widgets to expand vertically by
+  setting the _rox_lib_expand property to True (Stephen Watson, suggested by
+  Thomas Leonard).
+
+Bugfixs:
+
+- Fix scaling of MIME icons (Stephen Watson)
+
+- Work-around possible PyGTK bug (Lars Hansson and Tony Houghton, reported by
+  Peter): "assertion `GTK_IS_TREE_SELECTION (selection)' failed"
+
+- Added an assertion to detect a mysterious error (Thomas Leonard; reported by
+  Carl Bolduc).
+
+
+Release 2.0.4:
+
+General:
+
+- Fix unit tests to use correct path (Thomas Leonard).
+
+- Removed a load of unused imports spotted by PyFlakes (Thomas Leonard).
+
+- ROX base platform is now Python 2.3, so run unit tests against that by
+  default (Thomas Leonard).
+
+- Bugfix: Must use '..' in interface for backwards compat (Thomas Leonard).
+
+- Removed some more deprecation warnings. Do not run testsu as part of testall
+  as it is interactive (Thomas Leonard).
+
+- Ensure window response codes are treated as int(), required for python 2.5 
+  and pygtk 2.6 (Stephen Watson).
+
+- Drag-and-drop didn't work if the hostname contained '-', due to an error in
+  a regular expression (Thomas Leonard, reported by Lennon Cook).
+
+- Function to fetch an appropriate icon for a file (Lennon Cook).  Changed to
+  return a Pixbuf instead of an Image, to use the existing icon theme lookup
+  and to first check for a .DirIcon for directories (Stephen Watson).  
+
+Translations:
+
+- Update Chinese Translations (Babyfai Cheung).
+
+- Update French translations (Vincent Lefèvre).
+
+debug:
+
+- Exception handler now copes with old-style non-class exceptions and
+  with missing tracebacks (Thomas Leonard).
+
+mime:
+
+- Added xattr support including test for user set MIME types (Stephen Watson).
+
+OptionsBox:
+
+- When there is only one section in the options box, don't show a frame (Thomas
+  Leonard).
+
+- Added note about size-groups(Thomas Leonard).
+
+- Added <filechooser> widget to OptionsBox, which lets the user choose a file
+  using a GtkFileChooser or by drag-and-drop (Jim Ramsay). Requires GTK >= 2.6.
+
+- Added Clear button to filename options (Jim Ramsay and Thomas Leonard).
+
+saving:
+
+- Lookup icons from /rox.sourceforge.net/MIME-icons before /MIME-ICONS 
+ (Stephen Watson)
+
+session:
+
+- Prefered launcher for a URL scheme now part of uri_handler (Stephen Watson).
+
+settings:
+
+- Prefered launcher for a URL scheme now part of uri_handler (Stephen Watson).
+
+tasks:
+
+- Fixed some deprecation warnings (Thomas Leonard).
+
+- Bugfix: InputBlocker and OutputBlocker now trigger on IO_HUP too (Thomas 
+  Leonard).
+
+- Added Task.finished blocker, which is triggered when the task finishes,
+  successfully or by throwing an exception (Thomas Leonard; suggested by Ken
+  Hayber).
+
+- Ensure that IO blocker callbacks return False, not None, or we get a
+  warning from PyGTK (Thomas Leonard).
+
+templates: *NEW*
+
+- Added templates module as an interface to glade (Stephen Watson).
+
+- Templates now has full dict behaviour and derives from glade.XML.  Method
+  names have therefore changed to be the same used by glade.XML (Stephen 
+  Watson).
+
+
+thumbnail: *NEW*
+
+- Added thumbnail module to access thumbnail images of files and also to 
+  generate them (Stephen Watson).
+
+uri_handler: *NEW*
+
+- Suppor shared configuration for launching URIs (Stephen Watson).
+
+xattr: *NEW*
+
+- Added xattr support including test for user set MIME types (Stephen Watson).
+
+
+Release 2.0.3:
+
+General:
+
+- Added ROX-Lib.xml file, which makes it easy to register a CVS copy of ROX-Lib
+  with the 0launch, using '0launch --add-feed' (Thomas Leonard).
+
+- If pygtk is found, but not gtk, give a better error (Thomas Leonard; reported
+  by Albert).
+
+- Double-click on a line in the stacktrace display of the debug box to
+  open the source code in Edit.
+
+- Added rox.isappdir() function to test the validity of an AppDir (Stephen
+  Watson).
+
+- Set sys.excepthook to our graphical exception explorer so that untrapped
+  exceptions are reported nicely.
+
+- Don't display KeyboardInterrupt in an error box.
+
+- Added unittests.
+  Support Python 2.2.
+
+- When displaying an uncaught exception, still write it to stderr as well as
+  opening the exception dialog box.
+
+Translations:
+
+- Made message in AppRun translatable (Andras Mohari).
+
+- Include AppRun when generating translations, and rename translation function
+  in OptionsBox to avoid confusing pygettext (reported by Andras Mohari).
+
+- Added Hungarian translation.
+
+- More strings marked for translation.
+
+Current translations:
+
+ de      Guido Schimmels
+ es      Juan Carlos Jimenez Garcia
+ fr      Vincent Lefèvre
+ hu      Andras Mohari
+ it      Yuri Bongiorno
+ pl      Bart Kreska
+ pt_BR * Jose Carlos do Nascimento
+ zh_CN * cheungsiufai
+ zh_TW * cheungsiufai
+
+* indicates a translation which is out-of-date.
+
+applet:
+
+- Added method for applets to determine the panel orientation (Stephen Watson).
+
+filer:
+
+- Made filer.py use 0launch if available (Thomas Leonard; requested by
+  Christopher Arndt).
+
+launch: *NEW*
+
+- Added launch module, which allows running programs easily using the injector,
+  and made filer.py use 0launch if available (Thomas Leonard; requested by
+  Christopher Arndt).
+
+Menu:
+
+- Changed the doc string in Menu.py to prefer the new MenuItem based method
+  of defining menus not the old tuple method (Stephen Watson).
+
+mime:
+
+- Added mime.get_type_handler(), which uses the same algorithm as ROX-Filer to
+  find the handler for a file (Ken Hayber and Thomas Leonard).
+
+mime_handler:
+
+- EXPERIMENTAL code for installing MIME handlers via 0launch (Stephen Watson)
+
+- Better detection of the MIME-types/MIME-thumb location when installing type
+  handlers (Stephen Watson).
+
+- Improve installation of MIME type handler under Zero Install (Stephen Watson)
+
+- Bugfix: spurious argument when installing SendTo handler under Zero Install
+  (Stephen Watson, reported by Andras Mohari)
+
+OptionsBox:
+
+- Rename translation function in OptionsBox to avoid confusing pygettext.
+
+- Make the options box use ComboBox instead of OptionMenu whenever possible. It
+  also makes sure that the OptionMenu's initial width is large enough to
+  display the widest item (Andras Mohari).
+
+saving:
+
+- When saving a file to a FAT filesystem, the chmod would fail. Log a warning
+  instead of aborting (Thomas Leonard; reported by QS Computing).
+
+- Save box now selects icon from same icon theme as ROX-Filer (Stephen Watson).
+
+session: *NEW*
+
+- Added rox.session module for communicating with ROX-Session.
+
+- Use XMLRPC if the DBUS version is too old.
+
+- Check that ROX-Session is providing the dbus service, don't just assume that
+  it is (Stephen Watson).
+
+settings: *NEW*
+
+- Added settings module (Tony Houghton, based on code from LookAndFeel).
+
+- Don't create bus object until constructor is called.
+
+- rox.settings now uses rox.session to communicate with ROX-Session and
+  the duplicate Options work has been removed from rox.session (Stephen
+  Watson).
+
+su:
+
+- If 'xterm' isn't available, give a sensible error message when using the
+su module (Thomas Leonard; reported by Vincent Lefevre).
+
+xxmlrpc: *NEW*
+
+- Added 'xxmlrpc' module. This allows sending XML-RPC messages to other
+  processes, via the X server.
+
+- Extended XML-RPC code to return response values and faults to caller.
+
+- Better error codes (NoSuchService, UnknownObject, NoSuchMethod).  Cope with 
+  returning None (returns True instead).  Simplified API (no need to subclass
+  ExportedObject, call register, or use invoke).
+
+- If a service property exists but the window it points to doesn't, then
+  report that the service is no longer running.
+
+- XXMLRPC call objects support the Blocker interface (so you can block
+  until the reply is available).
+
+- If an XXMLRPC Call object is destroyed before the response is read then
+  display a warning and destroy the IPC window.
+
+25-May-2006
+~~~~~~~~~~~
+Updated French translation (Vincent Lefèvre).
+
+10-Mar-2006
+~~~~~~~~~~~
+Bugfix: spurious argument when installing SendTo handler under Zero 
+        Install (Stephen Watson, reported by Andras Mohari)
+
+04-Mar-2006
+~~~~~~~~~~~
+When installing a type handler under Zero Install, make sure to pass the
+arguments to the program and run 0launch in console mode (Stephen Watson).
+
+25-Feb-2006
+~~~~~~~~~~~
+Added mime.get_type_handler(), which uses the same algorithm as ROX-Filer to
+find the handler for a file (Ken Hayber and Thomas Leonard).
+
+17-Feb-2006
+~~~~~~~~~~~
+New class Setting in rox.session is an option tied to a ROX-Session setting
+(Stephen Watson).
+
+14-Feb-2006
+~~~~~~~~~~~
+Added rox.session module for communicating with ROX-Session.
+Added method for applets to determine the panel orientation (Stephen Watson).
+
+21-Jan-2006
+~~~~~~~~~~~
+Set sys.excepthook to our graphical exception explorer so that untrapped
+exceptions are reported nicely.
+
+13-Jan-2006
+~~~~~~~~~~~
+Save box now selects icon from same icon theme as ROX-Filer (Stephen Watson).
+
+29-Dec-2005
+~~~~~~~~~~~
+When saving a file to a FAT filesystem, the chmod would fail. Log a warning
+instead of aborting (Thomas Leonard; reported by QS Computing).
+
+25-Nov-2005
+~~~~~~~~~~~
+Better detection of the MIME-types/MIME-thumb location when installing 
+type handlers (Stephen Watson).
+
+12-Nov-2005
+~~~~~~~~~~~
+Added rox.isappdir() function to test the validity of an AppDir (Stephen
+Watson).
+EXPERIMENTAL code for installing MIME handlers via 0launch (Stephen Watson).
+
+05-Nov-2005
+~~~~~~~~~~~
+Changed the doc string in Menu.py to prefer the new MenuItem based method
+of defining menus not the old tuple method (Stephen Watson).
+
+22-Oct-2005
+~~~~~~~~~~~
+Added Hungarian translation (Andras Mohari).
+
+21-Oct-2005
+~~~~~~~~~~~
+Made message in AppRun translatable (Andras Mohari).
+
+02-Sep-2005
+~~~~~~~~~~~
+Added launch module, which allows running programs easily using the injector,
+and made filer.py use 0launch if available (Thomas Leonard; requested by
+Christopher Arndt).
+Double-click on a line in the stack-trace display of an error to open the
+source file in Edit (Thomas Leonard).
+
+30-Aug-2005
+~~~~~~~~~~~
+If pygtk is found, but not gtk, give a better error (Thomas Leonard; reported
+by Albert).
+
+20-Aug-2005
+~~~~~~~~~~~
+If 'xterm' isn't available, give a sensible error message when using the
+su module (Thomas Leonard; reported by Vincent Lefevre).
+
+18-Aug-2005
+~~~~~~~~~~~
+Added ROX-Lib.xml file, which makes it easy to register a CVS copy of ROX-Lib
+with the 0launch, using '0launch --add-feed' (Thomas Leonard).
+
+25-Jul-2005 (Release 2.0.2)
+~~~~~~~~~~~
+Bugfix: Installing MIME handlers under the XDG base dir system didn't 
+        work (Stephen Watson).
+
+17-Jun-2005 (Release 2.0.1)
+~~~~~~~~~~~
+Send deprecation warnings to stdout, not stderr, so only developers will
+see them (Thomas Leonard).
+
+10-Jun-2005
+~~~~~~~~~~~
+Fixed deprecation warning in processes.py (Thomas Leonard).
+
+01-Jun-2005
+~~~~~~~~~~~
+Avoid apparent PyGTK bug related to icon themes, may result in a
+memory leak but probably won't (Stephen Watson).
+
+19-May-2005
+~~~~~~~~~~~
+Clean up of icon theme handling (Stephen Watson).
+
+18-May-2005
+~~~~~~~~~~~
+Compatability with PyGTK 2.4 retaining backwards compatability with
+2.2 at least (Ken Hayber, Stephen Watson).
+
+12-May-2005
+~~~~~~~~~~~
+Updated Chinese translation (Babyfai Cheung).
+
+11-May-2005
+~~~~~~~~~~~
+Added Portuguese translation (José Carlos do Nascimento).
+
+07-May-2005
+~~~~~~~~~~~
+Don't try to get pygtk through Zero Install. The injector can be used to
+choose the implementation of pygtk to use, including a version in Zero
+Install if desired (Thomas Leonard).
+
+06-May-2005
+~~~~~~~~~~~
+MIME handler install now uses basedir (Stephen Watson).
+Tests use gtk.main() instead of the deprecated gtk.mainloop() (Stephen Watson).
+
+05-May-2005
+~~~~~~~~~~~
+Some versions of GTK silently remove '-' from sys.argv (GTK bug #303166).
+Added a work-around (Thomas Leonard).
+
+02-May-2005
+~~~~~~~~~~~
+Put "root" back in su command, but detect what the exact string should be, as
+Solaris needs something here (reported by Stephen Watson).
+
+01-May-2005
+~~~~~~~~~~~
+The default SaveArea.confirm_new_path() now shows an error if the target
+exists as a directory, instead of asking if you want to overwrite it (Thomas
+Leonard; reported by Jonatan Liljedahl).
+Remove "root" from the su command, as some systems call user 0 something else
+(Thomas Leonard; reported by Jonatan Liljedahl).
+
+30-Apr-2005
+~~~~~~~~~~~
+When getting an icon for saving, specify the size if PyGTK is recent enough.
+This prevents SVG icons from appearing in huge sizes (Thomas Leonard;
+requested by John Pettigrew).
+Bugfix: Theme index parser failed to cope with comments at the start of the
+	file (Thomas Leonard).
+
+29-Apr-2005
+~~~~~~~~~~~
+Compatability fixes for the su module (Stephen Watson).
+
+17-Apr-2005
+~~~~~~~~~~~
+Fixed Zero Install version test in findrox.py (Thomas Leonard).
+
+16-Apr-2005 (Release 2.0.0)
+~~~~~~~~~~~
+Run unit tests in alphabetical order as it fixes a strange interaction between them (Stephen Watson).
+
+10-Apr-2005
+~~~~~~~~~~~
+Added unit tests for processes module, based on old tests in Archive (Thomas
+Leonard).
+
+09-Apr-2005
+~~~~~~~~~~~
+Changed MakeDist to allow use of other SourceForge accounts (Stephen Watson).
+
+01-Apr-2005
+~~~~~~~~~~~
+Added 'testall' script to run all the unit tests together (Thomas Leonard).
+
+23-Mar-2005 (Release 1.9.18)
+~~~~~~~~~~~
+German translation (Guido Schimmels).
+
+13-Mar-2005
+~~~~~~~~~~~
+Added TODO file to track bugs and changes needed for 2.0.0 release.
+
+10-Mar-2005
+~~~~~~~~~~~
+Bugfix: Set default in Options box to OK to avoid triggering a GTK bug
+	(Thomas Leonard, reported by Guido Schimmels).
+
+16-Jan-2005 (Release 1.9.17)
+~~~~~~~~~~~
+Added OutputBlocker, which works in a similar way to InputBlocker (Thomas
+Leonard).
+
+15-Jan-2005
+~~~~~~~~~~~
+Be consistent about URI escaping. set_uri() is now always passed an unescaped
+UTF-8 string (Thomas Leonard).
+
+03-Jan-2004
+~~~~~~~~~~~
+Added fixedlist and varlist widgets to OptionsBox (Stephen Watson).
+
+31-Dec-2004
+~~~~~~~~~~~
+Added MIME type matching by file contents (Stephen Watson).
+
+29-Dec-2004
+~~~~~~~~~~~
+If a 'rox' module is in PYTHONPATH, use that without any searching (Thomas
+Leonard).
+
+23-Dec-2004
+~~~~~~~~~~~
+Added Chinese translation (Babyfai Cheung).
+
+11-Dec-2004
+~~~~~~~~~~~
+Suppress warning when we use GtkItemFactory under pygtk 2.4 (Stephen Watson).
+
+25-Nov-2004
+~~~~~~~~~~~
+Added tasks.InputBlocker, which triggers when an input source becomes
+readable (Thomas Leonard).
+
+21-Nov-2004
+~~~~~~~~~~~
+Bugfix: Use only text nodes when getting the tool tip from the Options.xml
+        file (Stephen Watson).
+
+22-Oct-2004
+~~~~~~~~~~~
+Bugfix: Theme subdirectories are separated by ',' not ';' (reported by
+	Denis Prost).
+
+20-Oct-2004
+~~~~~~~~~~~
+Bugfix: When a menu has more than one toggle item, only one is updated
+	correctly (Ken Hayber).
+
+07-Oct-2004
+~~~~~~~~~~~
+Replace g.mainloop() and g.mainquit() with g.main() and g.main_quit() as
+recommended since pygtk 2.0.0 to avoid warnings with pygtk 2.4.0 (Stephen 
+Watson).
+
+03-Oct-2004
+~~~~~~~~~~~
+Added options.ListOption to support multi-valued option widgets, such as
+lists (Stephen Watson).
+
+02-Oct-2004 (Release 1.9.16)
+~~~~~~~~~~~
+Cope better with user cancelling su operation. New interface to replace
+create_su_proxy (Thomas Leonard).
+
+27-Sep-2004
+~~~~~~~~~~~
+The choices module is now deprecated. You can use choices.migrate() to move
+settings over to the basedir system (Thomas Leonard). Also added
+basedir.load_first_config(), which works like the old choices.load().
+
+26-Sep-2004
+~~~~~~~~~~~
+Several incompatible changes to the experimental proxy API to make it simpler
+(Thomas Leonard):
+
+- Create_su_proxy now returns the MasterObject directly, not the MasterProxy.
+- You can call finish on the MasterObject (so the MasterProxy isn't needed).
+- Slave methods no longer take a 'request' argument. Instead, the return
+  value of the function is returned.
+- Methods can only return one value. dequeue and dequeue_last have been
+  replaced with a 'result' property.
+- Methods on MasterObject now return a RequestBlocker, not a Queue. This
+  means you just yield the object itself, not object.blocker.
+
+Tasks API is no longer experimental, but proxy API is.
+
+22-Sep-2004
+~~~~~~~~~~~
+Added a Help button to the exception dialog, which opens the new Help/Errors
+file (Thomas Leonard).
+
+08-Sep-2004
+~~~~~~~~~~~
+Bugfix: Failed to call the parent constructor to AbortSave correctly.
+
+06-Sep-2004
+~~~~~~~~~~~
+Simplified su code and interface.
+New suchild methods: open, close, read, write, chmod and rename, which work
+just like their normal Python counterparts (Thomas Leonard).
+
+29-Aug-2004
+~~~~~~~~~~~
+Removed code to turn off the separator in the debug dialog. GTK 2.4 doesn't
+need it, and generates a warning if you use it (Thomas Leonard).
+
+27-Aug-2004 (Release 1.9.15)
+~~~~~~~~~~~
+Added spawnvpe and waitpid methods to suchild.
+
+08-Aug-2004
+~~~~~~~~~~~
+If the unit field for a <numentry> option is blank, don't try to translate it
+(reported by Guido Schimmels).
+
+30-Jun-2004
+~~~~~~~~~~~
+Added 'su' module for performing operations as root.
+
+11-Jun-2004
+~~~~~~~~~~~
+Allow "" as a valid value in a OptionsBox menu (reported by Guido Schimmels).
+
+10-Jun-2004
+~~~~~~~~~~~
+Added 'proxy' module. This allows one Python process to invoke methods on
+another asynchronously.
+Added rox.UserAbort exception, to be raised when users cancel something
+manually.
+
+07-Jun-2004
+~~~~~~~~~~~
+Fix syntax error I caused when I added a docstring (Stephen Watson).
+
+30-May-2004
+~~~~~~~~~~~
+Get update-mime-database command through Zero Install, if possible.
+
+24-May-2004
+~~~~~~~~~~~
+mime_handler can now uninstall (Stephen Watson).
+
+04-May-2004
+~~~~~~~~~~~
+Translate menu items in options (Guido Schimmels).
+
+26-Apr-2004
+~~~~~~~~~~~
+Added <slider> widget to options.
+
+25-Apr-2004
+~~~~~~~~~~~
+Added 'size-group' attribute to Options.xml elements. This allows grouping
+elements so that their labels all appear the same width.
+
+20-Apr-2004
+~~~~~~~~~~~
+Bugfix: Colour buttons in the Options boxes didn't work with some themes
+	(Jonatan Liljedahl).
+
+17-Apr-2004 (Release 1.9.14)
+~~~~~~~~~~~
+Added ToggleItem (based on a patch from Ken Hayber).
+
+15-Apr-2004
+~~~~~~~~~~~
+Better <label> widgets (wrapping and icon). Taken from LookAndFeel.
+
+20-Mar-2004
+~~~~~~~~~~~
+Stop themes from overriding the display of the colour-picker buttons in
+the options box (Rene Ejury).
+
+17-Mar-2004
+~~~~~~~~~~~
+Warn about old versions of findrox.py.
+Bugfix: Bug in new menu API prevented submenus from working.
+
+16-Mar-2004 (Release 1.9.13)
+~~~~~~~~~~~
+Bugfix: Icon themes didn't work with python versions older than 2.2.2
+	(reported by Thomas Zajic).
+
+15-Mar-2004
+~~~~~~~~~~~
+Bugfix: Use filer module to show ROX-Lib help, rather than using os.system,
+	so that it works with Zero Install (reported by Keith Hopper).
+
+14-Mar-2004
+~~~~~~~~~~~
+Added widget_registry to OptionsBox, to provide an easy way to register
+new option types. Removed build_button in favour of this method.
+
+Bugfix: If an error occurred loading the ROX theme at startup it could not
+	be reported, because icon_theme wants debug, debug wants saving, and
+	saving wants icon_theme (reported by Thomas Zajic).
+
+12-Mar-2004
+~~~~~~~~~~~
+Cope with pygtk2.2 API change (Stephen Watson, reported by Guido Schimmels).
+
+06-Mar-2004
+~~~~~~~~~~~
+Added secretentry and button options to the OptionsBox (Stephen Watson).
+
+26-Feb-2004
+~~~~~~~~~~~
+Cope with option values split into multiple DOM text nodes (Rene Ejury).
+
+22-Feb-2004
+~~~~~~~~~~~
+Allow a list of values to be stored in each menu Action. These are used as
+the arguments to the callback function.
+If a file's details were recorded (in document.save_last_stat) when it was
+loaded, make sure they haven't changed when saving. Saving also updates this
+variable (requested by Arnaud Calvo).
+
+20-Feb-2004
+~~~~~~~~~~~
+Updated examples in documentation for new findrox (Yuri Bongiorno).
+
+10-Feb-2004
+~~~~~~~~~~~
+New API for menus. Instead of passing tuples for menu items, python classes
+can be used. The old tuple interface is still supported.
+
+07-Feb-2004
+~~~~~~~~~~~
+Don't stop DnD working in the savebox just because no icon can be found
+(reported by Martin Lucina).
+
+02-Feb-2004
+~~~~~~~~~~~
+Added French translation (Vincent Lefèvre).
+
+30-Jan-2004
+~~~~~~~~~~~
+Also translate <label> elements in the Options box (reported by Arnaud Calvo).
+
+28-Jan-2004
+~~~~~~~~~~~
+Also translate section names in the Options box (reported by Arnaud Calvo).
+
+22-Jan-2004 (Release 1.9.12)
+~~~~~~~~~~~
+Added 'tasks' module to provide a light-weight alternative to threads.
+Bugfix: On non-zero-install systems, the sense of the version check in findrox
+	was wrong.
+
+02-Jan-2004
+~~~~~~~~~~~
+Added method to MIMEtype to fetch its icon. Install list window for
+the MIME handler installation uses it (Stephen Watson).
+
+13-Dec-2003
+~~~~~~~~~~~
+Translate text in Options box.
+
+28-Dec-2003
+~~~~~~~~~~~
+Allow ROXLIB_DISABLE_ZEROINSTALL to override looking for ROX-Lib in Zero
+Install (useful for ROX-Lib developers). Prefer a locally installed version
+of ROX-Filer to the Zero Install version; this also allows users to select
+which Zero Install version they want (eg, stable or developer).
+Moved MIME handler installation into a separate module (mime_handler) and
+made a few changes to the XML syntax.
+
+24-Dec-2003
+~~~~~~~~~~~
+Added <menu> OptionMenu widget for Options box (Chris Shaffer).
+
+27-Nov-2003
+~~~~~~~~~~~
+Fixed bug in findrox when not using Zero Install (Lionel Bringuier).
+
+26-Nov-2003
+~~~~~~~~~~~
+Escape and unescape URIs, as required by ROX-Filer 2.1.0 (reported by
+Peter Geer).
+Note that the xds_load_uris() method is now called with escaped URIs.
+Try to run the filer through Zero Install, if possible.
+
+11-Nov-2003
+~~~~~~~~~~~
+If we can't get pygtk through Zero Install, try the local copy.
+
+05-Nov-2003
+~~~~~~~~~~~
+Added support in mime.py for an application to set MIME-type run
+actions and thumbnail programs (Stephen Watson).
+
+31-Oct-2003
+~~~~~~~~~~~
+Simplified implementation of saving.SaveFilter by using the new
+processes.PipeThroughCommand class. The child_run() method of SaveFilter
+is no longer supported.
+In processes.PipeThroughCommand, a None input stream gets /dev/null instead
+of inheriting its parent's stream. The class has a new run_child_with_streams
+to make overriding the behaviour easier.
+findrox.py script now warns if ROX-Lib2 version is too old (unless requesting
+a version too old to have a version number).
+
+29-Oct-2003
+~~~~~~~~~~~
+Changed 'Dismiss' to 'Close' (Chris Shaffer).
+Bugfix: Error reporting in mime.py failed to import the _ function (reported
+	by Christopher Haines).
+New AppInfo.py for parsing AppInfo.xml files (Christopher Arndt), InfoWin
+converted to use it (Stephen Watson).
+
+15-Oct-2003 (Release 1.9.11)
+~~~~~~~~~~~
+Bugfix: Python 2.3's new bool type broke options saving (reported by Lars
+	Hansson).
+
+13-Oct-2003
+~~~~~~~~~~~
+Added PipeThroughCommand class (copied from Archive, with some minor
+changes).
+
+09-Oct-2003
+~~~~~~~~~~~
+Allow event to be None for Menu.popup. This allows the menu to be activated
+from the keyboard, using the 'popup-menu' signal.
+
+08-Oct-2003
+~~~~~~~~~~~
+Added French translation in AppInfo.xml (Vincent Lefèvre).
+
+03-Oct-2003 (Release 1.9.10)
+~~~~~~~~~~~
+Added support for icon themes (doesn't do inheritance yet).
+
+28-Sep-2003
+~~~~~~~~~~~
+Added some version information to the dialog you get when you run ROX-Lib
+directly.
+
+22-Sep-2003
+~~~~~~~~~~~
+New bug() function to quickly bring up a debugging prompt.
+
+15-Sep-2003
+~~~~~~~~~~~
+The glob patterns in mime.py are now sorted longest first. Fix for setting 
+icon in the old way when there was no icon (Stephen Watson).
+
+25-Aug-2003
+~~~~~~~~~~~
+Try to cope better with bad hostname setup (reported by Nathan Howell).
+
+24-Aug-2003
+~~~~~~~~~~~
+Added InfoWin.py to provide standardized information window (Stephen Watson).
+
+24-Aug-2003
+~~~~~~~~~~~
+Fall back to old way of setting default icon for older pygtk's (Stephen 
+Watson).
+
+20-Aug-2003
+~~~~~~~~~~~
+Added Italian translation (Yuri Bongiorno).
+
+18-Aug-2003
+~~~~~~~~~~~
+Better way to set the default icon.
+
+16-Aug-2003 (Release 1.9.9)
+~~~~~~~~~~~
+Give windows a default icon from .DirIcon (Chris Shaffer).
+
+01-Aug-2003
+~~~~~~~~~~~
+Try to get pygtk through ZeroInstall.
+
+25-Jul-2003
+~~~~~~~~~~~
+Updated findrox to use ZeroInstall, if possible.
+
+22-Jul-2003
+~~~~~~~~~~~
+Work out correct application name even if invoked via a symlink. This stops
+applications from calling themselves 'text_plain', etc (reported by Joe Hill).
+
+19-Jul-2003 (Release 1.9.8)
+~~~~~~~~~~~
+Make default menu positioning function keep the pointer inside the menu.
+Allow stock icons in menus.
+
+18-Jul-2003
+~~~~~~~~~~~
+Added position_fn argument to rox.Menu.popup.
+
+17-Jul-2003
+~~~~~~~~~~~
+Cope with % escaped URIs.
+
+04-Jul-2003
+~~~~~~~~~~~
+Added italian translation in AppInfo.xml (Yuri Bongiorno)
+
+26-Jun-2003
+~~~~~~~~~~~
+When loading data from another application, pass the suggested leafname to
+xds_load_from_stream().
+
+04-Jun-2003
+~~~~~~~~~~~
+Code tidying, thanks to pychecker.
+
+26-May-2003
+~~~~~~~~~~~
+Added fileutils module, which provides an interactive makedirs() function
+(Richard Boulton).
+Changed savebox module to use it.
+
+16-May-2003 (Release 1.9.7)
+~~~~~~~~~~~
+New icon (Geoff Youngs).
+Added 'basedir' module for freedesktop.org Base Directory specification.
+
+06-May-2003
+~~~~~~~~~~~
+Added functions to read MIME database (Stephen Watson).
+
+27-Jan-2003 (Release 1.9.6)
+~~~~~~~~~~~
+Make the default window class the name of the application directory, not
+'AppRun' (suggested by Albert Wagner).
+Bugfix: With pygtk-1.99.14, only the first error message from a process
+	would be detected; this meant that ROX-Lib wouldn't detect when the
+	process quit (reported by joehill).
+Bugfix: <hbox> and <vbox> layouts didn't work in the options box (Allen
+	Leonard).
+
+22-Jan-2003
+~~~~~~~~~~~
+If python is too old, raise SystemExit instead of quitting.
+Ensure that True and False are defined.
+
+16-Dec-2002
+~~~~~~~~~~~
+Work around bug in some versions of pygtk that stopped the options window
+from working.
+
+12-Dec-2002 (Release 1.9.5)
+~~~~~~~~~~~
+Upgrade Options box to new style.
+
+11-Dec-2002
+~~~~~~~~~~~
+Bugfix: If an option had an empty value, an exception was thrown on loading
+	(reported by Stephen Watson).
+
+05-Dec-2002
+~~~~~~~~~~~
+Cope with missing input_add_full.
+
+25-Oct-2002
+~~~~~~~~~~~
+Pygtk 1.99.12 seems to more-or-less work now (according to Alastair Porter), so
+remove the warning for that so we can support RedHat 8.0.
+
+20-Oct-2002 (Release 1.9.4)
+~~~~~~~~~~~
+More warnings about old pygtk versions.
+Added Dialog class (does ref-counting, like Window).
+
+15-Oct-2002
+~~~~~~~~~~~
+Trying to use ROX-Lib2 with earlier versions of python now gives a sensible
+error message.
+
+10-Oct-2002
+~~~~~~~~~~~
+Make clicking on ROX-Lib itself work again (Christopher Arndt).
+
+25-Aug-2002
+~~~~~~~~~~~
+Updated findrox.py to use pygtk 1.99.13 -- update your programs!
+
+25-Aug-2002 (Release 1.9.3)
+~~~~~~~~~~~
+Switch to use new pygtk versioning system (requires pygtk 1.99.13).
+
+19-Aug-2002
+~~~~~~~~~~~
+Added 'processes' module, based on code in Archive, which makes controlling
+subprocesses easier.
+
+14-Aug-2002
+~~~~~~~~~~~
+Bugfix: Changing the keys lost any builtin shortcuts (Gtk behaviour has
+	changed since 1.2).
+
+08-Aug-2002
+~~~~~~~~~~~
+Trap exceptions when activating menu items and report nicely.
+
+07-Aug-2002
+~~~~~~~~~~~
+Bugfix: Remember to call drop_finish() after a drag-and-drop operation.
+
+05-Aug-2002 (Release 1.9.2)
+~~~~~~~~~~~
+Renamed XDSLoader module to 'loading' (like 'saving').
+Added 'mime' module for installing extra MIME information.
+Bugfix: XDSLoader didn't handle the drag-drop signal, and so only worked for
+	widgets with their own implementation!
+
+31-Jul-2002
+~~~~~~~~~~~
+Show local variables in report_exception, and allow expressions to be
+evaluated in the context of any frame.
+Added StringSaver class.
+
+25-Jul-2002
+~~~~~~~~~~~
+Added applet module for creating ROX panel applets.
+
+24-Jul-2002
+~~~~~~~~~~~
+Bugfix: saving code didn't cope with missing images (reported by Musus Umbra).
+
+21-Jul-2002
+~~~~~~~~~~~
+If 'gtk2' isn't available, see if 'gtk' is actually the 2.0 version.
+Added save_set_permissions to Saveable interface, allowing the default
+save_to_file to preserve file permissions.
+Changes to XDSLoader: xds_load_from_stream(name, type, stream)
+replaces the old xds_load_data(data).
+Loading files from remote filers works now.
+Added much improved exception reporting system.
+
+19-Jul-2002 (Release 1.9.1)
+~~~~~~~~~~~
+Added support for translations.
+
+18-Jul-2002
+~~~~~~~~~~~
+License change to the LGPL (allows commercial programs to use this library).
+Added AbortSave exception.
+
+14-Jul-2002
+~~~~~~~~~~~
+Saveable.save_to_file() should raise an exception when saving fails, rather
+than returning 0. The return value is now ignored (note that raising an
+exception will still work with 1.9.0).
+toplevel_unref() ignores any arguments, so it is easier to use as a signal
+handler.
+
+12-Jul-2002 (Release 1.9.0)
+~~~~~~~~~~~
+First release for Gtk+-2.0.

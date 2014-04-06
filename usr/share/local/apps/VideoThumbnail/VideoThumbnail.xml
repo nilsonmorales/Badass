@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<interface xmlns="http://zero-install.sourceforge.net/2004/injector/interface"
+           uri="http://www.kerofin.demon.co.uk/2005/interfaces/VideoThumbnail"
+	   main="VideoThumbnail/AppRun">
+  <name>VideoThumbnail</name>
+  <summary>generate thumbnail images from video files</summary>
+  <description>
+This is a helper program for ROX-Filer.
+It provides thumbnail images for video files by executing MPlayer or 
+totem-video-thumbnailer with
+appropriate options and post-processing the output. 
+  </description>
+  <icon type='image/png' href='http://www.kerofin.demon.co.uk/2005/interfaces/VideoThumbnail.png'/>
+<group>
+    <requires interface="http://rox.sourceforge.net/2005/interfaces/ROX-Lib" version="2.0.2">
+      <environment insert="ROX-Lib2/python" name="PYTHONPATH"/>
+    </requires>
+    <implementation id=".."
+		stability="testing" version="0.1.14"/>
+  </group>
+  <feed-for interface="http://www.kerofin.demon.co.uk/2005/interfaces/VideoThumbnail"/>
+</interface>

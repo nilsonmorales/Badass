@@ -1,0 +1,54 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.basedir</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.basedir</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>The&nbsp;freedesktop.org&nbsp;Base&nbsp;Directory&nbsp;specification&nbsp;provides&nbsp;a&nbsp;way&nbsp;for<br>
+applications&nbsp;to&nbsp;locate&nbsp;shared&nbsp;data&nbsp;and&nbsp;configuration:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.freedesktop.org/standards/">http://www.freedesktop.org/standards/</a><br>
+&nbsp;<br>
+This&nbsp;module&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;load&nbsp;and&nbsp;save&nbsp;from&nbsp;and&nbsp;to&nbsp;these&nbsp;directories.<br>
+&nbsp;<br>
+Typical&nbsp;usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;rox&nbsp;import&nbsp;basedir<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;dir&nbsp;in&nbsp;basedir.<a href="#-load_config_paths">load_config_paths</a>('mydomain.org',&nbsp;'MyProg',&nbsp;'Options'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Load&nbsp;settings&nbsp;from",&nbsp;dir<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dir&nbsp;=&nbsp;basedir.<a href="#-save_config_path">save_config_path</a>('mydomain.org',&nbsp;'MyProg')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;&gt;&gt;file(os.path.join(dir,&nbsp;'Options'),&nbsp;'w'),&nbsp;"foo=2"<br>
+&nbsp;<br>
+Note:&nbsp;see&nbsp;the&nbsp;rox.Options&nbsp;module&nbsp;for&nbsp;a&nbsp;higher-level&nbsp;API&nbsp;for&nbsp;managing&nbsp;options.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-load_config_paths"><strong>load_config_paths</strong></a>(*resource)</dt><dd><tt>Returns&nbsp;an&nbsp;iterator&nbsp;which&nbsp;gives&nbsp;each&nbsp;directory&nbsp;named&nbsp;'resource'&nbsp;in&nbsp;the<br>
+configuration&nbsp;search&nbsp;path.&nbsp;Information&nbsp;provided&nbsp;by&nbsp;earlier&nbsp;directories&nbsp;should<br>
+take&nbsp;precedence&nbsp;over&nbsp;later&nbsp;ones&nbsp;(ie,&nbsp;the&nbsp;user's&nbsp;config&nbsp;dir&nbsp;comes&nbsp;first).</tt></dd></dl>
+ <dl><dt><a name="-load_data_paths"><strong>load_data_paths</strong></a>(*resource)</dt><dd><tt>Returns&nbsp;an&nbsp;iterator&nbsp;which&nbsp;gives&nbsp;each&nbsp;directory&nbsp;named&nbsp;'resource'&nbsp;in&nbsp;the<br>
+shared&nbsp;data&nbsp;search&nbsp;path.&nbsp;Information&nbsp;provided&nbsp;by&nbsp;earlier&nbsp;directories&nbsp;should<br>
+take&nbsp;precedence&nbsp;over&nbsp;later&nbsp;ones.</tt></dd></dl>
+ <dl><dt><a name="-load_first_config"><strong>load_first_config</strong></a>(*resource)</dt><dd><tt>Returns&nbsp;the&nbsp;first&nbsp;result&nbsp;from&nbsp;load_config_paths,&nbsp;or&nbsp;None&nbsp;if&nbsp;there&nbsp;is&nbsp;nothing<br>
+to&nbsp;load.</tt></dd></dl>
+ <dl><dt><a name="-save_config_path"><strong>save_config_path</strong></a>(*resource)</dt><dd><tt>Ensure&nbsp;$XDG_CONFIG_HOME/&lt;resource&gt;/&nbsp;exists,&nbsp;and&nbsp;return&nbsp;its&nbsp;path.<br>
+'resource'&nbsp;should&nbsp;normally&nbsp;be&nbsp;the&nbsp;name&nbsp;of&nbsp;your&nbsp;application.&nbsp;Use&nbsp;this<br>
+when&nbsp;SAVING&nbsp;configuration&nbsp;settings.&nbsp;Use&nbsp;the&nbsp;xdg_config_dirs&nbsp;variable<br>
+for&nbsp;loading.</tt></dd></dl>
+ <dl><dt><a name="-save_data_path"><strong>save_data_path</strong></a>(*resource)</dt><dd><tt>Ensure&nbsp;$XDG_DATA_HOME/&lt;resource&gt;/&nbsp;exists,&nbsp;and&nbsp;return&nbsp;its&nbsp;path.<br>
+'resource'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;some&nbsp;shared&nbsp;resource.&nbsp;Use&nbsp;this&nbsp;when&nbsp;updating<br>
+a&nbsp;shared&nbsp;(between&nbsp;programs)&nbsp;database.&nbsp;Use&nbsp;the&nbsp;xdg_data_dirs&nbsp;variable<br>
+for&nbsp;loading.</tt></dd></dl>
+</td></tr></table>
+</body></html>

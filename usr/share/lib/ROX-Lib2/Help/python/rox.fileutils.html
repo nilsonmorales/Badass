@@ -1,0 +1,40 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.fileutils</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.fileutils</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Utilities&nbsp;to&nbsp;perform&nbsp;various&nbsp;operations&nbsp;on&nbsp;paths,&nbsp;with&nbsp;support&nbsp;for<br>
+opening&nbsp;the&nbsp;ROX&nbsp;filer&nbsp;to&nbsp;examine&nbsp;locations&nbsp;if&nbsp;things&nbsp;go&nbsp;wrong.<br>
+&nbsp;<br>
+Typical&nbsp;usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;rox.fileutils<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rox.fileutils.<a href="#-makedirs">makedirs</a>('/path/for/new/directory')</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-makedirs"><strong>makedirs</strong></a>(path, mode<font color="#909090">=511</font>)</dt><dd><tt>Make&nbsp;a&nbsp;directory&nbsp;at&nbsp;the&nbsp;specified&nbsp;path,&nbsp;creating&nbsp;intermediate<br>
+directories&nbsp;if&nbsp;necessary.&nbsp;No&nbsp;error&nbsp;if&nbsp;'path'&nbsp;is&nbsp;already&nbsp;a&nbsp;directory.<br>
+&nbsp;<br>
+On&nbsp;error,&nbsp;a&nbsp;dialog&nbsp;which&nbsp;allows&nbsp;the&nbsp;user&nbsp;to&nbsp;open&nbsp;the&nbsp;filer&nbsp;to&nbsp;fix<br>
+things&nbsp;and&nbsp;then&nbsp;retry&nbsp;will&nbsp;be&nbsp;opened.<br>
+&nbsp;<br>
+Returns&nbsp;successfully&nbsp;if&nbsp;all&nbsp;directories&nbsp;get&nbsp;created&nbsp;(or&nbsp;already&nbsp;exist),<br>
+Raises&nbsp;an&nbsp;OSError&nbsp;if&nbsp;there&nbsp;is&nbsp;a&nbsp;problem,&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;application<br>
+should&nbsp;not&nbsp;open&nbsp;a&nbsp;dialog&nbsp;box&nbsp;to&nbsp;inform&nbsp;the&nbsp;user,&nbsp;since&nbsp;one&nbsp;will&nbsp;already<br>
+have&nbsp;been&nbsp;displayed.</tt></dd></dl>
+ <dl><dt><a name="-report_patherror"><strong>report_patherror</strong></a>(message, path)</dt><dd><tt>Display&nbsp;a&nbsp;&lt;Cancel&gt;/&lt;Retry&gt;/&lt;Examine&gt;&nbsp;dialog.<br>
+This&nbsp;will&nbsp;raise&nbsp;an&nbsp;OSError&nbsp;exception&nbsp;if&nbsp;the&nbsp;user&nbsp;selects&nbsp;Cancel,&nbsp;or<br>
+will&nbsp;return&nbsp;successfully&nbsp;if&nbsp;the&nbsp;user&nbsp;chooses&nbsp;to&nbsp;retry.</tt></dd></dl>
+</td></tr></table>
+</body></html>

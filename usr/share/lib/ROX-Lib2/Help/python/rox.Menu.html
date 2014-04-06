@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.Menu</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.Menu</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>The&nbsp;<a href="#Menu">Menu</a>&nbsp;widget&nbsp;provides&nbsp;an&nbsp;easy&nbsp;way&nbsp;to&nbsp;create&nbsp;menus&nbsp;that&nbsp;allow&nbsp;the&nbsp;user&nbsp;to<br>
+define&nbsp;keyboard&nbsp;shortcuts,&nbsp;and&nbsp;saves&nbsp;the&nbsp;shortcuts&nbsp;automatically.&nbsp;You&nbsp;only&nbsp;define<br>
+each&nbsp;<a href="#Menu">Menu</a>&nbsp;once,&nbsp;and&nbsp;attach&nbsp;it&nbsp;to&nbsp;windows&nbsp;as&nbsp;required.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+from&nbsp;rox.<a href="#Menu">Menu</a>&nbsp;import&nbsp;<a href="#Menu">Menu</a>,&nbsp;set_save_name,&nbsp;<a href="#Action">Action</a>,&nbsp;<a href="#Separator">Separator</a>,&nbsp;<a href="#SubMenu">SubMenu</a><br>
+&nbsp;<br>
+<a href="#-set_save_name">set_save_name</a>('Edit')<br>
+&nbsp;<br>
+menu&nbsp;=&nbsp;<a href="#Menu">Menu</a>('main',&nbsp;[<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SubMenu">SubMenu</a>('File',&nbsp;<a href="#Menu">Menu</a>([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Save',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'save'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Open&nbsp;Parent',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'up'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Close',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'close'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Separator">Separator</a>(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('New',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'new')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#SubMenu">SubMenu</a>('/Edit',&nbsp;<a href="#Menu">Menu</a>([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Undo',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'undo'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Redo',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'redo'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Separator">Separator</a>(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Search...',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'search'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Goto&nbsp;line...',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'goto'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Separator">Separator</a>(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Process...',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'process'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Options',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'show_options',&nbsp;'F1',&nbsp;stock=g.STOCK_HELP)),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Action">Action</a>('Quit',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'quit',&nbsp;stock=g.STOCK_QUIT),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])<br>
+&nbsp;<br>
+There&nbsp;is&nbsp;also&nbsp;an&nbsp;older&nbsp;syntax,&nbsp;where&nbsp;you&nbsp;pass&nbsp;tuples&nbsp;of&nbsp;strings&nbsp;<br>
+to&nbsp;the&nbsp;<a href="#Menu">Menu</a>&nbsp;constructor.&nbsp;This&nbsp;has&nbsp;not&nbsp;been&nbsp;required&nbsp;since&nbsp;1.9.13.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.Menu.html#Menu">Menu</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.Menu.html#MenuItem">MenuItem</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.Menu.html#Action">Action</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.Menu.html#Separator">Separator</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.Menu.html#SubMenu">SubMenu</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.Menu.html#ToggleItem">ToggleItem</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action">class <strong>Action</strong></a>(<a href="rox.Menu.html#MenuItem">MenuItem</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;leaf&nbsp;menu&nbsp;item,&nbsp;possibly&nbsp;with&nbsp;a&nbsp;stock&nbsp;icon,&nbsp;which&nbsp;calls&nbsp;a&nbsp;method&nbsp;when&nbsp;clicked.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Action-__init__"><strong>__init__</strong></a>(self, label, callback_name, key<font color="#909090">=None</font>, stock<font color="#909090">=None</font>, values<font color="#909090">=()</font>)</dt><dd><tt>object.callback(*values)&nbsp;is&nbsp;called&nbsp;when&nbsp;the&nbsp;item&nbsp;is&nbsp;activated.</tt></dd></dl>
+
+<dl><dt><a name="Action-activate"><strong>activate</strong></a>(self, caller)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Menu">class <strong>Menu</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;popup&nbsp;menu.&nbsp;This&nbsp;wraps&nbsp;GtkMenu.&nbsp;It&nbsp;handles&nbsp;setting,&nbsp;loading&nbsp;and&nbsp;saving&nbsp;of<br>
+keyboard-shortcuts,&nbsp;applies&nbsp;translations,&nbsp;and&nbsp;has&nbsp;a&nbsp;simpler&nbsp;API.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Menu-__init__"><strong>__init__</strong></a>(self, name, items)</dt><dd><tt>names&nbsp;should&nbsp;be&nbsp;unique&nbsp;(eg,&nbsp;'popup',&nbsp;'main',&nbsp;etc).<br>
+items&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;menu&nbsp;items:<br>
+[(name,&nbsp;callback_name,&nbsp;type,&nbsp;key),&nbsp;...].<br>
+'name'&nbsp;is&nbsp;the&nbsp;item's&nbsp;path.<br>
+'callback_name'&nbsp;is&nbsp;the&nbsp;NAME&nbsp;of&nbsp;a&nbsp;method&nbsp;to&nbsp;call.<br>
+'type'&nbsp;is&nbsp;as&nbsp;for&nbsp;g.ItemFactory.<br>
+'key'&nbsp;is&nbsp;only&nbsp;used&nbsp;if&nbsp;no&nbsp;bindings&nbsp;are&nbsp;in&nbsp;Choices.</tt></dd></dl>
+
+<dl><dt><a name="Menu-attach"><strong>attach</strong></a>(self, window, object)</dt><dd><tt>Keypresses&nbsp;on&nbsp;this&nbsp;window&nbsp;will&nbsp;be&nbsp;treated&nbsp;as&nbsp;menu&nbsp;shortcuts<br>
+for&nbsp;this&nbsp;object,&nbsp;calling&nbsp;'object.&lt;callback_name&gt;'&nbsp;when&nbsp;used.</tt></dd></dl>
+
+<dl><dt><a name="Menu-popup"><strong>popup</strong></a>(self, caller, event, position_fn<font color="#909090">=None</font>)</dt><dd><tt>Display&nbsp;the&nbsp;menu.&nbsp;Call&nbsp;'caller.&lt;callback_name&gt;'&nbsp;when&nbsp;an&nbsp;item&nbsp;is&nbsp;chosen.<br>
+For&nbsp;applets,&nbsp;position_fn&nbsp;should&nbsp;be&nbsp;my_applet.position_menu).</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MenuItem">class <strong>MenuItem</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;menu&nbsp;items.&nbsp;You&nbsp;should&nbsp;normally&nbsp;use&nbsp;one&nbsp;of&nbsp;the&nbsp;subclasses...<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MenuItem-__init__"><strong>__init__</strong></a>(self, label, callback_name, type<font color="#909090">=''</font>, key<font color="#909090">=None</font>, stock<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="MenuItem-activate"><strong>activate</strong></a>(self, caller)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Separator">class <strong>Separator</strong></a>(<a href="rox.Menu.html#MenuItem">MenuItem</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;line&nbsp;dividing&nbsp;two&nbsp;parts&nbsp;of&nbsp;the&nbsp;menu.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Separator-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SubMenu">class <strong>SubMenu</strong></a>(<a href="rox.Menu.html#MenuItem">MenuItem</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;branch&nbsp;menu&nbsp;item&nbsp;leading&nbsp;to&nbsp;a&nbsp;submenu.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SubMenu-__init__"><strong>__init__</strong></a>(self, label, submenu)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ToggleItem">class <strong>ToggleItem</strong></a>(<a href="rox.Menu.html#MenuItem">MenuItem</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;menu&nbsp;item&nbsp;that&nbsp;has&nbsp;a&nbsp;check&nbsp;icon&nbsp;and&nbsp;toggles&nbsp;state&nbsp;each&nbsp;time&nbsp;it&nbsp;is&nbsp;activated.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ToggleItem-__init__"><strong>__init__</strong></a>(self, label, property_name)</dt><dd><tt>property_name&nbsp;is&nbsp;a&nbsp;boolean&nbsp;property&nbsp;on&nbsp;the&nbsp;caller&nbsp;object.&nbsp;You&nbsp;can&nbsp;use<br>
+the&nbsp;built-in&nbsp;Python&nbsp;class&nbsp;property()&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;perform&nbsp;calculations&nbsp;when<br>
+getting&nbsp;or&nbsp;setting&nbsp;the&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="ToggleItem-activate"><strong>activate</strong></a>(self, caller)</dt></dl>
+
+<dl><dt><a name="ToggleItem-update"><strong>update</strong></a>(self, menu, widget)</dt><dd><tt>Called&nbsp;when&nbsp;then&nbsp;menu&nbsp;is&nbsp;opened.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-set_save_name"><strong>set_save_name</strong></a>(prog, leaf<font color="#909090">='menus'</font>, site<font color="#909090">=None</font>)</dt><dd><tt>Set&nbsp;the&nbsp;directory/leafname&nbsp;(see&nbsp;choices)&nbsp;used&nbsp;to&nbsp;save&nbsp;the&nbsp;menu&nbsp;keys.<br>
+Call&nbsp;this&nbsp;before&nbsp;creating&nbsp;any&nbsp;menus.<br>
+If&nbsp;'site'&nbsp;is&nbsp;given,&nbsp;the&nbsp;basedir&nbsp;module&nbsp;is&nbsp;used&nbsp;for&nbsp;saving&nbsp;bindings&nbsp;(the<br>
+new&nbsp;system).&nbsp;Otherwise,&nbsp;the&nbsp;deprecated&nbsp;choices&nbsp;module&nbsp;is&nbsp;used.</tt></dd></dl>
+</td></tr></table>
+</body></html>

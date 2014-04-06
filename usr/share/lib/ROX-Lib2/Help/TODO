@@ -1,0 +1,18 @@
+                        ROX-Lib2
+                        Shared code for ROX applications
+                        by Thomas Leonard
+                        http://rox.sourceforge.net
+ 
+This is a list of features that should be added, plus a list of current bugs.
+
+KNOWN BUGS
+
+Encoding of error messages and warnings on stderr may be wrong on Python 2.4
+and earlier.
+
+FEATURES
+
+Use GtkUIManager instead of GtkItemFactory when GTK+ 2.4 or later present
+
+Some more list widgets for the Options code?
+

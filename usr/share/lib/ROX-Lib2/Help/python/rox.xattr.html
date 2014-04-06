@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.xattr</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.xattr</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Extended&nbsp;attribute&nbsp;support.<br>
+&nbsp;<br>
+Two&nbsp;versions&nbsp;of&nbsp;the&nbsp;extended&nbsp;attribute&nbsp;API&nbsp;are&nbsp;recognized.&nbsp;&nbsp;If&nbsp;the&nbsp;'getxattr'<br>
+function&nbsp;is&nbsp;detected&nbsp;then&nbsp;the&nbsp;functions&nbsp;used&nbsp;are<br>
+getxattr/setxattr/listxattr/removexattr.&nbsp;&nbsp;This&nbsp;is&nbsp;the&nbsp;API&nbsp;found&nbsp;on&nbsp;Linux<br>
+and&nbsp;some&nbsp;others.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;'attropen'&nbsp;function&nbsp;is&nbsp;found&nbsp;then&nbsp;the&nbsp;functions&nbsp;used&nbsp;are<br>
+attropen&nbsp;and&nbsp;unlinkat.&nbsp;&nbsp;This&nbsp;is&nbsp;the&nbsp;API&nbsp;found&nbsp;on&nbsp;Solaris.<br>
+&nbsp;<br>
+If&nbsp;neither&nbsp;version&nbsp;is&nbsp;detected&nbsp;then&nbsp;a&nbsp;set&nbsp;of&nbsp;dummy&nbsp;functions&nbsp;are&nbsp;generated<br>
+which&nbsp;have&nbsp;no&nbsp;affect.<br>
+&nbsp;<br>
+You&nbsp;should&nbsp;check&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;the&nbsp;function&nbsp;<a href="#-supported">supported</a>().&nbsp;&nbsp;Without<br>
+an&nbsp;argument&nbsp;this&nbsp;returns&nbsp;whether&nbsp;extended&nbsp;attribute&nbsp;support&nbsp;is&nbsp;available.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;requires&nbsp;the&nbsp;ctypes&nbsp;module.&nbsp;&nbsp;This&nbsp;is&nbsp;part&nbsp;of&nbsp;Python&nbsp;2.5&nbsp;and<br>
+available&nbsp;as&nbsp;an&nbsp;extension&nbsp;for&nbsp;earlier&nbsp;versions&nbsp;of&nbsp;Python.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#OSError">exceptions.OSError</a>(<a href="exceptions.html#EnvironmentError">exceptions.EnvironmentError</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.xattr.html#NoXAttr">NoXAttr</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NoXAttr">class <strong>NoXAttr</strong></a>(<a href="exceptions.html#OSError">exceptions.OSError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Exception&nbsp;thrown&nbsp;when&nbsp;xattr&nbsp;support&nbsp;is&nbsp;requested&nbsp;but&nbsp;is&nbsp;not<br>
+available.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="NoXAttr-__init__"><strong>__init__</strong></a>(self, path)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-binary_value_supported"><strong>binary_value_supported</strong></a>()</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;value&nbsp;of&nbsp;an&nbsp;extended&nbsp;attribute&nbsp;may&nbsp;contain<br>
+embedded&nbsp;NUL&nbsp;characters&nbsp;(ASCII&nbsp;0).</tt></dd></dl>
+ <dl><dt><a name="-delete"><strong>delete</strong></a>(path, attr)</dt><dd><tt>Delete&nbsp;an&nbsp;extended&nbsp;attribute&nbsp;from&nbsp;a&nbsp;specified&nbsp;file.<br>
+&nbsp;<br>
+path&nbsp;-&nbsp;path&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;check<br>
+attr&nbsp;-&nbsp;name&nbsp;of&nbsp;attribute&nbsp;to&nbsp;delete<br>
+&nbsp;<br>
+<a href="exceptions.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;an&nbsp;error&nbsp;occurs.</tt></dd></dl>
+ <dl><dt><a name="-get"><strong>get</strong></a>(path, attr)</dt><dd><tt>Get&nbsp;an&nbsp;extended&nbsp;attribute&nbsp;on&nbsp;a&nbsp;specified&nbsp;file.<br>
+&nbsp;<br>
+path&nbsp;-&nbsp;path&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;check<br>
+attr&nbsp;-&nbsp;name&nbsp;of&nbsp;attribute&nbsp;to&nbsp;get<br>
+&nbsp;<br>
+None&nbsp;is&nbsp;returned&nbsp;if&nbsp;the&nbsp;named&nbsp;attribute&nbsp;does&nbsp;not&nbsp;exist.&nbsp;&nbsp;<a href="exceptions.html#OSError">OSError</a><br>
+is&nbsp;raised&nbsp;if&nbsp;path&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;is&nbsp;not&nbsp;readable.</tt></dd></dl>
+ <dl><dt><a name="-listx"><strong>listx</strong></a>(path)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;extended&nbsp;attributes&nbsp;set&nbsp;on&nbsp;the&nbsp;named&nbsp;file.<br>
+&nbsp;<br>
+path&nbsp;-&nbsp;path&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;check<br>
+&nbsp;<br>
+<a href="exceptions.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;path&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;is&nbsp;not&nbsp;readable.</tt></dd></dl>
+ <dl><dt><a name="-name_valid"><strong>name_valid</strong></a>(name)</dt><dd><tt>Check&nbsp;that&nbsp;name&nbsp;is&nbsp;a&nbsp;valid&nbsp;name&nbsp;for&nbsp;an&nbsp;extended&nbsp;attibute.<br>
+False&nbsp;is&nbsp;returned&nbsp;if&nbsp;the&nbsp;name&nbsp;should&nbsp;not&nbsp;be&nbsp;used.</tt></dd></dl>
+ <dl><dt><a name="-present"><strong>present</strong></a>(path)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;extended&nbsp;attributes&nbsp;exist&nbsp;on&nbsp;the&nbsp;named&nbsp;file.</tt></dd></dl>
+ <dl><dt><a name="-set"><strong>set</strong></a>(path, attr, value)</dt><dd><tt>Set&nbsp;an&nbsp;extended&nbsp;attribute&nbsp;on&nbsp;a&nbsp;specified&nbsp;file.<br>
+&nbsp;<br>
+path&nbsp;-&nbsp;path&nbsp;name&nbsp;of&nbsp;file&nbsp;to&nbsp;check<br>
+attr&nbsp;-&nbsp;name&nbsp;of&nbsp;attribute&nbsp;to&nbsp;set<br>
+value&nbsp;-&nbsp;value&nbsp;of&nbsp;attribute&nbsp;to&nbsp;set<br>
+&nbsp;<br>
+<a href="exceptions.html#OSError">OSError</a>&nbsp;is&nbsp;raised&nbsp;if&nbsp;path&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;is&nbsp;not&nbsp;writable.</tt></dd></dl>
+ <dl><dt><a name="-supported"><strong>supported</strong></a>(path<font color="#909090">=None</font>)</dt><dd><tt>Detect&nbsp;whether&nbsp;extended&nbsp;attribute&nbsp;support&nbsp;is&nbsp;available.<br>
+&nbsp;<br>
+path&nbsp;-&nbsp;path&nbsp;to&nbsp;file&nbsp;to&nbsp;check&nbsp;for&nbsp;extended&nbsp;attribute&nbsp;support.<br>
+Availablity&nbsp;can&nbsp;vary&nbsp;from&nbsp;one&nbsp;file&nbsp;system&nbsp;to&nbsp;another.<br>
+&nbsp;<br>
+If&nbsp;path&nbsp;is&nbsp;None&nbsp;then&nbsp;return&nbsp;True&nbsp;if&nbsp;the&nbsp;system&nbsp;in&nbsp;general&nbsp;supports<br>
+extended&nbsp;attributes.</tt></dd></dl>
+</td></tr></table>
+</body></html>

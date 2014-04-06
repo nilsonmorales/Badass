@@ -1,0 +1,82 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.AppInfo</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.AppInfo</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Parse&nbsp;the&nbsp;<a href="#AppInfo">AppInfo</a>&nbsp;files.<br>
+Written&nbsp;by&nbsp;Christopher&nbsp;Arndt&nbsp;and&nbsp;Stephen&nbsp;Watson.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.AppInfo.html#AppInfo">AppInfo</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AppInfo">class <strong>AppInfo</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Parsed&nbsp;<a href="#AppInfo">AppInfo</a>.xml&nbsp;file.&nbsp;Current&nbsp;only&nbsp;deals&nbsp;with&nbsp;the&nbsp;&lt;About&gt;,&nbsp;<br>
+&lt;Summary&gt;&nbsp;and&nbsp;&lt;AppMenu&gt;&nbsp;elements<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="AppInfo-__init__"><strong>__init__</strong></a>(self, source)</dt><dd><tt>Read&nbsp;the&nbsp;file&nbsp;and&nbsp;parse&nbsp;the&nbsp;&lt;About&gt;&nbsp;element.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-findElements"><strong>findElements</strong></a>(self, elname, ns<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;all&nbsp;instances&nbsp;of&nbsp;the&nbsp;named&nbsp;element&nbsp;with&nbsp;an&nbsp;optional&nbsp;name<br>
+space.&nbsp;&nbsp;They&nbsp;are&nbsp;returned&nbsp;as&nbsp;DOM&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getAbout"><strong>getAbout</strong></a>(self, elname, langs<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;an&nbsp;entry&nbsp;from&nbsp;the&nbsp;&lt;About&gt;&nbsp;section.<br>
+&nbsp;<br>
+elname&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;return&nbsp;text&nbsp;from<br>
+langs&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;acceptable&nbsp;languages,&nbsp;or&nbsp;None&nbsp;to&nbsp;use<br>
+rox.i18n.langs</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getAppMenu"><strong>getAppMenu</strong></a>(self, langs<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;all&nbsp;menu&nbsp;entries.&nbsp;&nbsp;Each&nbsp;item&nbsp;in&nbsp;the&nbsp;list&nbsp;is&nbsp;a<br>
+dictionary&nbsp;with&nbsp;these&nbsp;keys:<br>
+'option':&nbsp;the&nbsp;option&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;app&nbsp;for&nbsp;each&nbsp;item<br>
+'label':&nbsp;the&nbsp;label&nbsp;of&nbsp;the&nbsp;item&nbsp;in&nbsp;an&nbsp;appropriate&nbsp;language<br>
+'icon':&nbsp;the&nbsp;icon&nbsp;of&nbsp;the&nbsp;item<br>
+'sub-menus':&nbsp;list&nbsp;of&nbsp;sub&nbsp;menu&nbsp;items</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getAuthors"><strong>getAuthors</strong></a>(self, langs<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;&lt;Authors&gt;&nbsp;element&nbsp;in&nbsp;the<br>
+&lt;About&gt;&nbsp;section&nbsp;(also&nbsp;tries&nbsp;&lt;Author&gt;&nbsp;if&nbsp;needed.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getCanRun"><strong>getCanRun</strong></a>(self)</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;named&nbsp;MIME&nbsp;types&nbsp;that&nbsp;this&nbsp;application&nbsp;declares<br>
+it&nbsp;can&nbsp;handle.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getCanThumbnail"><strong>getCanThumbnail</strong></a>(self)</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;named&nbsp;MIME&nbsp;types&nbsp;that&nbsp;this&nbsp;application&nbsp;declares<br>
+it&nbsp;can&nbsp;generate&nbsp;thumbnails&nbsp;for.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-getSummary"><strong>getSummary</strong></a>(self, langs<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;&lt;Summary&gt;&nbsp;element.<br>
+&nbsp;<br>
+langs&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;acceptable&nbsp;languages,&nbsp;or&nbsp;None&nbsp;to&nbsp;use<br>
+rox.i18n.langs</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-setAbout"><strong>setAbout</strong></a>(self, elname, value, lang)</dt><dd><tt>Set&nbsp;the&nbsp;value&nbsp;of&nbsp;an&nbsp;element&nbsp;in&nbsp;the&nbsp;&lt;About&gt;&nbsp;section.<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;element&nbsp;'elname'&nbsp;is&nbsp;present&nbsp;in&nbsp;the&nbsp;&lt;About&gt;&nbsp;section&nbsp;with&nbsp;the<br>
+matching&nbsp;'lang'&nbsp;attribute,&nbsp;append&nbsp;a&nbsp;new&nbsp;one.&nbsp;If&nbsp;no&nbsp;such&nbsp;section<br>
+exists&nbsp;yet,&nbsp;create&nbsp;it&nbsp;first.<br>
+value&nbsp;must&nbsp;be&nbsp;a&nbsp;unicode&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-setSummary"><strong>setSummary</strong></a>(self, value, lang)</dt><dd><tt>Set&nbsp;content&nbsp;of&nbsp;the&nbsp;Summary&nbsp;element&nbsp;with&nbsp;matching&nbsp;'lang'&nbsp;attribute.<br>
+&nbsp;<br>
+If&nbsp;no&nbsp;such&nbsp;element&nbsp;is&nbsp;present,&nbsp;append&nbsp;a&nbsp;new&nbsp;one&nbsp;to&nbsp;the&nbsp;DOM&nbsp;object.<br>
+value&nbsp;must&nbsp;be&nbsp;a&nbsp;unicode&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="AppInfo-writeToFile"><strong>writeToFile</strong></a>(self, fname)</dt></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

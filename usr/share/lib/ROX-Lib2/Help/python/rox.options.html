@@ -1,0 +1,124 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.options</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.options</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>To&nbsp;use&nbsp;the&nbsp;Options&nbsp;system:<br>
+&nbsp;<br>
+1.&nbsp;Create&nbsp;an&nbsp;<a href="#OptionGroup">OptionGroup</a>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;<a href="#OptionGroup">OptionGroup</a>('MyProg',&nbsp;'Options')<br>
+You&nbsp;can&nbsp;also&nbsp;use&nbsp;the&nbsp;handy&nbsp;rox.setup_app_options()&nbsp;in&nbsp;most&nbsp;applications.<br>
+&nbsp;<br>
+2.&nbsp;Create&nbsp;the&nbsp;options:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colour&nbsp;=&nbsp;<a href="#Option">Option</a>('colour',&nbsp;'red',&nbsp;options)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size&nbsp;=&nbsp;<a href="#Option">Option</a>('size',&nbsp;3,&nbsp;options)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;icons&nbsp;=&nbsp;<a href="#ListOption">ListOption</a>('icons',&nbsp;('circle',&nbsp;'square',&nbsp;'triangle'),&nbsp;options)<br>
+&nbsp;<br>
+3.&nbsp;Register&nbsp;any&nbsp;callbacks&nbsp;(notification&nbsp;of&nbsp;options&nbsp;changing):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;my_callback():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;colour.has_changed:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"The&nbsp;colour&nbsp;is&nbsp;now",&nbsp;colour.value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.add_notify(my_callback)<br>
+&nbsp;<br>
+4.&nbsp;Notify&nbsp;any&nbsp;changes&nbsp;from&nbsp;defaults:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.notify()<br>
+&nbsp;<br>
+See&nbsp;OptionsBox&nbsp;for&nbsp;editing&nbsp;options.&nbsp;Do&nbsp;not&nbsp;change&nbsp;the&nbsp;value&nbsp;of&nbsp;options<br>
+yourself.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.options.html#Option">Option</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.options.html#ListOption">ListOption</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.options.html#OptionGroup">OptionGroup</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ListOption">class <strong>ListOption</strong></a>(<a href="rox.options.html#Option">Option</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#ListOption">ListOption</a>&nbsp;stores&nbsp;a&nbsp;list&nbsp;of&nbsp;values.&nbsp;Every&nbsp;option&nbsp;is&nbsp;part&nbsp;of&nbsp;exactly&nbsp;one&nbsp;<a href="#OptionGroup">OptionGroup</a>.<br>
+&nbsp;<br>
+The&nbsp;read-only&nbsp;attribute&nbsp;list_value&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;current&nbsp;setting<br>
+for&nbsp;the&nbsp;<a href="#ListOption">ListOption</a>.&nbsp;value&nbsp;will&nbsp;be&nbsp;str(list_value)&nbsp;and&nbsp;int_value&nbsp;wille&nbsp;be&nbsp;-1.<br>
+&nbsp;<br>
+The&nbsp;has_changed&nbsp;attribute&nbsp;is&nbsp;used&nbsp;during&nbsp;notify()&nbsp;calls&nbsp;to&nbsp;indicate&nbsp;whether&nbsp;this<br>
+<a href="#ListOption">ListOption</a>'s&nbsp;value&nbsp;has&nbsp;changed&nbsp;since&nbsp;the&nbsp;last&nbsp;notify&nbsp;(or&nbsp;option&nbsp;creation).<br>
+You&nbsp;may&nbsp;set&nbsp;has_changed&nbsp;=&nbsp;1&nbsp;right&nbsp;after&nbsp;creating&nbsp;an&nbsp;option&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;force<br>
+notification&nbsp;the&nbsp;first&nbsp;time&nbsp;even&nbsp;if&nbsp;the&nbsp;default&nbsp;is&nbsp;used.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ListOption-__init__"><strong>__init__</strong></a>(self, name, value, group<font color="#909090">=None</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Option">class <strong>Option</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;<a href="#Option">Option</a>&nbsp;stores&nbsp;a&nbsp;single&nbsp;value.&nbsp;Every&nbsp;option&nbsp;is&nbsp;part&nbsp;of&nbsp;exactly&nbsp;one&nbsp;<a href="#OptionGroup">OptionGroup</a>.<br>
+&nbsp;<br>
+The&nbsp;read-only&nbsp;attributes&nbsp;value&nbsp;and&nbsp;int_value&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;current&nbsp;setting<br>
+for&nbsp;the&nbsp;<a href="#Option">Option</a>.&nbsp;int_value&nbsp;will&nbsp;be&nbsp;-1&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;integer.<br>
+&nbsp;<br>
+The&nbsp;has_changed&nbsp;attribute&nbsp;is&nbsp;used&nbsp;during&nbsp;notify()&nbsp;calls&nbsp;to&nbsp;indicate&nbsp;whether&nbsp;this<br>
+<a href="#Option">Option</a>'s&nbsp;value&nbsp;has&nbsp;changed&nbsp;since&nbsp;the&nbsp;last&nbsp;notify&nbsp;(or&nbsp;option&nbsp;creation).<br>
+You&nbsp;may&nbsp;set&nbsp;has_changed&nbsp;=&nbsp;1&nbsp;right&nbsp;after&nbsp;creating&nbsp;an&nbsp;option&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;force<br>
+notification&nbsp;the&nbsp;first&nbsp;time&nbsp;even&nbsp;if&nbsp;the&nbsp;default&nbsp;is&nbsp;used.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Option-__init__"><strong>__init__</strong></a>(self, name, value, group<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;option&nbsp;with&nbsp;this&nbsp;name&nbsp;and&nbsp;default&nbsp;value.<br>
+Add&nbsp;to&nbsp;'group',&nbsp;or&nbsp;to&nbsp;rox.app_options&nbsp;if&nbsp;no&nbsp;group&nbsp;is&nbsp;given.<br>
+The&nbsp;value&nbsp;cannot&nbsp;be&nbsp;used&nbsp;until&nbsp;the&nbsp;first&nbsp;notify()&nbsp;call&nbsp;to<br>
+the&nbsp;group.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OptionGroup">class <strong>OptionGroup</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OptionGroup-__init__"><strong>__init__</strong></a>(self, program, leaf, site<font color="#909090">=None</font>)</dt><dd><tt>program/leaf&nbsp;is&nbsp;a&nbsp;Choices&nbsp;pair&nbsp;for&nbsp;the&nbsp;saved&nbsp;options.&nbsp;If&nbsp;site<br>
+is&nbsp;given,&nbsp;the&nbsp;basedir&nbsp;module&nbsp;is&nbsp;used&nbsp;for&nbsp;saving&nbsp;choices&nbsp;(the&nbsp;new&nbsp;system).<br>
+Otherwise,&nbsp;the&nbsp;deprecated&nbsp;choices&nbsp;module&nbsp;is&nbsp;used.</tt></dd></dl>
+
+<dl><dt><a name="OptionGroup-add_notify"><strong>add_notify</strong></a>(self, callback)</dt><dd><tt>Call&nbsp;callback()&nbsp;after&nbsp;one&nbsp;or&nbsp;more&nbsp;options&nbsp;have&nbsp;changed&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="OptionGroup-notify"><strong>notify</strong></a>(self, warn_unused<font color="#909090">=True</font>)</dt><dd><tt>Call&nbsp;this&nbsp;after&nbsp;creating&nbsp;any&nbsp;new&nbsp;options&nbsp;or&nbsp;changing&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="OptionGroup-remove_notify"><strong>remove_notify</strong></a>(self, callback)</dt><dd><tt>Remove&nbsp;a&nbsp;callback&nbsp;added&nbsp;with&nbsp;<a href="#OptionGroup-add_notify">add_notify</a>().</tt></dd></dl>
+
+<dl><dt><a name="OptionGroup-save"><strong>save</strong></a>(self)</dt><dd><tt>Save&nbsp;all&nbsp;option&nbsp;values.&nbsp;Usually&nbsp;called&nbsp;by&nbsp;OptionsBox().</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-data"><strong>data</strong></a>(node)</dt><dd><tt>Return&nbsp;all&nbsp;the&nbsp;text&nbsp;directly&nbsp;inside&nbsp;this&nbsp;DOM&nbsp;Node.</tt></dd></dl>
+</td></tr></table>
+</body></html>

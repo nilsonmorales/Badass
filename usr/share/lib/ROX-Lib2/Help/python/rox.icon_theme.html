@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.icon_theme</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.icon_theme</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>This&nbsp;is&nbsp;an&nbsp;internal&nbsp;module.&nbsp;Do&nbsp;not&nbsp;use&nbsp;it.&nbsp;GTK&nbsp;2.4&nbsp;will&nbsp;contain&nbsp;functions<br>
+that&nbsp;replace&nbsp;those&nbsp;defined&nbsp;here.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.icon_theme.html#IconTheme">IconTheme</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.icon_theme.html#IconThemeGTK">IconThemeGTK</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.icon_theme.html#IconThemeROX">IconThemeROX</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.icon_theme.html#Index">Index</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.icon_theme.html#SubDir">SubDir</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IconTheme">class <strong>IconTheme</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Icon&nbsp;themes&nbsp;are&nbsp;located&nbsp;by&nbsp;searching&nbsp;through&nbsp;various&nbsp;directories.&nbsp;You&nbsp;can&nbsp;use&nbsp;an&nbsp;<a href="#IconTheme">IconTheme</a><br>
+to&nbsp;convert&nbsp;an&nbsp;icon&nbsp;name&nbsp;into&nbsp;a&nbsp;suitable&nbsp;image.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="IconTheme-__init__"><strong>__init__</strong></a>(self, name)</dt><dd><tt>name&nbsp;=&nbsp;icon&nbsp;theme&nbsp;to&nbsp;load</tt></dd></dl>
+
+<dl><dt><a name="IconTheme-load_icon"><strong>load_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt><dd><tt>return&nbsp;gdk_pixbuf&nbsp;of&nbsp;icon</tt></dd></dl>
+
+<dl><dt><a name="IconTheme-lookup_icon"><strong>lookup_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt><dd><tt>return&nbsp;path&nbsp;to&nbsp;required&nbsp;icon&nbsp;at&nbsp;specified&nbsp;size</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IconThemeGTK">class <strong>IconThemeGTK</strong></a>(<a href="rox.icon_theme.html#IconTheme">IconTheme</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Icon&nbsp;themes&nbsp;are&nbsp;located&nbsp;by&nbsp;searching&nbsp;through&nbsp;various&nbsp;directories.&nbsp;You&nbsp;can&nbsp;use&nbsp;an&nbsp;<a href="#IconTheme">IconTheme</a><br>
+to&nbsp;convert&nbsp;an&nbsp;icon&nbsp;name&nbsp;into&nbsp;a&nbsp;suitable&nbsp;image.&nbsp;&nbsp;This&nbsp;implementation&nbsp;is&nbsp;for&nbsp;PyGTK&nbsp;2.4&nbsp;or&nbsp;later<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="IconThemeGTK-__init__"><strong>__init__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="IconThemeGTK-load_icon"><strong>load_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt></dl>
+
+<dl><dt><a name="IconThemeGTK-lookup_icon"><strong>lookup_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IconThemeROX">class <strong>IconThemeROX</strong></a>(<a href="rox.icon_theme.html#IconTheme">IconTheme</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Icon&nbsp;themes&nbsp;are&nbsp;located&nbsp;by&nbsp;searching&nbsp;through&nbsp;various&nbsp;directories.&nbsp;You&nbsp;can&nbsp;use&nbsp;an&nbsp;<a href="#IconTheme">IconTheme</a><br>
+to&nbsp;convert&nbsp;an&nbsp;icon&nbsp;name&nbsp;into&nbsp;a&nbsp;suitable&nbsp;image.&nbsp;&nbsp;This&nbsp;implementation&nbsp;is&nbsp;for&nbsp;PyGTK&nbsp;2.0&nbsp;or&nbsp;2.2<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="IconThemeROX-__init__"><strong>__init__</strong></a>(self, name)</dt></dl>
+
+<dl><dt><a name="IconThemeROX-load_icon"><strong>load_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt></dl>
+
+<dl><dt><a name="IconThemeROX-lookup_icon"><strong>lookup_icon</strong></a>(self, iconname, size, flags<font color="#909090">=0</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Index">class <strong>Index</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;theme's&nbsp;index.theme&nbsp;file.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Index-__init__"><strong>__init__</strong></a>(self, dir)</dt></dl>
+
+<dl><dt><a name="Index-get"><strong>get</strong></a>(self, section, key)</dt><dd><tt>None&nbsp;if&nbsp;not&nbsp;found</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SubDir">class <strong>SubDir</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;subdirectory&nbsp;within&nbsp;a&nbsp;theme.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SubDir-__init__"><strong>__init__</strong></a>(self, index, subdir)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_theme"><strong>get_theme</strong></a>(name<font color="#909090">=None</font>)</dt></dl>
+</td></tr></table>
+</body></html>

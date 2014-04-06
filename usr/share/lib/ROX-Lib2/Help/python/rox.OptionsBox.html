@@ -1,0 +1,234 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.OptionsBox</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.OptionsBox</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>The&nbsp;<a href="#OptionsBox">OptionsBox</a>&nbsp;widget&nbsp;is&nbsp;used&nbsp;to&nbsp;edit&nbsp;an&nbsp;OptionGroup.<br>
+For&nbsp;simple&nbsp;applications,&nbsp;rox.edit_options()&nbsp;provides&nbsp;an<br>
+easy&nbsp;way&nbsp;to&nbsp;edit&nbsp;the&nbsp;options.<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;add&nbsp;new&nbsp;types&nbsp;of&nbsp;option&nbsp;by&nbsp;appending&nbsp;to&nbsp;widget_registry&nbsp;(new<br>
+in&nbsp;ROX-Lib&nbsp;1.9.13).&nbsp;Return&nbsp;a&nbsp;list&nbsp;of&nbsp;widgets&nbsp;(which&nbsp;are&nbsp;packed&nbsp;into&nbsp;either&nbsp;an<br>
+HBox&nbsp;or&nbsp;a&nbsp;VBox).&nbsp;For&nbsp;example,&nbsp;to&nbsp;add&nbsp;a&nbsp;button&nbsp;widget:<br>
+&nbsp;<br>
+def&nbsp;build_button(box,&nbsp;node,&nbsp;label):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button&nbsp;=&nbsp;g.<a href="gtk.html#Button">Button</a>(label)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;box.may_add_tip(button,&nbsp;node)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.connect('clicked',&nbsp;my_button_handler)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[button]<br>
+<a href="#OptionsBox">OptionsBox</a>.widget_registry['button']&nbsp;=&nbsp;build_button<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;then&nbsp;create&nbsp;such&nbsp;a&nbsp;button&nbsp;in&nbsp;Options.xml&nbsp;with:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&lt;button&nbsp;label='...'&gt;Tooltip&lt;/button&gt;<br>
+&nbsp;<br>
+Any&nbsp;element&nbsp;may&nbsp;have&nbsp;a&nbsp;'size-group'&nbsp;attribute.&nbsp;Certain&nbsp;widgets&nbsp;(labels&nbsp;in<br>
+particular)&nbsp;in&nbsp;the&nbsp;same&nbsp;size&nbsp;group&nbsp;all&nbsp;have&nbsp;the&nbsp;same&nbsp;size.<br>
+&nbsp;<br>
+For&nbsp;widgets&nbsp;that&nbsp;have&nbsp;options,&nbsp;your&nbsp;build&nbsp;function&nbsp;will&nbsp;be&nbsp;called&nbsp;with<br>
+the&nbsp;option&nbsp;as&nbsp;a&nbsp;third&nbsp;parameter.&nbsp;You&nbsp;should&nbsp;register&nbsp;get&nbsp;and&nbsp;set&nbsp;methods,<br>
+and&nbsp;arrange&nbsp;for&nbsp;box.check_widget&nbsp;to&nbsp;be&nbsp;called&nbsp;when&nbsp;the&nbsp;user&nbsp;changes&nbsp;the<br>
+value:<br>
+&nbsp;<br>
+def&nbsp;build_toggle(box,&nbsp;node,&nbsp;label,&nbsp;option):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toggle&nbsp;=&nbsp;g.CheckButton(label)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;box.may_add_tip(toggle,&nbsp;node)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;box.handlers[option]&nbsp;=&nbsp;(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambda:&nbsp;str(toggle.get_active()),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambda:&nbsp;toggle.set_active(option.int_value))<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toggle.connect('toggled',&nbsp;lambda&nbsp;w:&nbsp;box.check_widget(option))<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[toggle]<br>
+<a href="#OptionsBox">OptionsBox</a>.widget_registry['mytoggle']&nbsp;=&nbsp;build_toggle</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="gtk.html#Button">gtk.Button</a>(<a href="gtk.html#Bin">gtk.Bin</a>, gtk.gtk.Activatable)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.OptionsBox.html#ColourButton">ColourButton</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.OptionsBox.html#FontButton">FontButton</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.html#Dialog">gtk.Dialog</a>(<a href="gtk.html#Window">gtk.Window</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.OptionsBox.html#OptionsBox">OptionsBox</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ColourButton">class <strong>ColourButton</strong></a>(<a href="gtk.html#Button">gtk.Button</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;button&nbsp;that&nbsp;opens&nbsp;a&nbsp;GtkColorSelectionDialog<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ColourButton-__init__"><strong>__init__</strong></a>(self, option_box, option, title)</dt></dl>
+
+<dl><dt><a name="ColourButton-clicked"><strong>clicked</strong></a>(self, button)</dt></dl>
+
+<dl><dt><a name="ColourButton-expose"><strong>expose</strong></a>(self, widget, event)</dt></dl>
+
+<dl><dt><a name="ColourButton-get"><strong>get</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ColourButton-set"><strong>set</strong></a>(self, c<font color="#909090">=None</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FontButton">class <strong>FontButton</strong></a>(<a href="gtk.html#Button">gtk.Button</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;button&nbsp;that&nbsp;opens&nbsp;a&nbsp;GtkFontSelectionDialog<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FontButton-__init__"><strong>__init__</strong></a>(self, option_box, option, title)</dt></dl>
+
+<dl><dt><a name="FontButton-clicked"><strong>clicked</strong></a>(self, button)</dt></dl>
+
+<dl><dt><a name="FontButton-get"><strong>get</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FontButton-set"><strong>set</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OptionsBox">class <strong>OptionsBox</strong></a>(<a href="gtk.html#Dialog">gtk.Dialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;dialog&nbsp;box&nbsp;which&nbsp;lets&nbsp;the&nbsp;user&nbsp;edit&nbsp;the&nbsp;options.&nbsp;The&nbsp;file<br>
+Options.xml&nbsp;specifies&nbsp;the&nbsp;layout&nbsp;of&nbsp;this&nbsp;box.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OptionsBox-__init__"><strong>__init__</strong></a>(self, options_group, options_xml, translation<font color="#909090">=None</font>)</dt><dd><tt>options_xml&nbsp;is&nbsp;an&nbsp;XML&nbsp;file,&nbsp;usually&nbsp;&lt;app_dir&gt;/Options.xml,<br>
+which&nbsp;defines&nbsp;the&nbsp;layout&nbsp;of&nbsp;the&nbsp;<a href="#OptionsBox">OptionsBox</a>.<br>
+&nbsp;<br>
+It&nbsp;contains&nbsp;an&nbsp;&lt;options&gt;&nbsp;root&nbsp;element&nbsp;containing&nbsp;(nested)<br>
+&lt;section&gt;&nbsp;elements.&nbsp;Each&nbsp;&lt;section&gt;&nbsp;contains&nbsp;a&nbsp;number&nbsp;of&nbsp;widgets,<br>
+some&nbsp;of&nbsp;which&nbsp;correspond&nbsp;to&nbsp;options.&nbsp;The&nbsp;build_*&nbsp;functions&nbsp;are<br>
+used&nbsp;to&nbsp;create&nbsp;them.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&lt;?xml&nbsp;version='1.0'?&gt;<br>
+&lt;options&gt;<br>
+&nbsp;&nbsp;&lt;section&nbsp;title='First&nbsp;section'&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;Here&nbsp;are&nbsp;some&nbsp;options&lt;/label&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry&nbsp;name='default_name'&nbsp;label='Default&nbsp;file&nbsp;name'&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;saving&nbsp;an&nbsp;untitled&nbsp;file,&nbsp;use&nbsp;this&nbsp;name&nbsp;as&nbsp;the&nbsp;default.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/entry&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;section&nbsp;title='Nested&nbsp;section'&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;<br>
+&nbsp;&nbsp;&lt;/section&gt;<br>
+&lt;/options&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_colour"><strong>build_colour</strong></a>(self, node, label, option)</dt><dd><tt>&lt;colour&nbsp;name='...'&nbsp;label='...'&gt;Tooltip&lt;/colour&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_entry"><strong>build_entry</strong></a>(self, node, label, option)</dt><dd><tt>&lt;entry&nbsp;name='...'&nbsp;label='...'&gt;Tooltip&lt;/entry&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_filechooser"><strong>build_filechooser</strong></a>(self, node, label, option)</dt><dd><tt>&lt;filechooser&nbsp;name='...'&nbsp;label='...'/&gt;Tooltip&lt;/filechooser&gt;.<br>
+Lets&nbsp;the&nbsp;user&nbsp;choose&nbsp;a&nbsp;file&nbsp;(using&nbsp;a&nbsp;GtkFileChooser&nbsp;or&nbsp;by&nbsp;drag-and-drop).<br>
+Note:&nbsp;requires&nbsp;GTK&nbsp;&gt;=&nbsp;2.6</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_fixedlist"><strong>build_fixedlist</strong></a>(self, node, label, option)</dt><dd><tt>&lt;fixedlist&nbsp;name='...'&nbsp;label='...'&nbsp;selection='single|none|multiple'&gt;Tooltip&lt;listitem&nbsp;label='...'/&gt;&lt;listitem&nbsp;label='...'/&gt;&lt;/fixedlist&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_font"><strong>build_font</strong></a>(self, node, label, option)</dt><dd><tt>&lt;font&nbsp;name='...'&nbsp;label='...'&gt;Tooltip&lt;/font&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_frame"><strong>build_frame</strong></a>(self, node, label)</dt><dd><tt>&lt;frame&nbsp;label='Title'&gt;...&lt;/frame&gt;&nbsp;to&nbsp;group&nbsp;options&nbsp;under&nbsp;a&nbsp;heading.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_hbox"><strong>build_hbox</strong></a>(self, node, label)</dt><dd><tt>&lt;hbox&gt;...&lt;/hbox&gt;&nbsp;to&nbsp;layout&nbsp;child&nbsp;widgets&nbsp;horizontally.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_label"><strong>build_label</strong></a>(self, node, label)</dt></dl>
+
+<dl><dt><a name="OptionsBox-build_menu"><strong>build_menu</strong></a>(self, node, label, option)</dt><dd><tt>Build&nbsp;an&nbsp;OptionMenu&nbsp;widget,&nbsp;only&nbsp;one&nbsp;item&nbsp;of&nbsp;which&nbsp;may&nbsp;be&nbsp;selected.<br>
+&lt;menu&nbsp;name='...'&nbsp;label='...'&gt;<br>
+&nbsp;&nbsp;&lt;item&nbsp;value='...'&nbsp;label='...'/&gt;<br>
+&nbsp;&nbsp;&lt;item&nbsp;value='...'&nbsp;label='...'/&gt;<br>
+&lt;/menu&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_numentry"><strong>build_numentry</strong></a>(self, node, label, option)</dt><dd><tt>&lt;numentry&nbsp;name='...'&nbsp;label='...'&nbsp;min='0'&nbsp;max='100'&nbsp;step='1'&gt;Tooltip&lt;/numentry&gt;.<br>
+Lets&nbsp;the&nbsp;user&nbsp;choose&nbsp;a&nbsp;number&nbsp;from&nbsp;min&nbsp;to&nbsp;max.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_radio_group"><strong>build_radio_group</strong></a>(self, node, label, option)</dt><dd><tt>Build&nbsp;a&nbsp;list&nbsp;of&nbsp;radio&nbsp;buttons,&nbsp;only&nbsp;one&nbsp;of&nbsp;which&nbsp;may&nbsp;be&nbsp;selected.<br>
+&lt;radio-group&nbsp;name='...'&gt;<br>
+&nbsp;&nbsp;&lt;radio&nbsp;value='...'&nbsp;label='...'&gt;Tooltip&lt;/radio&gt;<br>
+&nbsp;&nbsp;&lt;radio&nbsp;value='...'&nbsp;label='...'&gt;Tooltip&lt;/radio&gt;<br>
+&lt;/radio-group&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_secretentry"><strong>build_secretentry</strong></a>(self, node, label, option)</dt><dd><tt>&lt;secretentry&nbsp;name='...'&nbsp;label='...'&nbsp;char='*'&gt;Tooltip&lt;/secretentry&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_section"><strong>build_section</strong></a>(self, section, parent)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;page&nbsp;for&nbsp;the&nbsp;notebook&nbsp;and&nbsp;a&nbsp;new&nbsp;entry&nbsp;in&nbsp;the<br>
+sections&nbsp;tree,&nbsp;and&nbsp;build&nbsp;all&nbsp;the&nbsp;widgets&nbsp;inside&nbsp;the&nbsp;page.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_slider"><strong>build_slider</strong></a>(self, node, label, option)</dt></dl>
+
+<dl><dt><a name="OptionsBox-build_spacer"><strong>build_spacer</strong></a>(self, node, label)</dt><dd><tt>&lt;spacer/&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_toggle"><strong>build_toggle</strong></a>(self, node, label, option)</dt><dd><tt>&lt;toggle&nbsp;name='...'&nbsp;label='...'&gt;Tooltip&lt;/toggle&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_unknown"><strong>build_unknown</strong></a>(self, node, label, option<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="OptionsBox-build_varlist"><strong>build_varlist</strong></a>(self, node, label, option)</dt><dd><tt>&lt;varlist&nbsp;name='...'&nbsp;label='...'&nbsp;edit='yes|no'&nbsp;extend='yes|no'&nbsp;selection='single|none|multiple'&gt;Tooltip&lt;/varlist&gt;</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_vbox"><strong>build_vbox</strong></a>(self, node, label)</dt><dd><tt>&lt;vbox&gt;...&lt;/vbox&gt;&nbsp;to&nbsp;layout&nbsp;child&nbsp;widgets&nbsp;vertically.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_widget"><strong>build_widget</strong></a>(self, node, box)</dt><dd><tt>Dispatches&nbsp;the&nbsp;job&nbsp;of&nbsp;dealing&nbsp;with&nbsp;a&nbsp;DOM&nbsp;Node&nbsp;to&nbsp;the<br>
+appropriate&nbsp;build_*&nbsp;function.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-build_window_frame"><strong>build_window_frame</strong></a>(self, add_frame<font color="#909090">=True</font>)</dt><dd><tt>Create&nbsp;the&nbsp;main&nbsp;structure&nbsp;of&nbsp;the&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-changed"><strong>changed</strong></a>(self)</dt><dd><tt>Check&nbsp;whether&nbsp;any&nbsp;options&nbsp;have&nbsp;different&nbsp;values&nbsp;(ie,&nbsp;whether&nbsp;Revert<br>
+will&nbsp;do&nbsp;anything).</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-check_widget"><strong>check_widget</strong></a>(self, option)</dt><dd><tt>A&nbsp;widgets&nbsp;call&nbsp;this&nbsp;when&nbsp;the&nbsp;user&nbsp;changes&nbsp;its&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-do_box"><strong>do_box</strong></a>(self, node, label, widget)</dt><dd><tt>Helper&nbsp;function&nbsp;for&nbsp;building&nbsp;hbox,&nbsp;vbox&nbsp;and&nbsp;frame&nbsp;widgets.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-do_entry"><strong>do_entry</strong></a>(self, node, label, option)</dt><dd><tt>Helper&nbsp;function&nbsp;for&nbsp;entry&nbsp;and&nbsp;secretentry&nbsp;widgets</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-get_size_group"><strong>get_size_group</strong></a>(self, name)</dt><dd><tt>Return&nbsp;the&nbsp;GtkSizeGroup&nbsp;for&nbsp;this&nbsp;name,&nbsp;creating&nbsp;one<br>
+if&nbsp;it&nbsp;doesn't&nbsp;currently&nbsp;exist.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-make_sized_label"><strong>make_sized_label</strong></a>(self, label, suffix<font color="#909090">=''</font>)</dt><dd><tt>Create&nbsp;a&nbsp;GtkLabel&nbsp;and&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;current&nbsp;size-group,&nbsp;if&nbsp;any</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-may_add_tip"><strong>may_add_tip</strong></a>(self, widget, node)</dt><dd><tt>If&nbsp;'node'&nbsp;contains&nbsp;any&nbsp;text,&nbsp;use&nbsp;that&nbsp;as&nbsp;the&nbsp;tip&nbsp;for&nbsp;'widget'.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-open"><strong>open</strong></a>(self)</dt><dd><tt>Show&nbsp;the&nbsp;window,&nbsp;updating&nbsp;all&nbsp;the&nbsp;widgets&nbsp;at&nbsp;the&nbsp;same<br>
+time.&nbsp;Use&nbsp;this&nbsp;instead&nbsp;of&nbsp;<a href="#OptionsBox-show">show</a>().</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-update_revert"><strong>update_revert</strong></a>(self)</dt><dd><tt>Shade/unshade&nbsp;the&nbsp;Revert&nbsp;button.&nbsp;Internal.</tt></dd></dl>
+
+<dl><dt><a name="OptionsBox-update_widgets"><strong>update_widgets</strong></a>(self)</dt><dd><tt>Make&nbsp;widgets&nbsp;show&nbsp;current&nbsp;values.&nbsp;Internal.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-bool_attr"><strong>bool_attr</strong></a>(node, name, val<font color="#909090">=False</font>)</dt><dd><tt>Interpret&nbsp;node&nbsp;attribute&nbsp;as&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
+ <dl><dt><a name="-data"><strong>data</strong></a>(node)</dt><dd><tt>Return&nbsp;all&nbsp;the&nbsp;text&nbsp;directly&nbsp;inside&nbsp;this&nbsp;DOM&nbsp;Node.</tt></dd></dl>
+ <dl><dt><a name="-str_attr"><strong>str_attr</strong></a>(node, name, val<font color="#909090">=''</font>)</dt><dd><tt>Get&nbsp;string&nbsp;value&nbsp;of&nbsp;node&nbsp;attribute</tt></dd></dl>
+</td></tr></table>
+</body></html>

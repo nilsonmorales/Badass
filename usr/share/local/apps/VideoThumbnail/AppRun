@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+#
+# $Id: AppRun,v 1.7 2007/06/30 09:44:23 stephen Exp $
+
+"""Manage the video thumbnail program"""
+
+import os
+import findrox; findrox.version(2, 0, 4)
+import rox
+
+__builtins__._ = rox.i18n.translation(os.path.join(rox.app_dir, 'Messages'))
+
+import sys
+import vidthumb
+
+# Are we to generate a thumb?
+if len(sys.argv)>1:
+    try:
+        vidthumb.main(sys.argv[1:])
+    except:
+        t, m=sys.exc_info()[:2]
+        print >> sys.stderr, '%s: %s %s' % (sys.argv[0], t, m)
+        sys.exit(1)
+    sys.exit(0)
+
+# We are being run in configure mode
+vidthumb.configure()

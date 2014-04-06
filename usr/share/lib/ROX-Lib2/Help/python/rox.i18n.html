@@ -1,0 +1,51 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.i18n</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.i18n</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>If&nbsp;you&nbsp;want&nbsp;your&nbsp;program&nbsp;to&nbsp;be&nbsp;translated&nbsp;into&nbsp;multiple&nbsp;languages&nbsp;you&nbsp;need<br>
+to&nbsp;do&nbsp;the&nbsp;following:<br>
+&nbsp;<br>
+-&nbsp;Pass&nbsp;all&nbsp;strings&nbsp;that&nbsp;should&nbsp;be&nbsp;translated&nbsp;through&nbsp;the&nbsp;'_'&nbsp;function,&nbsp;eg:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;_('Hello&nbsp;World!')<br>
+&nbsp;<br>
+-&nbsp;Create&nbsp;a&nbsp;Messages&nbsp;subdirectory&nbsp;in&nbsp;your&nbsp;application.<br>
+&nbsp;<br>
+-&nbsp;Run&nbsp;'pygettext&nbsp;*.py'&nbsp;to&nbsp;extract&nbsp;all&nbsp;the&nbsp;marked&nbsp;strings.<br>
+&nbsp;<br>
+-&nbsp;Copy&nbsp;messages.pot&nbsp;as&nbsp;Messages/&lt;lang&gt;.po&nbsp;and&nbsp;edit&nbsp;(see&nbsp;ROX-Lib2's&nbsp;README).<br>
+&nbsp;<br>
+-&nbsp;Use&nbsp;msgfmt&nbsp;to&nbsp;convert&nbsp;the&nbsp;.po&nbsp;files&nbsp;to&nbsp;.gmo&nbsp;files.<br>
+&nbsp;<br>
+-&nbsp;In&nbsp;your&nbsp;application,&nbsp;use&nbsp;the&nbsp;rox.i18n.<a href="#-translation">translation</a>()&nbsp;function&nbsp;to&nbsp;set&nbsp;the&nbsp;_&nbsp;function:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__builtins__._&nbsp;=&nbsp;rox.i18n.<a href="#-translation">translation</a>(os.path.join(rox.app_dir,&nbsp;'Messages'))<br>
+&nbsp;&nbsp;(for&nbsp;libraries,&nbsp;just&nbsp;do&nbsp;'_&nbsp;=';&nbsp;don't&nbsp;mess&nbsp;up&nbsp;the&nbsp;builtins)<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;the&nbsp;marked&nbsp;strings&nbsp;must&nbsp;be&nbsp;fixed.&nbsp;If&nbsp;you're&nbsp;using&nbsp;formats,&nbsp;mark&nbsp;up&nbsp;the<br>
+format,&nbsp;eg:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;_('You&nbsp;have&nbsp;%d&nbsp;lives&nbsp;remaining')&nbsp;%&nbsp;lives<br>
+&nbsp;<br>
+You&nbsp;might&nbsp;like&nbsp;to&nbsp;look&nbsp;at&nbsp;the&nbsp;scripts&nbsp;in&nbsp;ROX-Lib2's&nbsp;Messages&nbsp;directory&nbsp;for<br>
+more&nbsp;help.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-expand_languages"><strong>expand_languages</strong></a>(languages<font color="#909090">=None</font>)</dt></dl>
+ <dl><dt><a name="-find"><strong>find</strong></a>(messages_dir, languages<font color="#909090">=None</font>)</dt><dd><tt>Look&nbsp;in&nbsp;messages_dir&nbsp;for&nbsp;a&nbsp;.gmo&nbsp;file&nbsp;for&nbsp;the&nbsp;user's&nbsp;preferred&nbsp;language<br>
+(or&nbsp;override&nbsp;this&nbsp;with&nbsp;the&nbsp;'languages'&nbsp;argument).&nbsp;Returns&nbsp;the&nbsp;filename,&nbsp;or<br>
+None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;translation.</tt></dd></dl>
+ <dl><dt><a name="-translation"><strong>translation</strong></a>(messages_dir, languages<font color="#909090">=None</font>)</dt><dd><tt>Load&nbsp;the&nbsp;translation&nbsp;for&nbsp;the&nbsp;user's&nbsp;language&nbsp;and&nbsp;return&nbsp;a&nbsp;function<br>
+which&nbsp;translates&nbsp;a&nbsp;string&nbsp;into&nbsp;its&nbsp;unicode&nbsp;equivalent.</tt></dd></dl>
+</td></tr></table>
+</body></html>
