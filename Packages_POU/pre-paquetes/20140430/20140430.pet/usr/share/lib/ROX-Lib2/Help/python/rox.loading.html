@@ -1,0 +1,92 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.loading</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.loading</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>ROX&nbsp;applications&nbsp;should&nbsp;provide&nbsp;good&nbsp;drag-and-drop&nbsp;support.&nbsp;Use&nbsp;this&nbsp;module<br>
+to&nbsp;allow&nbsp;drops&nbsp;onto&nbsp;widgets&nbsp;in&nbsp;your&nbsp;application.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.loading.html#RemoteFiles">RemoteFiles</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.loading.html#XDSLoader">XDSLoader</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RemoteFiles">class <strong>RemoteFiles</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Internal&nbsp;use<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="RemoteFiles-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="XDSLoader">class <strong>XDSLoader</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;mix-in&nbsp;class&nbsp;for&nbsp;widgets&nbsp;that&nbsp;can&nbsp;have&nbsp;files/data&nbsp;dropped&nbsp;on<br>
+them.&nbsp;If&nbsp;object&nbsp;is&nbsp;also&nbsp;a&nbsp;GtkWidget,&nbsp;<a href="#XDSLoader-xds_proxy_for">xds_proxy_for</a>(self)&nbsp;is&nbsp;called<br>
+automatically.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="XDSLoader-__init__"><strong>__init__</strong></a>(self, types)</dt><dd><tt>Call&nbsp;this&nbsp;after&nbsp;initialising&nbsp;the&nbsp;widget.<br>
+Types&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;MIME-types,&nbsp;or&nbsp;None&nbsp;to&nbsp;only&nbsp;accept&nbsp;files.</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_data_received"><strong>xds_data_received</strong></a>(self, widget, context, x, y, selection, info, time)</dt><dd><tt>Called&nbsp;when&nbsp;we&nbsp;get&nbsp;some&nbsp;data.&nbsp;Internal.</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_drag_drop"><strong>xds_drag_drop</strong></a>(self, widget, context, data, info, time)</dt><dd><tt>Called&nbsp;when&nbsp;something&nbsp;is&nbsp;dropped&nbsp;on&nbsp;us.&nbsp;Decide&nbsp;which&nbsp;of&nbsp;the<br>
+offered&nbsp;targets&nbsp;to&nbsp;request&nbsp;and&nbsp;ask&nbsp;for&nbsp;it.&nbsp;xds_data_received&nbsp;will<br>
+be&nbsp;called&nbsp;when&nbsp;it&nbsp;finally&nbsp;arrives.</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_load_from_file"><strong>xds_load_from_file</strong></a>(self, path)</dt><dd><tt>Try&nbsp;to&nbsp;load&nbsp;this&nbsp;local&nbsp;file.&nbsp;Override&nbsp;this&nbsp;if&nbsp;you&nbsp;have&nbsp;a&nbsp;better&nbsp;way<br>
+to&nbsp;load&nbsp;files.&nbsp;The&nbsp;default&nbsp;method&nbsp;opens&nbsp;the&nbsp;file&nbsp;and&nbsp;calls&nbsp;<a href="#XDSLoader-xds_load_from_stream">xds_load_from_stream</a>().</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_load_from_selection"><strong>xds_load_from_selection</strong></a>(self, selection, leafname<font color="#909090">=None</font>)</dt><dd><tt>Try&nbsp;to&nbsp;load&nbsp;this&nbsp;selection&nbsp;(data&nbsp;from&nbsp;another&nbsp;application).&nbsp;The&nbsp;default<br>
+puts&nbsp;the&nbsp;data&nbsp;in&nbsp;a&nbsp;cStringIO&nbsp;and&nbsp;calls&nbsp;<a href="#XDSLoader-xds_load_from_stream">xds_load_from_stream</a>().</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_load_from_stream"><strong>xds_load_from_stream</strong></a>(self, name, mimetype, stream)</dt><dd><tt>Called&nbsp;when&nbsp;we&nbsp;get&nbsp;any&nbsp;data&nbsp;sent&nbsp;via&nbsp;drag-and-drop&nbsp;in&nbsp;any&nbsp;way&nbsp;(local<br>
+file&nbsp;or&nbsp;remote&nbsp;application&nbsp;transfer).&nbsp;You&nbsp;should&nbsp;override&nbsp;this&nbsp;and&nbsp;do<br>
+something&nbsp;with&nbsp;the&nbsp;data.&nbsp;'name'&nbsp;may&nbsp;be&nbsp;None&nbsp;(if&nbsp;the&nbsp;data&nbsp;is&nbsp;unnamed),<br>
+a&nbsp;leafname,&nbsp;or&nbsp;a&nbsp;full&nbsp;path&nbsp;or&nbsp;URI.&nbsp;'mimetype'&nbsp;is&nbsp;the&nbsp;MIME&nbsp;type,&nbsp;or&nbsp;None&nbsp;if<br>
+unknown.</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_load_uris"><strong>xds_load_uris</strong></a>(self, uris)</dt><dd><tt>Try&nbsp;to&nbsp;load&nbsp;each&nbsp;URI&nbsp;in&nbsp;the&nbsp;list.&nbsp;Override&nbsp;this&nbsp;if&nbsp;you&nbsp;can&nbsp;handle&nbsp;URIs<br>
+directly.&nbsp;The&nbsp;default&nbsp;method&nbsp;passes&nbsp;each&nbsp;local&nbsp;path&nbsp;to&nbsp;<a href="#XDSLoader-xds_load_from_file">xds_load_from_file</a>()<br>
+and&nbsp;displays&nbsp;an&nbsp;error&nbsp;for&nbsp;anything&nbsp;else.<br>
+The&nbsp;uris&nbsp;are&nbsp;escaped,&nbsp;so&nbsp;a&nbsp;space&nbsp;will&nbsp;appear&nbsp;as&nbsp;'%20'</tt></dd></dl>
+
+<dl><dt><a name="XDSLoader-xds_proxy_for"><strong>xds_proxy_for</strong></a>(self, widget)</dt><dd><tt>Handle&nbsp;drops&nbsp;on&nbsp;this&nbsp;widget&nbsp;as&nbsp;if&nbsp;they&nbsp;were&nbsp;to&nbsp;'self'.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-extract_uris"><strong>extract_uris</strong></a>(data)</dt><dd><tt>Convert&nbsp;a&nbsp;text/uri-list&nbsp;to&nbsp;a&nbsp;python&nbsp;list&nbsp;of&nbsp;(still&nbsp;escaped)&nbsp;URIs</tt></dd></dl>
+ <dl><dt><a name="-provides"><strong>provides</strong></a>(context, type)</dt></dl>
+</td></tr></table>
+</body></html>

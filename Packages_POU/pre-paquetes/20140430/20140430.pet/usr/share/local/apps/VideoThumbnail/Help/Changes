@@ -1,0 +1,157 @@
+	VideoThumbnail
+	Thumbnail images of video files for ROX-Filer
+	by Stephen Watson
+	http://www.kerofin.demon.co.uk/rox/
+
+26-Jan-2008 (0.1.14)
+~~~~~~~~~~~
+Finished code for setting the handler for a type.
+
+21-Nov-2007
+~~~~~~~~~~~
+Adding interface to test and set handler for a type by dropping a sample file.
+
+23-Jun-2007
+~~~~~~~~~~~
+Can handle application/x-flash-video.
+
+27-May-2007
+~~~~~~~~~~~
+Thumbnail helper now in ROX-Lib 2.0.4.
+
+10-Apr-2007
+~~~~~~~~~~~
+Removed cause of deprecation warning.
+
+14-Jan-2007 (0.1.13)
+~~~~~~~~~~~
+Added support for translating strings in Options.xml.
+
+07-Dec-2006
+~~~~~~~~~~~
+Use -vf-clr option for MPlayer to clear video filters (Christian W. 
+Zuckschwerdt).
+
+07-Oct-2006
+~~~~~~~~~~~
+Option to place the time label at right hand side, to avoid being obscured
+by symlink/xattr emblems.
+
+30-Aug-2006
+~~~~~~~~~~~
+Fix command line handling.
+
+29-Apr-2006
+~~~~~~~~~~~
+Added i18n support.
+
+01-Mar-2006 (0.1.12)
+~~~~~~~~~~~
+Yet more bugs in installing handlers under Zero Install.
+
+01-Mar-2006 (0.1.9)
+~~~~~~~~~~~
+Another bug in installing handlers under Zero Install (reported by 
+José Silva).
+
+S_ISDIR(info.st_mode)28-Feb-2006 (0.1.8)
+~~~~~~~~~~~
+Fix typo when installing handlers under Zero Install (reported by Henning 
+Jacobsen). 
+
+11-Feb-2006
+~~~~~~~~~~~
+Return length as 0 if we can't work it out.
+
+16-Jan-2006 (0.1.7)
+~~~~~~~~~~~
+Bugfix: handle UTF-8 filenames (reported by Benjamin Peter).
+
+08-Jan-2006
+~~~~~~~~~~~
+If the frame file is missing, try getting the initial frame (fixes problem with
+short files having erroneous lengths).
+
+17-Nov-2005
+~~~~~~~~~~~
+Trying to fix install of MIME handlers when using the injector.
+
+12-Nov-2005
+~~~~~~~~~~~
+Experimenting with number of frames we should get from MPlayer.
+Added injector feed.
+
+07-Oct-2005 (0.1.6)
+~~~~~~~~~~~
+Added support for using totem-video-thumbnailer instead of MPlayer
+(Torsten Marek).
+
+12-Sep-2005
+~~~~~~~~~~~
+MPlayer supports video/x-ogm and application/x-matroska (Yuri Bongiorno).
+
+13-Aug-2005
+~~~~~~~~~~~
+Require ROX-Lib 2.0.2 as there was a bug in mime_handler in 2.0.0 and 2.0.1.
+
+22-Apr-2005 (0.1.5)
+~~~~~~~~~~~
+MPlayer 1.0pre7 doesn't recognize the -z option, so don't use it.
+Options stored in XDG dirs now.
+
+17-Apr-2005
+~~~~~~~~~~~
+Require ROX-Lib 2.0.0.
+
+05-Mar-2005
+~~~~~~~~~~~
+Fix generation of error image.
+
+25-Feb-2005
+~~~~~~~~~~~
+Try to improve readability of time count.
+
+11-Feb-2005
+~~~~~~~~~~~
+When thumbnail creation fails generate an image with a error message.
+
+27-Oct-2004
+-----------
+Pass -noloop to mplayer.
+
+21-Aug-2004 (0.1.4)
+-----------
+Frame selection now dependant on the type of file.
+
+30-Jun-2004 (0.1.3)
+-----------
+Added option to control which of the two generated frames we should use.
+
+08-May-2004 (0.1.2)
+-----------
+Error reporting controlled by options, defaults to silent.
+
+30-Apr-2004
+-----------
+Can put length of clip in upper left corner.
+
+04-Mar-2004
+-----------
+Fix reporting of exceptions.
+
+23-Jan-2004
+-----------
+Use fixed findrox.py
+
+11-Jan-2004 (0.1.1)
+-----------
+Now use mime_handler module to install handlers.
+
+20-Dec-2003 (0.1.0)
+-----------
+Re-written to be more object-orientated.
+
+08-Nov-2003 (Initial 0.0.1 version)
+-----------
+
+First fully operation version.

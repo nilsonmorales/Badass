@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.tasks</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.tasks</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>The&nbsp;tasks&nbsp;module&nbsp;provides&nbsp;a&nbsp;simple&nbsp;light-weight&nbsp;alternative&nbsp;to&nbsp;threads.<br>
+&nbsp;<br>
+When&nbsp;you&nbsp;have&nbsp;a&nbsp;long-running&nbsp;job&nbsp;you&nbsp;will&nbsp;want&nbsp;to&nbsp;run&nbsp;it&nbsp;in&nbsp;the&nbsp;background,<br>
+while&nbsp;the&nbsp;user&nbsp;does&nbsp;other&nbsp;things.&nbsp;There&nbsp;are&nbsp;four&nbsp;ways&nbsp;to&nbsp;do&nbsp;this:<br>
+&nbsp;<br>
+-&nbsp;Use&nbsp;a&nbsp;new&nbsp;thread&nbsp;for&nbsp;each&nbsp;task.<br>
+-&nbsp;Use&nbsp;callbacks&nbsp;from&nbsp;an&nbsp;idle&nbsp;handler.<br>
+-&nbsp;Use&nbsp;a&nbsp;recursive&nbsp;mainloop.<br>
+-&nbsp;Use&nbsp;this&nbsp;module.<br>
+&nbsp;<br>
+Using&nbsp;threads&nbsp;causes&nbsp;a&nbsp;number&nbsp;of&nbsp;problems.&nbsp;Some&nbsp;builds&nbsp;of&nbsp;pygtk/python&nbsp;don't<br>
+support&nbsp;them,&nbsp;they&nbsp;introduce&nbsp;race&nbsp;conditions,&nbsp;often&nbsp;lead&nbsp;to&nbsp;many&nbsp;subtle<br>
+bugs,&nbsp;and&nbsp;they&nbsp;require&nbsp;lots&nbsp;of&nbsp;resources&nbsp;(you&nbsp;probably&nbsp;wouldn't&nbsp;want&nbsp;10,000<br>
+threads&nbsp;running&nbsp;at&nbsp;once).&nbsp;In&nbsp;particular,&nbsp;two&nbsp;threads&nbsp;can&nbsp;run&nbsp;at&nbsp;exactly&nbsp;the<br>
+same&nbsp;time&nbsp;(perhaps&nbsp;on&nbsp;different&nbsp;processors),&nbsp;so&nbsp;you&nbsp;have&nbsp;to&nbsp;be&nbsp;really&nbsp;careful<br>
+that&nbsp;they&nbsp;don't&nbsp;both&nbsp;try&nbsp;to&nbsp;update&nbsp;the&nbsp;same&nbsp;variable&nbsp;at&nbsp;the&nbsp;same&nbsp;time.&nbsp;This<br>
+requires&nbsp;lots&nbsp;of&nbsp;messy&nbsp;locking,&nbsp;which&nbsp;is&nbsp;hard&nbsp;to&nbsp;get&nbsp;right.<br>
+&nbsp;<br>
+Callbacks&nbsp;work&nbsp;within&nbsp;a&nbsp;single&nbsp;thread.&nbsp;For&nbsp;example,&nbsp;you&nbsp;open&nbsp;a&nbsp;dialog&nbsp;box&nbsp;and<br>
+then&nbsp;tell&nbsp;the&nbsp;system&nbsp;to&nbsp;call&nbsp;one&nbsp;function&nbsp;if&nbsp;it's&nbsp;closed,&nbsp;and&nbsp;another&nbsp;if&nbsp;the<br>
+user&nbsp;clicks&nbsp;OK,&nbsp;etc.&nbsp;The&nbsp;function&nbsp;that&nbsp;opened&nbsp;the&nbsp;box&nbsp;then&nbsp;returns,&nbsp;and&nbsp;the<br>
+system&nbsp;calls&nbsp;one&nbsp;of&nbsp;the&nbsp;given&nbsp;callback&nbsp;functions&nbsp;later.&nbsp;Callbacks&nbsp;only<br>
+execute&nbsp;one&nbsp;at&nbsp;a&nbsp;time,&nbsp;so&nbsp;you&nbsp;don't&nbsp;have&nbsp;to&nbsp;worry&nbsp;about&nbsp;race&nbsp;conditions.<br>
+However,&nbsp;they&nbsp;are&nbsp;often&nbsp;very&nbsp;awkward&nbsp;to&nbsp;program&nbsp;with,&nbsp;because&nbsp;you&nbsp;have&nbsp;to<br>
+save&nbsp;state&nbsp;somewhere&nbsp;and&nbsp;then&nbsp;pass&nbsp;it&nbsp;to&nbsp;the&nbsp;functions&nbsp;when&nbsp;they're&nbsp;called.<br>
+&nbsp;<br>
+A&nbsp;recursive&nbsp;mainloop&nbsp;only&nbsp;works&nbsp;with&nbsp;nested&nbsp;tasks&nbsp;(you&nbsp;can&nbsp;create&nbsp;a<br>
+sub-task,&nbsp;but&nbsp;the&nbsp;main&nbsp;task&nbsp;can't&nbsp;continue&nbsp;until&nbsp;the&nbsp;sub-task&nbsp;has<br>
+finished).&nbsp;We&nbsp;use&nbsp;these&nbsp;for,&nbsp;eg,&nbsp;rox.alert()&nbsp;boxes&nbsp;since&nbsp;you&nbsp;don't<br>
+normally&nbsp;want&nbsp;to&nbsp;do&nbsp;anything&nbsp;else&nbsp;until&nbsp;the&nbsp;box&nbsp;is&nbsp;closed,&nbsp;but&nbsp;it&nbsp;is&nbsp;not<br>
+appropriate&nbsp;for&nbsp;long-running&nbsp;jobs.<br>
+&nbsp;<br>
+Tasks&nbsp;use&nbsp;python's&nbsp;generator&nbsp;API&nbsp;to&nbsp;provide&nbsp;a&nbsp;more&nbsp;pleasant&nbsp;interface&nbsp;to<br>
+callbacks.&nbsp;See&nbsp;the&nbsp;<a href="#Task">Task</a>&nbsp;class&nbsp;(below)&nbsp;for&nbsp;more&nbsp;information.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.tasks.html#Blocker">Blocker</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.tasks.html#IdleBlocker">IdleBlocker</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.tasks.html#InputBlocker">InputBlocker</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.tasks.html#OutputBlocker">OutputBlocker</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.tasks.html#TimeoutBlocker">TimeoutBlocker</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.tasks.html#Task">Task</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Blocker">class <strong>Blocker</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#Blocker">Blocker</a>&nbsp;object&nbsp;starts&nbsp;life&nbsp;with&nbsp;'happened&nbsp;=&nbsp;False'.&nbsp;Tasks&nbsp;can<br>
+ask&nbsp;to&nbsp;be&nbsp;suspended&nbsp;until&nbsp;'happened&nbsp;=&nbsp;True'.&nbsp;The&nbsp;value&nbsp;is&nbsp;changed<br>
+by&nbsp;a&nbsp;call&nbsp;to&nbsp;<a href="#Blocker-trigger">trigger</a>().<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+kettle_boiled&nbsp;=&nbsp;tasks.<a href="#Blocker">Blocker</a>()<br>
+&nbsp;<br>
+def&nbsp;make_tea():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Get&nbsp;cup"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Add&nbsp;tea&nbsp;leaves"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;kettle_boiled<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Pour&nbsp;water&nbsp;into&nbsp;cup"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Brew..."<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;tasks.<a href="#TimeoutBlocker">TimeoutBlocker</a>(120)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Add&nbsp;milk"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Ready!"<br>
+&nbsp;<br>
+tasks.<a href="#Task">Task</a>(make_tea())<br>
+&nbsp;<br>
+#&nbsp;elsewhere,&nbsp;later...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"Kettle&nbsp;boiled!"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kettle_boiled.<a href="#Blocker-trigger">trigger</a>()<br>
+&nbsp;<br>
+You&nbsp;can&nbsp;also&nbsp;yield&nbsp;a&nbsp;list&nbsp;of&nbsp;Blockers.&nbsp;Your&nbsp;function&nbsp;will&nbsp;resume<br>
+after&nbsp;any&nbsp;one&nbsp;of&nbsp;them&nbsp;is&nbsp;triggered.&nbsp;Use&nbsp;blocker.happened&nbsp;to<br>
+find&nbsp;out&nbsp;which&nbsp;one(s).&nbsp;Yielding&nbsp;a&nbsp;<a href="#Blocker">Blocker</a>&nbsp;that&nbsp;has&nbsp;already<br>
+happened&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;yielding&nbsp;None&nbsp;(gives&nbsp;any&nbsp;other&nbsp;Tasks&nbsp;a<br>
+chance&nbsp;to&nbsp;run,&nbsp;and&nbsp;then&nbsp;continues).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Blocker-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Blocker-add_task"><strong>add_task</strong></a>(self, task)</dt><dd><tt>Called&nbsp;by&nbsp;the&nbsp;schedular&nbsp;when&nbsp;a&nbsp;<a href="#Task">Task</a>&nbsp;yields&nbsp;this<br>
+<a href="#Blocker">Blocker</a>.&nbsp;If&nbsp;you&nbsp;override&nbsp;this&nbsp;method,&nbsp;be&nbsp;sure&nbsp;to&nbsp;still<br>
+call&nbsp;this&nbsp;method&nbsp;with&nbsp;<a href="#Blocker">Blocker</a>.<a href="#Blocker-add_task">add_task</a>(self)!</tt></dd></dl>
+
+<dl><dt><a name="Blocker-remove_task"><strong>remove_task</strong></a>(self, task)</dt><dd><tt>Called&nbsp;by&nbsp;the&nbsp;schedular&nbsp;when&nbsp;a&nbsp;<a href="#Task">Task</a>&nbsp;that&nbsp;was&nbsp;waiting&nbsp;for<br>
+this&nbsp;blocker&nbsp;is&nbsp;resumed.</tt></dd></dl>
+
+<dl><dt><a name="Blocker-trigger"><strong>trigger</strong></a>(self)</dt><dd><tt>The&nbsp;event&nbsp;has&nbsp;happened.&nbsp;Note&nbsp;that&nbsp;this&nbsp;cannot&nbsp;be&nbsp;undone;<br>
+instead,&nbsp;create&nbsp;a&nbsp;new&nbsp;<a href="#Blocker">Blocker</a>&nbsp;to&nbsp;handle&nbsp;the&nbsp;next&nbsp;occurance<br>
+of&nbsp;the&nbsp;event.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IdleBlocker">class <strong>IdleBlocker</strong></a>(<a href="rox.tasks.html#Blocker">Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;<a href="#IdleBlocker">IdleBlocker</a>&nbsp;blocks&nbsp;until&nbsp;a&nbsp;task&nbsp;starts&nbsp;waiting&nbsp;on&nbsp;it,&nbsp;then<br>
+immediately&nbsp;triggers.&nbsp;An&nbsp;instance&nbsp;of&nbsp;this&nbsp;class&nbsp;is&nbsp;used&nbsp;internally<br>
+when&nbsp;a&nbsp;<a href="#Task">Task</a>&nbsp;yields&nbsp;None.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="IdleBlocker-add_task"><strong>add_task</strong></a>(self, task)</dt><dd><tt>Also&nbsp;calls&nbsp;trigger.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="InputBlocker">class <strong>InputBlocker</strong></a>(<a href="rox.tasks.html#Blocker">Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Triggers&nbsp;when&nbsp;os.read(stream)&nbsp;would&nbsp;not&nbsp;block.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="InputBlocker-__init__"><strong>__init__</strong></a>(self, stream)</dt></dl>
+
+<dl><dt><a name="InputBlocker-add_task"><strong>add_task</strong></a>(self, task)</dt></dl>
+
+<dl><dt><a name="InputBlocker-remove_task"><strong>remove_task</strong></a>(self, task)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="OutputBlocker">class <strong>OutputBlocker</strong></a>(<a href="rox.tasks.html#Blocker">Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Triggers&nbsp;when&nbsp;os.write(stream)&nbsp;would&nbsp;not&nbsp;block.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="OutputBlocker-__init__"><strong>__init__</strong></a>(self, stream)</dt></dl>
+
+<dl><dt><a name="OutputBlocker-add_task"><strong>add_task</strong></a>(self, task)</dt></dl>
+
+<dl><dt><a name="OutputBlocker-remove_task"><strong>remove_task</strong></a>(self, task)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Task">class <strong>Task</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Create&nbsp;a&nbsp;new&nbsp;<a href="#Task">Task</a>&nbsp;when&nbsp;you&nbsp;have&nbsp;some&nbsp;long&nbsp;running&nbsp;function&nbsp;to<br>
+run&nbsp;in&nbsp;the&nbsp;background,&nbsp;but&nbsp;which&nbsp;needs&nbsp;to&nbsp;do&nbsp;work&nbsp;in&nbsp;'chunks'.<br>
+Example:<br>
+&nbsp;<br>
+from&nbsp;rox&nbsp;import&nbsp;tasks<br>
+def&nbsp;my_task(start):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;range(start,&nbsp;start&nbsp;+&nbsp;5):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;"x&nbsp;=",&nbsp;x<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;None<br>
+&nbsp;<br>
+tasks.<a href="#Task">Task</a>(my_task(0))<br>
+tasks.<a href="#Task">Task</a>(my_task(10))<br>
+&nbsp;<br>
+rox.mainloop()<br>
+&nbsp;<br>
+Yielding&nbsp;None&nbsp;gives&nbsp;up&nbsp;control&nbsp;of&nbsp;the&nbsp;processor&nbsp;to&nbsp;another&nbsp;<a href="#Task">Task</a>,<br>
+causing&nbsp;the&nbsp;sequence&nbsp;printed&nbsp;to&nbsp;be&nbsp;interleaved.&nbsp;You&nbsp;can&nbsp;also&nbsp;yield&nbsp;a<br>
+<a href="#Blocker">Blocker</a>&nbsp;(or&nbsp;a&nbsp;list&nbsp;of&nbsp;Blockers)&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;wait&nbsp;for&nbsp;some<br>
+particular&nbsp;event&nbsp;before&nbsp;resuming&nbsp;(see&nbsp;the&nbsp;<a href="#Blocker">Blocker</a>&nbsp;class&nbsp;for&nbsp;details).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Task-__init__"><strong>__init__</strong></a>(self, iterator, name<font color="#909090">=None</font>)</dt><dd><tt>Call&nbsp;iterator.next()&nbsp;from&nbsp;a&nbsp;glib&nbsp;idle&nbsp;function.&nbsp;This&nbsp;function<br>
+can&nbsp;yield&nbsp;<a href="#Blocker">Blocker</a>()&nbsp;objects&nbsp;to&nbsp;suspend&nbsp;processing&nbsp;while&nbsp;waiting<br>
+for&nbsp;events.&nbsp;name&nbsp;is&nbsp;used&nbsp;only&nbsp;for&nbsp;debugging.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TimeoutBlocker">class <strong>TimeoutBlocker</strong></a>(<a href="rox.tasks.html#Blocker">Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Triggers&nbsp;after&nbsp;a&nbsp;set&nbsp;number&nbsp;of&nbsp;seconds.&nbsp;rox.toplevel_ref/unref<br>
+are&nbsp;called&nbsp;to&nbsp;prevent&nbsp;the&nbsp;app&nbsp;quitting&nbsp;while&nbsp;a&nbsp;<a href="#TimeoutBlocker">TimeoutBlocker</a>&nbsp;is<br>
+running.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TimeoutBlocker-__init__"><strong>__init__</strong></a>(self, timeout)</dt><dd><tt>Trigger&nbsp;after&nbsp;'timeout'&nbsp;seconds&nbsp;(may&nbsp;be&nbsp;a&nbsp;fraction).</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

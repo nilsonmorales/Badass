@@ -1,0 +1,295 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package rox</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>rox</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>To&nbsp;use&nbsp;ROX-Lib2&nbsp;you&nbsp;need&nbsp;to&nbsp;copy&nbsp;the&nbsp;findrox.py&nbsp;script&nbsp;into&nbsp;your&nbsp;application<br>
+directory&nbsp;and&nbsp;import&nbsp;that&nbsp;before&nbsp;anything&nbsp;else.&nbsp;This&nbsp;module&nbsp;will&nbsp;locate<br>
+ROX-Lib2&nbsp;and&nbsp;add&nbsp;ROX-Lib2/python&nbsp;to&nbsp;sys.path.&nbsp;If&nbsp;ROX-Lib2&nbsp;is&nbsp;not&nbsp;found,&nbsp;it<br>
+will&nbsp;display&nbsp;a&nbsp;suitable&nbsp;error&nbsp;and&nbsp;quit.<br>
+&nbsp;<br>
+Since&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;gtk2&nbsp;module&nbsp;can&nbsp;vary,&nbsp;it&nbsp;is&nbsp;best&nbsp;to&nbsp;import&nbsp;it&nbsp;from&nbsp;rox,<br>
+where&nbsp;it&nbsp;is&nbsp;named&nbsp;'g'.<br>
+&nbsp;<br>
+The&nbsp;AppRun&nbsp;script&nbsp;of&nbsp;a&nbsp;simple&nbsp;application&nbsp;might&nbsp;look&nbsp;like&nbsp;this:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#!/usr/bin/env&nbsp;python<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;findrox;&nbsp;findrox.version(1,&nbsp;9,&nbsp;12)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;rox<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window&nbsp;=&nbsp;rox.<a href="#Window">Window</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.set_title('My&nbsp;window')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.show()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rox.<a href="#-mainloop">mainloop</a>()<br>
+&nbsp;<br>
+This&nbsp;program&nbsp;creates&nbsp;and&nbsp;displays&nbsp;a&nbsp;window.&nbsp;The&nbsp;rox.<a href="#Window">Window</a>&nbsp;widget&nbsp;keeps<br>
+track&nbsp;of&nbsp;how&nbsp;many&nbsp;toplevel&nbsp;windows&nbsp;are&nbsp;open.&nbsp;rox.<a href="#-mainloop">mainloop</a>()&nbsp;will&nbsp;return<br>
+when&nbsp;the&nbsp;last&nbsp;one&nbsp;is&nbsp;closed.<br>
+&nbsp;<br>
+'rox.app_dir'&nbsp;is&nbsp;set&nbsp;to&nbsp;the&nbsp;absolute&nbsp;pathname&nbsp;of&nbsp;your&nbsp;application&nbsp;(extracted<br>
+from&nbsp;sys.argv).<br>
+&nbsp;<br>
+The&nbsp;builtin&nbsp;names&nbsp;True&nbsp;and&nbsp;False&nbsp;are&nbsp;defined&nbsp;to&nbsp;1&nbsp;and&nbsp;0,&nbsp;if&nbsp;your&nbsp;version&nbsp;of<br>
+python&nbsp;is&nbsp;old&nbsp;enough&nbsp;not&nbsp;to&nbsp;include&nbsp;them&nbsp;already.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="rox.AppInfo.html">AppInfo</a><br>
+<a href="rox.InfoWin.html">InfoWin</a><br>
+<a href="rox.Menu.html">Menu</a><br>
+<a href="rox.OptionsBox.html">OptionsBox</a><br>
+<a href="rox.applet.html">applet</a><br>
+<a href="rox.basedir.html">basedir</a><br>
+<a href="rox.choices.html">choices</a><br>
+<a href="rox.debug.html">debug</a><br>
+</td><td width="25%" valign=top><a href="rox.filer.html">filer</a><br>
+<a href="rox.fileutils.html">fileutils</a><br>
+<a href="rox.i18n.html">i18n</a><br>
+<a href="rox.icon_theme.html">icon_theme</a><br>
+<a href="rox.launch.html">launch</a><br>
+<a href="rox.loading.html">loading</a><br>
+<a href="rox.master_proxy.html">master_proxy</a><br>
+<a href="rox.mime.html">mime</a><br>
+</td><td width="25%" valign=top><a href="rox.mime_handler.html">mime_handler</a><br>
+<a href="rox.options.html">options</a><br>
+<a href="rox.processes.html">processes</a><br>
+<a href="rox.proxy.html">proxy</a><br>
+<a href="rox.saving.html">saving</a><br>
+<a href="rox.session.html">session</a><br>
+<a href="rox.settings.html">settings</a><br>
+<a href="rox.singleton.html">singleton</a><br>
+</td><td width="25%" valign=top><a href="rox.su.html">su</a><br>
+<a href="rox.suchild.html">suchild</a><br>
+<a href="rox.tasks.html">tasks</a><br>
+<a href="rox.templates.html">templates</a><br>
+<a href="rox.thumbnail.html">thumbnail</a><br>
+<a href="rox.uri_handler.html">uri_handler</a><br>
+<a href="rox.xattr.html">xattr</a><br>
+<a href="rox.xxmlrpc.html">xxmlrpc</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.html#UserAbort">UserAbort</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.html#Button">gtk.Button</a>(<a href="gtk.html#Bin">gtk.Bin</a>, gtk.gtk.Activatable)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.html#ButtonMixed">ButtonMixed</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.html#Dialog">gtk.Dialog</a>(<a href="gtk.html#Window">gtk.Window</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.html#Dialog">Dialog</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.html#StatusIcon">gtk.StatusIcon</a>(<a href="gobject._gobject.html#GObject">gobject._gobject.GObject</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.html#StatusIcon">StatusIcon</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.html#Window">gtk.Window</a>(<a href="gtk.html#Bin">gtk.Bin</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.html#Window">Window</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ButtonMixed">class <strong>ButtonMixed</strong></a>(<a href="gtk.html#Button">gtk.Button</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;button&nbsp;with&nbsp;a&nbsp;standard&nbsp;stock&nbsp;icon,&nbsp;but&nbsp;any&nbsp;label.&nbsp;This&nbsp;is&nbsp;useful<br>
+when&nbsp;you&nbsp;want&nbsp;to&nbsp;express&nbsp;a&nbsp;concept&nbsp;similar&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;stock&nbsp;ones.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ButtonMixed-__init__"><strong>__init__</strong></a>(self, stock, message)</dt><dd><tt>Specify&nbsp;the&nbsp;icon&nbsp;and&nbsp;text&nbsp;for&nbsp;the&nbsp;new&nbsp;button.&nbsp;The&nbsp;text<br>
+may&nbsp;specify&nbsp;the&nbsp;mnemonic&nbsp;for&nbsp;the&nbsp;widget&nbsp;by&nbsp;putting&nbsp;a&nbsp;_&nbsp;before<br>
+the&nbsp;letter,&nbsp;eg:<br>
+button&nbsp;=&nbsp;<a href="#ButtonMixed">ButtonMixed</a>(g.STOCK_DELETE,&nbsp;'_Delete&nbsp;message').</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Dialog">class <strong>Dialog</strong></a>(<a href="gtk.html#Dialog">gtk.Dialog</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;works&nbsp;in&nbsp;exactly&nbsp;the&nbsp;same&nbsp;way&nbsp;as&nbsp;a&nbsp;GtkDialog,&nbsp;except&nbsp;that<br>
+it&nbsp;calls&nbsp;the&nbsp;toplevel_(un)ref&nbsp;functions&nbsp;for&nbsp;you&nbsp;automatically.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Dialog-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StatusIcon">class <strong>StatusIcon</strong></a>(<a href="gtk.html#StatusIcon">gtk.StatusIcon</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Wrap&nbsp;GtkStatusIcon&nbsp;to&nbsp;call&nbsp;toplevel_(un)ref&nbsp;functions&nbsp;for<br>
+you.&nbsp;&nbsp;Calling&nbsp;toplevel_unref&nbsp;isn't&nbsp;automatic,&nbsp;because&nbsp;a<br>
+GtkStatusIcon&nbsp;is&nbsp;not&nbsp;a&nbsp;GtkWidget.<br>
+&nbsp;<br>
+GtkStatusIcon&nbsp;was&nbsp;added&nbsp;in&nbsp;GTK+&nbsp;2.10,&nbsp;so&nbsp;you&nbsp;will&nbsp;need<br>
+pygtk&nbsp;2.10&nbsp;or&nbsp;later&nbsp;to&nbsp;use&nbsp;this&nbsp;class.&nbsp;&nbsp;Check&nbsp;by&nbsp;using<br>
+&nbsp;<br>
+import&nbsp;rox<br>
+if&nbsp;hasattr(rox,&nbsp;'<a href="#StatusIcon">StatusIcon</a>'):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;....<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="StatusIcon-__init__"><strong>__init__</strong></a>(self, add_ref<font color="#909090">=True</font>, menu<font color="#909090">=None</font>, show<font color="#909090">=True</font>, icon_pixbuf<font color="#909090">=None</font>, icon_name<font color="#909090">=None</font>, icon_stock<font color="#909090">=None</font>, icon_file<font color="#909090">=None</font>)</dt><dd><tt>Initialise&nbsp;the&nbsp;<a href="#StatusIcon">StatusIcon</a>.<br>
+&nbsp;<br>
+add_ref&nbsp;-&nbsp;if&nbsp;True&nbsp;(the&nbsp;default)&nbsp;call&nbsp;<a href="#-toplevel_ref">toplevel_ref</a>()&nbsp;for<br>
+this&nbsp;icon&nbsp;and&nbsp;<a href="#-toplevel_unref">toplevel_unref</a>()&nbsp;when&nbsp;removed.&nbsp;&nbsp;Set&nbsp;to<br>
+False&nbsp;if&nbsp;you&nbsp;want&nbsp;the&nbsp;main&nbsp;loop&nbsp;to&nbsp;finish&nbsp;if&nbsp;only&nbsp;the<br>
+icon&nbsp;is&nbsp;present&nbsp;and&nbsp;no&nbsp;other&nbsp;windows<br>
+menu&nbsp;-&nbsp;if&nbsp;not&nbsp;None&nbsp;then&nbsp;this&nbsp;is&nbsp;the&nbsp;menu&nbsp;to&nbsp;show&nbsp;when<br>
+the&nbsp;popup-menu&nbsp;signal&nbsp;is&nbsp;received.&nbsp;&nbsp;Alternatively<br>
+add&nbsp;a&nbsp;handler&nbsp;for&nbsp;then&nbsp;popup-menu&nbsp;signal&nbsp;yourself&nbsp;for<br>
+more&nbsp;sophisticated&nbsp;menus<br>
+show&nbsp;-&nbsp;True&nbsp;to&nbsp;show&nbsp;them&nbsp;icon&nbsp;initially,&nbsp;False&nbsp;to&nbsp;start<br>
+with&nbsp;the&nbsp;icon&nbsp;hidden.<br>
+icon_pixbuf&nbsp;-&nbsp;image&nbsp;(a&nbsp;gdk.pixbuf)&nbsp;to&nbsp;use&nbsp;as&nbsp;an&nbsp;icon<br>
+icon_name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;icon&nbsp;from&nbsp;the&nbsp;current&nbsp;icon<br>
+theme&nbsp;to&nbsp;use&nbsp;as&nbsp;an&nbsp;icon<br>
+icon_stock&nbsp;-&nbsp;name&nbsp;of&nbsp;stock&nbsp;icon&nbsp;to&nbsp;use&nbsp;as&nbsp;an&nbsp;icon<br>
+icon_file&nbsp;-&nbsp;file&nbsp;name&nbsp;of&nbsp;the&nbsp;image&nbsp;to&nbsp;use&nbsp;as&nbsp;an&nbsp;icon<br>
+&nbsp;<br>
+The&nbsp;icon&nbsp;used&nbsp;is&nbsp;selected&nbsp;is&nbsp;the&nbsp;first&nbsp;of<br>
+(icon_pixbuf,&nbsp;icon_name,&nbsp;icon_stock,&nbsp;icon_file)&nbsp;not<br>
+to&nbsp;be&nbsp;None.&nbsp;&nbsp;If&nbsp;no&nbsp;icon&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;taken&nbsp;from<br>
+$APP_DIR/.DirIcon,&nbsp;scaled&nbsp;to&nbsp;22&nbsp;pixels.<br>
+&nbsp;<br>
+NOTE:&nbsp;even&nbsp;if&nbsp;show&nbsp;is&nbsp;set&nbsp;to&nbsp;True,&nbsp;the&nbsp;icon&nbsp;may&nbsp;not<br>
+be&nbsp;visible&nbsp;if&nbsp;no&nbsp;system&nbsp;tray&nbsp;application&nbsp;is&nbsp;running.</tt></dd></dl>
+
+<dl><dt><a name="StatusIcon-popup_menu"><strong>popup_menu</strong></a>(self, icon, button, act_time)</dt><dd><tt>Show&nbsp;the&nbsp;default&nbsp;menu,&nbsp;if&nbsp;one&nbsp;was&nbsp;specified<br>
+in&nbsp;the&nbsp;constructor.</tt></dd></dl>
+
+<dl><dt><a name="StatusIcon-remove_icon"><strong>remove_icon</strong></a>(self)</dt><dd><tt>Hides&nbsp;the&nbsp;icon&nbsp;and&nbsp;drops&nbsp;the&nbsp;top&nbsp;level&nbsp;reference,<br>
+if&nbsp;it&nbsp;was&nbsp;holding&nbsp;one.&nbsp;&nbsp;This&nbsp;may&nbsp;cause&nbsp;the&nbsp;main&nbsp;loop<br>
+to&nbsp;exit.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="UserAbort">class <strong>UserAbort</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Raised&nbsp;when&nbsp;the&nbsp;user&nbsp;aborts&nbsp;an&nbsp;operation,&nbsp;eg&nbsp;by&nbsp;clicking&nbsp;on&nbsp;Cancel<br>
+or&nbsp;pressing&nbsp;Escape.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="UserAbort-__init__"><strong>__init__</strong></a>(self, message<font color="#909090">=None</font>)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Window">class <strong>Window</strong></a>(<a href="gtk.html#Window">gtk.Window</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;works&nbsp;in&nbsp;exactly&nbsp;the&nbsp;same&nbsp;way&nbsp;as&nbsp;a&nbsp;GtkWindow,&nbsp;except&nbsp;that<br>
+it&nbsp;calls&nbsp;the&nbsp;toplevel_(un)ref&nbsp;functions&nbsp;for&nbsp;you&nbsp;automatically,<br>
+and&nbsp;sets&nbsp;the&nbsp;window&nbsp;icon&nbsp;to&nbsp;&lt;app_dir&gt;/.DirIcon&nbsp;if&nbsp;it&nbsp;exists.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Window-__init__"><strong>__init__</strong></a>(*args, **kwargs)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-alert"><strong>alert</strong></a>(message)</dt><dd><tt>Display&nbsp;message&nbsp;in&nbsp;an&nbsp;error&nbsp;box.&nbsp;Return&nbsp;when&nbsp;the&nbsp;user&nbsp;closes&nbsp;the&nbsp;box.</tt></dd></dl>
+ <dl><dt><a name="-bug"><strong>bug</strong></a>(message<font color="#909090">='A bug has been detected in this program. Please report the problem to the authors.'</font>)</dt><dd><tt>Display&nbsp;an&nbsp;error&nbsp;message&nbsp;and&nbsp;offer&nbsp;a&nbsp;debugging&nbsp;prompt.</tt></dd></dl>
+ <dl><dt><a name="-confirm"><strong>confirm</strong></a>(message, stock_icon, action<font color="#909090">=None</font>)</dt><dd><tt>Display&nbsp;a&nbsp;&lt;Cancel&gt;/&lt;Action&gt;&nbsp;dialog.&nbsp;Result&nbsp;is&nbsp;true&nbsp;if&nbsp;the&nbsp;user<br>
+chooses&nbsp;the&nbsp;action,&nbsp;false&nbsp;otherwise.&nbsp;If&nbsp;action&nbsp;is&nbsp;given&nbsp;then&nbsp;that<br>
+is&nbsp;used&nbsp;as&nbsp;the&nbsp;text&nbsp;instead&nbsp;of&nbsp;the&nbsp;default&nbsp;for&nbsp;the&nbsp;stock&nbsp;item.&nbsp;Eg:<br>
+if&nbsp;rox.<a href="#-confirm">confirm</a>('Really&nbsp;delete&nbsp;everything?',&nbsp;g.STOCK_DELETE):&nbsp;delete()</tt></dd></dl>
+ <dl><dt><a name="-croak"><strong>croak</strong></a>(message)</dt><dd><tt>Display&nbsp;message&nbsp;in&nbsp;an&nbsp;error&nbsp;box,&nbsp;then&nbsp;quit&nbsp;the&nbsp;program,&nbsp;returning<br>
+with&nbsp;a&nbsp;non-zero&nbsp;exit&nbsp;status.</tt></dd></dl>
+ <dl><dt><a name="-edit_options"><strong>edit_options</strong></a>(options_file<font color="#909090">=None</font>)</dt><dd><tt>Edit&nbsp;the&nbsp;app_options&nbsp;(set&nbsp;using&nbsp;<a href="#-setup_app_options">setup_app_options</a>())&nbsp;using&nbsp;the&nbsp;GUI<br>
+specified&nbsp;in&nbsp;'options_file'&nbsp;(default&nbsp;&lt;app_dir&gt;/Options.xml).<br>
+If&nbsp;this&nbsp;function&nbsp;is&nbsp;called&nbsp;again&nbsp;while&nbsp;the&nbsp;box&nbsp;is&nbsp;still&nbsp;open,&nbsp;the<br>
+old&nbsp;box&nbsp;will&nbsp;be&nbsp;redisplayed&nbsp;to&nbsp;the&nbsp;user.</tt></dd></dl>
+ <dl><dt><a name="-escape"><strong>escape</strong></a>(uri)</dt><dd><tt>Convert&nbsp;each&nbsp;space&nbsp;to&nbsp;%20,&nbsp;etc</tt></dd></dl>
+ <dl><dt><a name="-get_icon"><strong>get_icon</strong></a>(path)</dt><dd><tt>Looks&nbsp;up&nbsp;an&nbsp;icon&nbsp;for&nbsp;the&nbsp;file&nbsp;named&nbsp;by&nbsp;path,&nbsp;in&nbsp;the&nbsp;order&nbsp;below,&nbsp;using&nbsp;the&nbsp;first&nbsp;<br>
+found:<br>
+1.&nbsp;The&nbsp;Filer's&nbsp;globicons&nbsp;file&nbsp;(not&nbsp;implemented)<br>
+2.&nbsp;A&nbsp;directory's&nbsp;.DirIcon&nbsp;file<br>
+3.&nbsp;A&nbsp;file&nbsp;in&nbsp;~/.thumbnails&nbsp;whose&nbsp;name&nbsp;is&nbsp;the&nbsp;md5&nbsp;hash&nbsp;of&nbsp;os.path.abspath(path),&nbsp;suffixed&nbsp;with&nbsp;'.png'&nbsp;<br>
+4.&nbsp;A&nbsp;file&nbsp;in&nbsp;$XDG_CONFIG_HOME/rox.sourceforge.net/MIME-Icons&nbsp;for&nbsp;the&nbsp;full&nbsp;type&nbsp;of&nbsp;the&nbsp;file.<br>
+5.&nbsp;An&nbsp;icon&nbsp;of&nbsp;the&nbsp;form&nbsp;'gnome-mime-media-subtype'&nbsp;in&nbsp;the&nbsp;current&nbsp;GTK&nbsp;icon&nbsp;theme.<br>
+6.&nbsp;A&nbsp;file&nbsp;in&nbsp;$XDG_CONFIG_HOME/rox.sourceforge.net/MIME-Icons&nbsp;for&nbsp;the&nbsp;'media'&nbsp;part&nbsp;of&nbsp;the&nbsp;file's&nbsp;type&nbsp;(eg,&nbsp;'text')<br>
+7.&nbsp;An&nbsp;icon&nbsp;of&nbsp;the&nbsp;form&nbsp;'gnome-mime-media'&nbsp;in&nbsp;the&nbsp;current&nbsp;icon&nbsp;theme.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;gtk.gdk.Pixbuf&nbsp;instance&nbsp;for&nbsp;the&nbsp;chosen&nbsp;icon.</tt></dd></dl>
+ <dl><dt><a name="-get_local_path"><strong>get_local_path</strong></a>(uri)</dt><dd><tt>Convert&nbsp;'uri'&nbsp;to&nbsp;a&nbsp;local&nbsp;path&nbsp;and&nbsp;return,&nbsp;if&nbsp;possible.&nbsp;If&nbsp;'uri'<br>
+is&nbsp;a&nbsp;resource&nbsp;on&nbsp;a&nbsp;remote&nbsp;machine,&nbsp;return&nbsp;None.&nbsp;URI&nbsp;is&nbsp;in&nbsp;the&nbsp;escaped&nbsp;form<br>
+(%20&nbsp;for&nbsp;space).</tt></dd></dl>
+ <dl><dt><a name="-info"><strong>info</strong></a>(message)</dt><dd><tt>Display&nbsp;informational&nbsp;message.&nbsp;Returns&nbsp;when&nbsp;the&nbsp;user&nbsp;closes&nbsp;the&nbsp;box.</tt></dd></dl>
+ <dl><dt><a name="-isappdir"><strong>isappdir</strong></a>(path)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;the&nbsp;path&nbsp;refers&nbsp;to&nbsp;a&nbsp;valid&nbsp;ROX&nbsp;AppDir.<br>
+The&nbsp;tests&nbsp;are:<br>
+-&nbsp;path&nbsp;is&nbsp;a&nbsp;directory<br>
+-&nbsp;path&nbsp;is&nbsp;not&nbsp;world&nbsp;writable<br>
+-&nbsp;path&nbsp;contains&nbsp;an&nbsp;executable&nbsp;AppRun<br>
+-&nbsp;path/AppRun&nbsp;is&nbsp;not&nbsp;world&nbsp;writable<br>
+-&nbsp;path&nbsp;and&nbsp;path/AppRun&nbsp;are&nbsp;owned&nbsp;by&nbsp;the&nbsp;same&nbsp;user.</tt></dd></dl>
+ <dl><dt><a name="-mainloop"><strong>mainloop</strong></a>()</dt><dd><tt>This&nbsp;is&nbsp;a&nbsp;wrapper&nbsp;around&nbsp;the&nbsp;gtk2.mainloop&nbsp;function.&nbsp;It&nbsp;only&nbsp;runs<br>
+the&nbsp;loop&nbsp;if&nbsp;there&nbsp;are&nbsp;top&nbsp;level&nbsp;references,&nbsp;and&nbsp;exits&nbsp;when<br>
+rox.<a href="#-toplevel_unref">toplevel_unref</a>()&nbsp;reduces&nbsp;the&nbsp;count&nbsp;to&nbsp;zero.</tt></dd></dl>
+ <dl><dt><a name="-our_host_name"><strong>our_host_name</strong></a>()</dt><dd><tt>Try&nbsp;to&nbsp;return&nbsp;the&nbsp;canonical&nbsp;name&nbsp;for&nbsp;this&nbsp;computer.&nbsp;This&nbsp;is&nbsp;used<br>
+in&nbsp;the&nbsp;drag-and-drop&nbsp;protocol&nbsp;to&nbsp;work&nbsp;out&nbsp;whether&nbsp;a&nbsp;drop&nbsp;is&nbsp;coming&nbsp;from<br>
+a&nbsp;remote&nbsp;machine&nbsp;(and&nbsp;therefore&nbsp;has&nbsp;to&nbsp;be&nbsp;fetched&nbsp;differently).</tt></dd></dl>
+ <dl><dt><a name="-report_exception"><strong>report_exception</strong></a>()</dt><dd><tt>Display&nbsp;the&nbsp;current&nbsp;python&nbsp;exception&nbsp;in&nbsp;an&nbsp;error&nbsp;box,&nbsp;returning<br>
+when&nbsp;the&nbsp;user&nbsp;closes&nbsp;the&nbsp;box.&nbsp;This&nbsp;is&nbsp;useful&nbsp;in&nbsp;the&nbsp;'except'&nbsp;clause<br>
+of&nbsp;a&nbsp;'try'&nbsp;block.&nbsp;Uses&nbsp;rox.debug.show_exception().</tt></dd></dl>
+ <dl><dt><a name="-setup_app_options"><strong>setup_app_options</strong></a>(program, leaf<font color="#909090">='Options.xml'</font>, site<font color="#909090">=None</font>)</dt><dd><tt>Most&nbsp;applications&nbsp;only&nbsp;have&nbsp;one&nbsp;set&nbsp;of&nbsp;options.&nbsp;This&nbsp;function&nbsp;can&nbsp;be<br>
+used&nbsp;to&nbsp;set&nbsp;up&nbsp;the&nbsp;default&nbsp;group.&nbsp;'program'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the<br>
+directory&nbsp;to&nbsp;use&nbsp;and&nbsp;'leaf'&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;used&nbsp;to&nbsp;store&nbsp;the<br>
+group.&nbsp;You&nbsp;can&nbsp;refer&nbsp;to&nbsp;the&nbsp;group&nbsp;using&nbsp;rox.app_options.<br>
+&nbsp;<br>
+If&nbsp;site&nbsp;is&nbsp;given,&nbsp;the&nbsp;basedir&nbsp;module&nbsp;is&nbsp;used&nbsp;for&nbsp;saving&nbsp;options&nbsp;(the<br>
+new&nbsp;system).&nbsp;Otherwise,&nbsp;the&nbsp;deprecated&nbsp;choices&nbsp;module&nbsp;is&nbsp;used.<br>
+&nbsp;<br>
+See&nbsp;rox.options.OptionGroup.</tt></dd></dl>
+ <dl><dt><a name="-toplevel_ref"><strong>toplevel_ref</strong></a>()</dt><dd><tt>Increment&nbsp;the&nbsp;toplevel&nbsp;ref&nbsp;count.&nbsp;rox.<a href="#-mainloop">mainloop</a>()&nbsp;won't&nbsp;exit&nbsp;until<br>
+<a href="#-toplevel_unref">toplevel_unref</a>()&nbsp;is&nbsp;called&nbsp;the&nbsp;same&nbsp;number&nbsp;of&nbsp;times.</tt></dd></dl>
+ <dl><dt><a name="-toplevel_unref"><strong>toplevel_unref</strong></a>(*unused)</dt><dd><tt>Decrement&nbsp;the&nbsp;toplevel&nbsp;ref&nbsp;count.&nbsp;If&nbsp;this&nbsp;is&nbsp;called&nbsp;while&nbsp;in<br>
+rox.<a href="#-mainloop">mainloop</a>()&nbsp;and&nbsp;the&nbsp;count&nbsp;has&nbsp;reached&nbsp;zero,&nbsp;then&nbsp;rox.<a href="#-mainloop">mainloop</a>()<br>
+will&nbsp;exit.&nbsp;Ignores&nbsp;any&nbsp;arguments&nbsp;passed&nbsp;in,&nbsp;so&nbsp;you&nbsp;can&nbsp;use&nbsp;it<br>
+easily&nbsp;as&nbsp;a&nbsp;callback&nbsp;function.</tt></dd></dl>
+ <dl><dt><a name="-unescape"><strong>unescape</strong></a>(uri)</dt><dd><tt>Convert&nbsp;each&nbsp;%20&nbsp;to&nbsp;a&nbsp;space,&nbsp;etc</tt></dd></dl>
+</td></tr></table>
+</body></html>

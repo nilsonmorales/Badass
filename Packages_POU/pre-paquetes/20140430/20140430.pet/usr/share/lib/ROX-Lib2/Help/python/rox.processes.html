@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.processes</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.processes</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;makes&nbsp;it&nbsp;easier&nbsp;to&nbsp;use&nbsp;other&nbsp;programs&nbsp;to&nbsp;process&nbsp;data.<br>
+&nbsp;<br>
+The&nbsp;<a href="#Process">Process</a>&nbsp;class&nbsp;provides&nbsp;the&nbsp;low-level&nbsp;interface,&nbsp;which&nbsp;you&nbsp;can&nbsp;extend<br>
+by&nbsp;subclassing.&nbsp;Processes&nbsp;run&nbsp;in&nbsp;the&nbsp;background,&nbsp;so&nbsp;users&nbsp;can&nbsp;still&nbsp;work<br>
+with&nbsp;your&nbsp;application&nbsp;while&nbsp;they&nbsp;are&nbsp;running.&nbsp;If&nbsp;you&nbsp;don't&nbsp;care&nbsp;about&nbsp;that,<br>
+you&nbsp;might&nbsp;like&nbsp;to&nbsp;look&nbsp;at&nbsp;Python's&nbsp;builtin&nbsp;popen2&nbsp;module.<br>
+&nbsp;<br>
+The&nbsp;<a href="#PipeThroughCommand">PipeThroughCommand</a>&nbsp;class&nbsp;extends&nbsp;<a href="#Process">Process</a>&nbsp;to&nbsp;provide&nbsp;an&nbsp;easy&nbsp;way&nbsp;to<br>
+run&nbsp;other&nbsp;commands.&nbsp;It&nbsp;also,&nbsp;optionally,&nbsp;allows&nbsp;a&nbsp;stream&nbsp;of&nbsp;data&nbsp;to&nbsp;be&nbsp;fed<br>
+in&nbsp;to&nbsp;the&nbsp;process's&nbsp;standard&nbsp;input,&nbsp;and&nbsp;can&nbsp;collect&nbsp;the&nbsp;output&nbsp;to&nbsp;another<br>
+stream.&nbsp;Typical&nbsp;usage:<br>
+&nbsp;<br>
+rox.processes.<a href="#PipeThroughCommand">PipeThroughCommand</a>(('echo',&nbsp;'hello'),&nbsp;None,&nbsp;file('output',&nbsp;'w')).wait()<br>
+&nbsp;<br>
+This&nbsp;creates&nbsp;a&nbsp;new&nbsp;process,&nbsp;and&nbsp;execs&nbsp;'echo&nbsp;hello'&nbsp;in&nbsp;it&nbsp;with&nbsp;output&nbsp;sent<br>
+to&nbsp;the&nbsp;file&nbsp;'output'&nbsp;(any&nbsp;file-like&nbsp;object&nbsp;can&nbsp;be&nbsp;used).&nbsp;The&nbsp;wait()&nbsp;runs&nbsp;a<br>
+recursive&nbsp;mainloop,&nbsp;so&nbsp;that&nbsp;your&nbsp;application&nbsp;can&nbsp;still&nbsp;be&nbsp;used&nbsp;while&nbsp;the<br>
+command&nbsp;runs,&nbsp;but&nbsp;the&nbsp;wait()&nbsp;itself&nbsp;doesn't&nbsp;return&nbsp;until&nbsp;the&nbsp;command<br>
+completes.<br>
+&nbsp;<br>
+Instead&nbsp;of&nbsp;using&nbsp;a&nbsp;tuple&nbsp;for&nbsp;the&nbsp;command,&nbsp;a&nbsp;string&nbsp;may&nbsp;be&nbsp;passed&nbsp;(eg,&nbsp;"echo<br>
+hello").&nbsp;In&nbsp;this&nbsp;case,&nbsp;the&nbsp;shell&nbsp;is&nbsp;used&nbsp;to&nbsp;interpret&nbsp;the&nbsp;command,&nbsp;allowing<br>
+pipes,&nbsp;wildcards&nbsp;and&nbsp;so&nbsp;on.&nbsp;Be&nbsp;very&nbsp;careful&nbsp;of&nbsp;escaping&nbsp;in&nbsp;this&nbsp;case&nbsp;(think<br>
+about&nbsp;filenames&nbsp;containing&nbsp;spaces,&nbsp;quotes,&nbsp;apostrophes,&nbsp;etc).</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.processes.html#ChildError">ChildError</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.processes.html#ChildKilled">ChildKilled</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.processes.html#Process">Process</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.processes.html#PipeThroughCommand">PipeThroughCommand</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ChildError">class <strong>ChildError</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Raised&nbsp;when&nbsp;the&nbsp;child&nbsp;process&nbsp;reports&nbsp;an&nbsp;error.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ChildError-__init__"><strong>__init__</strong></a>(self, message)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ChildKilled">class <strong>ChildKilled</strong></a>(<a href="rox.processes.html#ChildError">ChildError</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Raised&nbsp;when&nbsp;child&nbsp;died&nbsp;due&nbsp;to&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;kill&nbsp;method.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ChildKilled-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PipeThroughCommand">class <strong>PipeThroughCommand</strong></a>(<a href="rox.processes.html#Process">Process</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#Process">Process</a>&nbsp;that&nbsp;runs&nbsp;a&nbsp;command&nbsp;with&nbsp;given&nbsp;input&nbsp;and&nbsp;output&nbsp;(Python)&nbsp;streams.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="PipeThroughCommand-__init__"><strong>__init__</strong></a>(self, command, src, dst)</dt><dd><tt>Execute&nbsp;'command'&nbsp;with&nbsp;src&nbsp;as&nbsp;stdin&nbsp;and&nbsp;writing&nbsp;to&nbsp;stream<br>
+dst.&nbsp;If&nbsp;either&nbsp;stream&nbsp;is&nbsp;not&nbsp;a&nbsp;fileno()&nbsp;stream,&nbsp;temporary&nbsp;files<br>
+will&nbsp;be&nbsp;used&nbsp;as&nbsp;required.<br>
+Either&nbsp;stream&nbsp;may&nbsp;be&nbsp;None&nbsp;if&nbsp;input&nbsp;or&nbsp;output&nbsp;is&nbsp;not&nbsp;required.<br>
+Call&nbsp;the&nbsp;<a href="#PipeThroughCommand-wait">wait</a>()&nbsp;method&nbsp;to&nbsp;wait&nbsp;for&nbsp;the&nbsp;command&nbsp;to&nbsp;finish.<br>
+'command'&nbsp;may&nbsp;be&nbsp;a&nbsp;string&nbsp;(passed&nbsp;to&nbsp;os.system)&nbsp;or&nbsp;a&nbsp;list&nbsp;(os.execvp).</tt></dd></dl>
+
+<dl><dt><a name="PipeThroughCommand-check_errors"><strong>check_errors</strong></a>(self, errors, status)</dt><dd><tt>Raise&nbsp;an&nbsp;exception&nbsp;here&nbsp;if&nbsp;errors&nbsp;(the&nbsp;string&nbsp;the&nbsp;child&nbsp;process&nbsp;wrote&nbsp;to&nbsp;stderr)&nbsp;or<br>
+status&nbsp;(the&nbsp;status&nbsp;from&nbsp;waitpid)&nbsp;seems&nbsp;to&nbsp;warrent&nbsp;it.&nbsp;It&nbsp;will&nbsp;be&nbsp;returned&nbsp;by&nbsp;<a href="#PipeThroughCommand-wait">wait</a>().</tt></dd></dl>
+
+<dl><dt><a name="PipeThroughCommand-child_died"><strong>child_died</strong></a>(self, status)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-child_run"><strong>child_run</strong></a>(self)</dt><dd><tt>Assigns&nbsp;file&nbsp;descriptors&nbsp;and&nbsp;calls&nbsp;child_run_with_streams.</tt></dd></dl>
+
+<dl><dt><a name="PipeThroughCommand-child_run_with_streams"><strong>child_run_with_streams</strong></a>(self)</dt><dd><tt>This&nbsp;is&nbsp;run&nbsp;by&nbsp;the&nbsp;child&nbsp;process.&nbsp;stdin&nbsp;and&nbsp;stdout&nbsp;have&nbsp;already&nbsp;been&nbsp;set&nbsp;up.<br>
+Should&nbsp;call&nbsp;exec()&nbsp;or&nbsp;os._exit()&nbsp;to&nbsp;finish.&nbsp;Default&nbsp;method&nbsp;execs&nbsp;self.<strong>command</strong>.</tt></dd></dl>
+
+<dl><dt><a name="PipeThroughCommand-got_error_output"><strong>got_error_output</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-kill"><strong>kill</strong></a>(self, sig<font color="#909090">=15</font>)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-parent_post_fork"><strong>parent_post_fork</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-pre_fork"><strong>pre_fork</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-start_error"><strong>start_error</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PipeThroughCommand-wait"><strong>wait</strong></a>(self)</dt><dd><tt>Run&nbsp;a&nbsp;recursive&nbsp;mainloop&nbsp;until&nbsp;the&nbsp;command&nbsp;terminates.<br>
+Raises&nbsp;an&nbsp;exception&nbsp;on&nbsp;error.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Process">class <strong>Process</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;represents&nbsp;another&nbsp;process.&nbsp;You&nbsp;should&nbsp;subclass&nbsp;this<br>
+and&nbsp;override&nbsp;the&nbsp;various&nbsp;methods.&nbsp;Use&nbsp;this&nbsp;when&nbsp;you&nbsp;want&nbsp;to<br>
+run&nbsp;another&nbsp;process&nbsp;in&nbsp;the&nbsp;background,&nbsp;but&nbsp;still&nbsp;be&nbsp;able&nbsp;to<br>
+communicate&nbsp;with&nbsp;it.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Process-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Process-child_died"><strong>child_died</strong></a>(self, status)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;child&nbsp;died&nbsp;(actually,&nbsp;when&nbsp;the&nbsp;child<br>
+closes&nbsp;its&nbsp;end&nbsp;of&nbsp;the&nbsp;stderr&nbsp;pipe).&nbsp;The&nbsp;child&nbsp;process&nbsp;has<br>
+already&nbsp;been&nbsp;reaped&nbsp;at&nbsp;this&nbsp;point;&nbsp;'status'&nbsp;is&nbsp;the&nbsp;status<br>
+returned&nbsp;by&nbsp;os.waitpid.</tt></dd></dl>
+
+<dl><dt><a name="Process-child_post_fork"><strong>child_post_fork</strong></a>(self)</dt><dd><tt>Called&nbsp;in&nbsp;the&nbsp;child&nbsp;after&nbsp;forking.&nbsp;Release&nbsp;the&nbsp;parent<br>
+part&nbsp;of&nbsp;any&nbsp;resources&nbsp;allocated&nbsp;in&nbsp;<a href="#Process-pre_fork">pre_fork</a>().<br>
+Also&nbsp;called&nbsp;(in&nbsp;the&nbsp;parent)&nbsp;if&nbsp;the&nbsp;fork&nbsp;or&nbsp;<a href="#Process-pre_fork">pre_fork</a>()<br>
+fails.&nbsp;Default&nbsp;method&nbsp;does&nbsp;nothing.</tt></dd></dl>
+
+<dl><dt><a name="Process-child_run"><strong>child_run</strong></a>(self)</dt><dd><tt>Called&nbsp;in&nbsp;the&nbsp;child&nbsp;process&nbsp;(after&nbsp;<a href="#Process-child_post_fork">child_post_fork</a>()).<br>
+Do&nbsp;whatever&nbsp;processing&nbsp;is&nbsp;required&nbsp;(perhaps&nbsp;exec&nbsp;another<br>
+process).&nbsp;If&nbsp;you&nbsp;don't&nbsp;exec,&nbsp;call&nbsp;os._exit(n)&nbsp;when&nbsp;done.<br>
+DO&nbsp;NOT&nbsp;make&nbsp;gtk&nbsp;calls&nbsp;in&nbsp;the&nbsp;child&nbsp;process,&nbsp;as&nbsp;it&nbsp;shares&nbsp;its<br>
+parent's&nbsp;connection&nbsp;to&nbsp;the&nbsp;X&nbsp;server&nbsp;until&nbsp;you&nbsp;exec().</tt></dd></dl>
+
+<dl><dt><a name="Process-got_error_output"><strong>got_error_output</strong></a>(self, data)</dt><dd><tt>Read&nbsp;some&nbsp;characters&nbsp;from&nbsp;the&nbsp;child's&nbsp;stderr&nbsp;stream.<br>
+The&nbsp;default&nbsp;method&nbsp;copies&nbsp;to&nbsp;our&nbsp;stderr.&nbsp;Note&nbsp;that&nbsp;'data'<br>
+isn't&nbsp;necessarily&nbsp;a&nbsp;complete&nbsp;line;&nbsp;it&nbsp;could&nbsp;be&nbsp;a&nbsp;single<br>
+character,&nbsp;or&nbsp;several&nbsp;lines,&nbsp;etc.</tt></dd></dl>
+
+<dl><dt><a name="Process-kill"><strong>kill</strong></a>(self, sig<font color="#909090">=15</font>)</dt><dd><tt>Send&nbsp;a&nbsp;signal&nbsp;to&nbsp;all&nbsp;processes&nbsp;in&nbsp;the&nbsp;child's&nbsp;process<br>
+group.&nbsp;The&nbsp;default,&nbsp;SIGTERM,&nbsp;requests&nbsp;all&nbsp;the&nbsp;processes<br>
+terminate.&nbsp;SIGKILL&nbsp;is&nbsp;more&nbsp;forceful.</tt></dd></dl>
+
+<dl><dt><a name="Process-parent_post_fork"><strong>parent_post_fork</strong></a>(self)</dt><dd><tt>This&nbsp;is&nbsp;called&nbsp;in&nbsp;the&nbsp;parent&nbsp;after&nbsp;forking.&nbsp;Free&nbsp;the<br>
+child&nbsp;part&nbsp;of&nbsp;any&nbsp;resources&nbsp;allocated&nbsp;in&nbsp;<a href="#Process-pre_fork">pre_fork</a>().<br>
+Also&nbsp;called&nbsp;if&nbsp;the&nbsp;fork&nbsp;or&nbsp;<a href="#Process-pre_fork">pre_fork</a>()&nbsp;fails.<br>
+Default&nbsp;method&nbsp;does&nbsp;nothing.</tt></dd></dl>
+
+<dl><dt><a name="Process-pre_fork"><strong>pre_fork</strong></a>(self)</dt><dd><tt>This&nbsp;is&nbsp;called&nbsp;in&nbsp;'start'&nbsp;just&nbsp;before&nbsp;forking&nbsp;into<br>
+two&nbsp;processes.&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;share&nbsp;a&nbsp;resource&nbsp;between<br>
+both&nbsp;processes&nbsp;(eg,&nbsp;a&nbsp;pipe),&nbsp;create&nbsp;it&nbsp;here.<br>
+Default&nbsp;method&nbsp;does&nbsp;nothing.</tt></dd></dl>
+
+<dl><dt><a name="Process-start"><strong>start</strong></a>(self)</dt><dd><tt>Create&nbsp;the&nbsp;subprocess.&nbsp;Calls&nbsp;<a href="#Process-pre_fork">pre_fork</a>()&nbsp;and&nbsp;forks.<br>
+The&nbsp;parent&nbsp;then&nbsp;calls&nbsp;<a href="#Process-parent_post_fork">parent_post_fork</a>()&nbsp;and&nbsp;returns,<br>
+while&nbsp;the&nbsp;child&nbsp;calls&nbsp;<a href="#Process-child_post_fork">child_post_fork</a>()&nbsp;and&nbsp;then<br>
+<a href="#Process-child_run">child_run</a>().</tt></dd></dl>
+
+<dl><dt><a name="Process-start_error"><strong>start_error</strong></a>(self)</dt><dd><tt>An&nbsp;error&nbsp;occurred&nbsp;before&nbsp;or&nbsp;during&nbsp;the&nbsp;fork&nbsp;(possibly<br>
+in&nbsp;<a href="#Process-pre_fork">pre_fork</a>().&nbsp;Clean&nbsp;up.&nbsp;Default&nbsp;method&nbsp;calls<br>
+<a href="#Process-parent_post_fork">parent_post_fork</a>()&nbsp;and&nbsp;<a href="#Process-child_post_fork">child_post_fork</a>().&nbsp;On&nbsp;returning,<br>
+the&nbsp;original&nbsp;exception&nbsp;will&nbsp;be&nbsp;raised.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

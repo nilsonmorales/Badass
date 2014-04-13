@@ -1,0 +1,111 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.xxmlrpc</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.xxmlrpc</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>XML-RPC&nbsp;over&nbsp;X.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.xxmlrpc.html#NoSuchService">NoSuchService</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.tasks.html#Blocker">rox.tasks.Blocker</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.xxmlrpc.html#ClientCall">ClientCall</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.xxmlrpc.html#XXMLObjectProxy">XXMLObjectProxy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.xxmlrpc.html#XXMLProxy">XXMLProxy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="rox.xxmlrpc.html#XXMLRPCServer">XXMLRPCServer</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ClientCall">class <strong>ClientCall</strong></a>(<a href="rox.tasks.html#Blocker">rox.tasks.Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ClientCall-__init__"><strong>__init__</strong></a>(self, service, method, params)</dt></dl>
+
+<dl><dt><a name="ClientCall-get_response"><strong>get_response</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ClientCall-message_property_changed"><strong>message_property_changed</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="NoSuchService">class <strong>NoSuchService</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"></td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="XXMLObjectProxy">class <strong>XXMLObjectProxy</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="XXMLObjectProxy-__init__"><strong>__init__</strong></a>(self, service, path)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="XXMLProxy">class <strong>XXMLProxy</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="XXMLProxy-__init__"><strong>__init__</strong></a>(self, service)</dt></dl>
+
+<dl><dt><a name="XXMLProxy-get_object"><strong>get_object</strong></a>(self, path)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="XXMLRPCServer">class <strong>XXMLRPCServer</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="XXMLRPCServer-__init__"><strong>__init__</strong></a>(self, service)</dt></dl>
+
+<dl><dt><a name="XXMLRPCServer-add_object"><strong>add_object</strong></a>(self, path, obj)</dt></dl>
+
+<dl><dt><a name="XXMLRPCServer-invoke"><strong>invoke</strong></a>(self, method, *params)</dt></dl>
+
+<dl><dt><a name="XXMLRPCServer-process_requests"><strong>process_requests</strong></a>(self, requests)</dt></dl>
+
+<dl><dt><a name="XXMLRPCServer-property_changed"><strong>property_changed</strong></a>(self, win, event)</dt></dl>
+
+<dl><dt><a name="XXMLRPCServer-remove_object"><strong>remove_object</strong></a>(self, path)</dt></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.templates</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.templates</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Support&nbsp;for&nbsp;loading&nbsp;glade&nbsp;files&nbsp;from&nbsp;your&nbsp;application&nbsp;directory.<br>
+&nbsp;<br>
+The&nbsp;simplest&nbsp;interface&nbsp;will&nbsp;be&nbsp;templates.<a href="#-load">load</a>()&nbsp;which&nbsp;will&nbsp;return&nbsp;a&nbsp;set<br>
+of&nbsp;widgets&nbsp;loaded&nbsp;from&nbsp;$APP_DIR/<a href="#Templates">Templates</a>.glade,&nbsp;e.g.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;widgets=templates.<a href="#-load">load</a>('main')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;MyWindow:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;__init__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>window</strong>=widgets.getWindow('main')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>entry</strong>=widgets['text_entry']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;widgets.autoConnect(self)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>window</strong>.show_all()<br>
+&nbsp;<br>
+&nbsp;<br>
+To&nbsp;use&nbsp;a&nbsp;template&nbsp;as&nbsp;part&nbsp;of&nbsp;a&nbsp;class,&nbsp;derive&nbsp;a&nbsp;class&nbsp;from&nbsp;<a href="#ProxyWindow">ProxyWindow</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;MyWindow(templates.<a href="#ProxyWindow">ProxyWindow</a>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;__init__(self,&nbsp;window,&nbsp;widgets):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;templates.<a href="#ProxyWindow">ProxyWindow</a>.__init__(self,&nbsp;window,&nbsp;widgets)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>cancel_button</strong>=widgets['cancel']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;...<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;widgets=templates.<a href="#-load">load</a>('main')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;window=widgets.getWindow('main',&nbsp;MyWindow)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="UserDict.html#DictMixin">UserDict.DictMixin</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.templates.html#Templates">Templates</a>(<a href="gtk.glade.html#XML">gtk.glade.XML</a>, <a href="UserDict.html#DictMixin">UserDict.DictMixin</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gtk.glade.html#XML">gtk.glade.XML</a>(<a href="gobject._gobject.html#GObject">gobject._gobject.GObject</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.templates.html#Templates">Templates</a>(<a href="gtk.glade.html#XML">gtk.glade.XML</a>, <a href="UserDict.html#DictMixin">UserDict.DictMixin</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="rox.templates.html#ProxyWindow">ProxyWindow</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ProxyWindow">class <strong>ProxyWindow</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;acts&nbsp;as&nbsp;a&nbsp;proxy&nbsp;for&nbsp;a&nbsp;GtkWindow&nbsp;or&nbsp;GtkDialog,&nbsp;except&nbsp;that<br>
+it&nbsp;calls&nbsp;the&nbsp;toplevel_(un)ref&nbsp;functions&nbsp;for&nbsp;you&nbsp;automatically.<br>
+It&nbsp;is&nbsp;designed&nbsp;to&nbsp;wrap&nbsp;a&nbsp;window&nbsp;loaded&nbsp;from&nbsp;a&nbsp;Glade&nbsp;template.&nbsp;&nbsp;You<br>
+can&nbsp;sub-class&nbsp;this&nbsp;to&nbsp;create&nbsp;your&nbsp;own&nbsp;classes.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ProxyWindow-__init__"><strong>__init__</strong></a>(self, window, widgets)</dt><dd><tt>Act&nbsp;as&nbsp;a&nbsp;proxy&nbsp;for&nbsp;window.&nbsp;&nbsp;Call&nbsp;toplevel_ref()&nbsp;and&nbsp;arrange<br>
+for&nbsp;toplevel_unref&nbsp;to&nbsp;be&nbsp;called&nbsp;on&nbsp;destruction.&nbsp;&nbsp;The&nbsp;signal<br>
+handlers&nbsp;are&nbsp;connected&nbsp;to&nbsp;this&nbsp;object.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Templates">class <strong>Templates</strong></a>(<a href="gtk.glade.html#XML">gtk.glade.XML</a>, <a href="UserDict.html#DictMixin">UserDict.DictMixin</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;set&nbsp;of&nbsp;widget&nbsp;instances&nbsp;created&nbsp;from&nbsp;a&nbsp;glade&nbsp;file.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Templates-__init__"><strong>__init__</strong></a>(self, root, fname<font color="#909090">=None</font>, dict_or_instance<font color="#909090">=None</font>)</dt><dd><tt>A&nbsp;set&nbsp;of&nbsp;widget&nbsp;instances&nbsp;created&nbsp;from&nbsp;the&nbsp;glade&nbsp;file.<br>
+root&nbsp;-&nbsp;top&nbsp;level&nbsp;widget&nbsp;to&nbsp;create&nbsp;(and&nbsp;all&nbsp;its&nbsp;contained&nbsp;widgets),&nbsp;<br>
+fname&nbsp;-&nbsp;file&nbsp;name&nbsp;to&nbsp;load&nbsp;the&nbsp;glade&nbsp;file&nbsp;from<br>
+dict_or_instance&nbsp;-&nbsp;either&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;the<br>
+signal&nbsp;handlers&nbsp;are&nbsp;indexed&nbsp;by&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;handler&nbsp;in&nbsp;the&nbsp;glade<br>
+file,&nbsp;or&nbsp;an&nbsp;instance&nbsp;of&nbsp;a&nbsp;class&nbsp;where&nbsp;the&nbsp;methods&nbsp;have&nbsp;the&nbsp;same<br>
+names&nbsp;as&nbsp;given&nbsp;in&nbsp;the&nbsp;glade&nbsp;file.<br>
+&nbsp;<br>
+NOTE:&nbsp;if&nbsp;fname&nbsp;is&nbsp;None&nbsp;the&nbsp;glade&nbsp;file<br>
+is&nbsp;loaded&nbsp;from&nbsp;<a href="#Templates">Templates</a>.glade&nbsp;in&nbsp;the&nbsp;app&nbsp;dir.</tt></dd></dl>
+
+<dl><dt><a name="Templates-get_window"><strong>get_window</strong></a>(self, name, klass<font color="#909090">=&lt;class rox.templates.ProxyWindow at 0x17c87d0&gt;</font>, *args, **kwargs)</dt><dd><tt>Return&nbsp;the&nbsp;named&nbsp;widget,&nbsp;which&nbsp;should&nbsp;be&nbsp;a&nbsp;gtk.Window.&nbsp;&nbsp;The<br>
+window&nbsp;is&nbsp;tracked&nbsp;by&nbsp;the&nbsp;window&nbsp;counting&nbsp;system,&nbsp;see<br>
+rox.toplevel_ref().<br>
+&nbsp;<br>
+name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;widget<br>
+klass&nbsp;-&nbsp;Python&nbsp;class&nbsp;to&nbsp;wrap&nbsp;the&nbsp;widget&nbsp;in<br>
+args&nbsp;-&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;constructor&nbsp;for&nbsp;klass&nbsp;after&nbsp;the<br>
+widget<br>
+kwargs&nbsp;-&nbsp;keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;constructor&nbsp;for&nbsp;klass</tt></dd></dl>
+
+<dl><dt><a name="Templates-itervalues"><strong>itervalues</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Templates-keys"><strong>keys</strong></a>(self)</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;all&nbsp;named&nbsp;widgets.</tt></dd></dl>
+
+<dl><dt><a name="Templates-values"><strong>values</strong></a>(self)</dt><dd><tt>#&nbsp;More&nbsp;efficient&nbsp;implementations&nbsp;than&nbsp;UserDict.<a href="UserDict.html#DictMixin">DictMixin</a></tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-load"><strong>load</strong></a>(root, fname<font color="#909090">=None</font>, dict_or_instance<font color="#909090">=None</font>)</dt><dd><tt>Load&nbsp;the&nbsp;templates&nbsp;file&nbsp;and&nbsp;return&nbsp;the&nbsp;set&nbsp;of&nbsp;widgets.<br>
+root&nbsp;-&nbsp;name&nbsp;of&nbsp;top&nbsp;level&nbsp;widget&nbsp;(and&nbsp;all&nbsp;child&nbsp;widgets)&nbsp;to&nbsp;create<br>
+fname&nbsp;-&nbsp;path&nbsp;to&nbsp;templates&nbsp;file:&nbsp;If&nbsp;it&nbsp;is&nbsp;an&nbsp;absolute&nbsp;path&nbsp;name&nbsp;then&nbsp;load<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it,&nbsp;if&nbsp;a&nbsp;relative&nbsp;path&nbsp;name&nbsp;load&nbsp;that&nbsp;from&nbsp;the&nbsp;appdir&nbsp;or&nbsp;if&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;load&nbsp;$APP_DIR/<a href="#Templates">Templates</a>.glade.<br>
+dict_or_instance&nbsp;-&nbsp;what&nbsp;to&nbsp;use&nbsp;to&nbsp;connect&nbsp;the&nbsp;signals.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;either&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signal&nbsp;handlers&nbsp;are&nbsp;indexed&nbsp;by&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;handler&nbsp;in&nbsp;the&nbsp;glade<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file,&nbsp;or&nbsp;an&nbsp;instance&nbsp;of&nbsp;a&nbsp;class&nbsp;where&nbsp;the&nbsp;methods&nbsp;have&nbsp;the&nbsp;same<br>
+&nbsp;&nbsp;&nbsp;&nbsp;names&nbsp;as&nbsp;given&nbsp;in&nbsp;the&nbsp;glade&nbsp;file.</tt></dd></dl>
+</td></tr></table>
+</body></html>

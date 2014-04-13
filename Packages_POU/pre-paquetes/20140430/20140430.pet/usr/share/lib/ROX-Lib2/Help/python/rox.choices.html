@@ -1,0 +1,40 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.choices</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.choices</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;implements&nbsp;the&nbsp;Choices&nbsp;system&nbsp;for&nbsp;user&nbsp;preferences.<br>
+The&nbsp;environment&nbsp;variable&nbsp;CHOICESPATH&nbsp;gives&nbsp;a&nbsp;list&nbsp;of&nbsp;directories&nbsp;to&nbsp;search<br>
+for&nbsp;choices.&nbsp;Changed&nbsp;choices&nbsp;are&nbsp;saved&nbsp;back&nbsp;to&nbsp;the&nbsp;first&nbsp;directory&nbsp;in&nbsp;the<br>
+list.<br>
+&nbsp;<br>
+The&nbsp;choices&nbsp;system&nbsp;is&nbsp;DEPRECATED.&nbsp;See&nbsp;choices.<a href="#-migrate">migrate</a>().</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-load"><strong>load</strong></a>(dir, leaf)</dt><dd><tt>When&nbsp;you&nbsp;want&nbsp;to&nbsp;load&nbsp;user&nbsp;choices,&nbsp;use&nbsp;this&nbsp;function.&nbsp;'dir'&nbsp;is<br>
+the&nbsp;subdirectory&nbsp;within&nbsp;Choices&nbsp;where&nbsp;the&nbsp;choices&nbsp;are&nbsp;saved&nbsp;(usually<br>
+this&nbsp;will&nbsp;be&nbsp;the&nbsp;name&nbsp;of&nbsp;your&nbsp;program).&nbsp;'leaf'&nbsp;is&nbsp;the&nbsp;file&nbsp;within&nbsp;it.<br>
+If&nbsp;serveral&nbsp;files&nbsp;are&nbsp;present,&nbsp;the&nbsp;most&nbsp;important&nbsp;one&nbsp;is&nbsp;returned.&nbsp;If<br>
+no&nbsp;files&nbsp;are&nbsp;there,&nbsp;returns&nbsp;None.<br>
+Eg&nbsp;('Edit',&nbsp;'Options')&nbsp;-&nbsp;&gt;&nbsp;'/usr/local/share/Choices/Edit/Options'</tt></dd></dl>
+ <dl><dt><a name="-migrate"><strong>migrate</strong></a>(dir, site)</dt><dd><tt>Move&nbsp;&lt;Choices&gt;/dir&nbsp;(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;$XDG_CONFIG_HOME/site/dir,&nbsp;and<br>
+put&nbsp;a&nbsp;symlink&nbsp;in&nbsp;its&nbsp;place.&nbsp;The&nbsp;choices&nbsp;load&nbsp;and&nbsp;save&nbsp;functions&nbsp;cannot<br>
+be&nbsp;used&nbsp;for&nbsp;'dir'&nbsp;after&nbsp;this;&nbsp;use&nbsp;the&nbsp;basedir&nbsp;module&nbsp;instead.&nbsp;'site'<br>
+should&nbsp;be&nbsp;a&nbsp;domain&nbsp;name&nbsp;owned&nbsp;or&nbsp;managed&nbsp;by&nbsp;you.&nbsp;Eg:<br>
+choices.<a href="#-migrate">migrate</a>('Edit',&nbsp;'rox.sourceforge.net')</tt></dd></dl>
+ <dl><dt><a name="-save"><strong>save</strong></a>(dir, leaf, create<font color="#909090">=1</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;path&nbsp;to&nbsp;save&nbsp;to,&nbsp;or&nbsp;None&nbsp;if&nbsp;saving&nbsp;is&nbsp;disabled.<br>
+If&nbsp;'create'&nbsp;is&nbsp;FALSE&nbsp;then&nbsp;no&nbsp;directories&nbsp;are&nbsp;created.&nbsp;'dir'&nbsp;and<br>
+'leaf'&nbsp;are&nbsp;as&nbsp;for&nbsp;<a href="#-load">load</a>().</tt></dd></dl>
+</td></tr></table>
+</body></html>

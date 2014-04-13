@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<options>
+  <section title="Install">
+    <install-button label="Install type handlers">Click here to install the handlers for the supported MIME-types</install-button>
+    <manage-type-button label="Manage MIME type">Click here to handling of a specific MIME type</manage-type-button>
+  </section>
+  <section title="General options">
+    <frame label='Back end'>
+    <radio-group name='generator'>
+      <radio value='totem' label='Totem'>Use Totem to generate video thumbnails</radio>
+      <radio value='mplayer' label='MPlayer'>Use MPlayer to generate video thumbnails</radio>
+    </radio-group>
+    </frame>
+    <numentry name='tsize' label='Thumbnail size' min='16' max='256'>
+      Size of the generated thumbnails (normally overriden by the filer).
+    </numentry>
+    <toggle name='report' label='Report errors'>If selected report any error that occurs, rather than ignoring it. Only useful if you are debugging.</toggle>
+  </section>
+  <section title="MPlayer options">
+    <toggle name='sprocket' label='Draw sprocket effect'>If selected, draw the film sprocket effect on the sides</toggle>
+    <numentry name='ssize' label='Sprocket size' min='4' max='16'>
+      Size of the sprocket effect.
+    </numentry>
+    <toggle name='time' label='Add time label'>If selected print the total time of the file in the thumb</toggle>
+    <toggle name='ralign' label='Right align time label'>If selected
+the total time is placed on the right of the image</toggle>
+    <toggle name='take_first' label='Use first frame'>If we have a choice of frames to use, take the first one.  You may need to try this option depending on your version of MPlayer</toggle>
+  </section>
+  <section title="Totem options">
+    <toggle name='scale' label='Scale image'>If selected  ask totem to generate the image at the correct size.  Not supported by all all versions of totem.</toggle>
+  </section>
+</options>

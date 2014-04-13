@@ -1,0 +1,132 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.thumbnail</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.thumbnail</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Interface&nbsp;to&nbsp;the&nbsp;thumbnail&nbsp;spec.&nbsp;&nbsp;This&nbsp;provides&nbsp;a&nbsp;functions&nbsp;to&nbsp;look&nbsp;up<br>
+thumbnails&nbsp;for&nbsp;files&nbsp;and&nbsp;a&nbsp;class&nbsp;which&nbsp;you&nbsp;can&nbsp;extend&nbsp;to&nbsp;generate&nbsp;a&nbsp;thumbnail<br>
+image&nbsp;for&nbsp;a&nbsp;type&nbsp;of&nbsp;file.<br>
+&nbsp;<br>
+The&nbsp;thumbnail&nbsp;standard&nbsp;is&nbsp;at&nbsp;<a href="http://jens.triq.net/thumbnail-spec/index.html">http://jens.triq.net/thumbnail-spec/index.html</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.thumbnail.html#Thumbnailer">Thumbnailer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.thumbnail.html#GdkPixbufThumbnailer">GdkPixbufThumbnailer</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GdkPixbufThumbnailer">class <strong>GdkPixbufThumbnailer</strong></a>(<a href="rox.thumbnail.html#Thumbnailer">Thumbnailer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;example&nbsp;implementation&nbsp;of&nbsp;a&nbsp;<a href="#Thumbnailer">Thumbnailer</a>&nbsp;class.&nbsp;&nbsp;It&nbsp;uses&nbsp;GdkPixbuf<br>
+to&nbsp;generate&nbsp;thumbnails&nbsp;of&nbsp;image&nbsp;files.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GdkPixbufThumbnailer-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GdkPixbufThumbnailer-get_image"><strong>get_image</strong></a>(self, inname, rsize)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Thumbnailer">class <strong>Thumbnailer</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;programs&nbsp;which&nbsp;generate&nbsp;thumbnails.<br>
+&nbsp;<br>
+The&nbsp;method&nbsp;<a href="#Thumbnailer-run">run</a>()&nbsp;creates&nbsp;the&nbsp;thumbnail&nbsp;for&nbsp;a&nbsp;source&nbsp;file.&nbsp;&nbsp;This<br>
+calls&nbsp;the&nbsp;methods&nbsp;<a href="#Thumbnailer-get_image">get_image</a>(),&nbsp;<a href="#Thumbnailer-process_image">process_image</a>()&nbsp;and&nbsp;<a href="#Thumbnailer-store_image">store_image</a>().<br>
+<a href="#Thumbnailer-process_image">process_image</a>()&nbsp;takes&nbsp;the&nbsp;image&nbsp;returned&nbsp;by&nbsp;<a href="#Thumbnailer-get_image">get_image</a>()&nbsp;and&nbsp;scales&nbsp;it&nbsp;to<br>
+the&nbsp;correct&nbsp;dimensions&nbsp;then&nbsp;passes&nbsp;it&nbsp;through&nbsp;<a href="#Thumbnailer-post_process_image">post_process_image</a>()&nbsp;(which<br>
+does&nbsp;nothing).<br>
+&nbsp;<br>
+You&nbsp;should&nbsp;&nbsp;override&nbsp;the&nbsp;method&nbsp;<a href="#Thumbnailer-get_image">get_image</a>()&nbsp;to&nbsp;create&nbsp;the&nbsp;image.&nbsp;&nbsp;You&nbsp;can<br>
+also&nbsp;override&nbsp;<a href="#Thumbnailer-post_process_image">post_process_image</a>()&nbsp;if&nbsp;you&nbsp;wish&nbsp;to&nbsp;work&nbsp;on&nbsp;the&nbsp;scaled<br>
+image.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Thumbnailer-__init__"><strong>__init__</strong></a>(self, name, fname, use_wdir<font color="#909090">=False</font>, debug<font color="#909090">=False</font>)</dt><dd><tt>Initialise&nbsp;the&nbsp;thumbnailer.<br>
+name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;program<br>
+fname&nbsp;-&nbsp;a&nbsp;string&nbsp;to&nbsp;use&nbsp;in&nbsp;generated&nbsp;temp&nbsp;file&nbsp;names<br>
+use_wdir&nbsp;-&nbsp;if&nbsp;true&nbsp;then&nbsp;use&nbsp;a&nbsp;temp&nbsp;directory&nbsp;to&nbsp;store&nbsp;files<br>
+debug&nbsp;-&nbsp;if&nbsp;false&nbsp;then&nbsp;suppress&nbsp;most&nbsp;error&nbsp;messages</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-creation_failed"><strong>creation_failed</strong></a>(self, inname, outname, rsize)</dt><dd><tt>Creation&nbsp;of&nbsp;a&nbsp;thumbnail&nbsp;failed.&nbsp;&nbsp;Stores&nbsp;a&nbsp;dummy&nbsp;file&nbsp;to&nbsp;mark&nbsp;it<br>
+as&nbsp;per&nbsp;the&nbsp;Thumbnail&nbsp;spec.</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-get_image"><strong>get_image</strong></a>(self, inname, rsize)</dt><dd><tt>Method&nbsp;you&nbsp;must&nbsp;define&nbsp;for&nbsp;your&nbsp;thumbnailer&nbsp;to&nbsp;do&nbsp;anything</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-make_working_dir"><strong>make_working_dir</strong></a>(self)</dt><dd><tt>Create&nbsp;the&nbsp;temporary&nbsp;directory&nbsp;and&nbsp;change&nbsp;into&nbsp;it.</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-post_process_image"><strong>post_process_image</strong></a>(self, img, w, h)</dt><dd><tt>Perform&nbsp;some&nbsp;post-processing&nbsp;on&nbsp;the&nbsp;image.<br>
+img&nbsp;-&nbsp;gdk-pixbuf&nbsp;of&nbsp;the&nbsp;image<br>
+w&nbsp;-&nbsp;width<br>
+h&nbsp;-&nbsp;height<br>
+Return:&nbsp;modified&nbsp;image<br>
+The&nbsp;default&nbsp;implementation&nbsp;just&nbsp;returns&nbsp;the&nbsp;image&nbsp;unchanged.</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-process_image"><strong>process_image</strong></a>(self, img, rsize)</dt><dd><tt>Take&nbsp;the&nbsp;raw&nbsp;image&nbsp;and&nbsp;scale&nbsp;it&nbsp;to&nbsp;the&nbsp;correct&nbsp;size.<br>
+Returns&nbsp;the&nbsp;result&nbsp;of&nbsp;scaling&nbsp;img&nbsp;and&nbsp;passing&nbsp;it&nbsp;to<br>
+<a href="#Thumbnailer-post_process_image">post_process_image</a>()</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-remove_working_dir"><strong>remove_working_dir</strong></a>(self)</dt><dd><tt>Remove&nbsp;our&nbsp;temporary&nbsp;directory,&nbsp;after&nbsp;changing&nbsp;back&nbsp;to&nbsp;the<br>
+previous&nbsp;one</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-report_exception"><strong>report_exception</strong></a>(self)</dt><dd><tt>Report&nbsp;an&nbsp;exception&nbsp;if&nbsp;debug&nbsp;enabled,&nbsp;otherwise&nbsp;ignore&nbsp;it</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-run"><strong>run</strong></a>(self, inname, outname<font color="#909090">=None</font>, rsize<font color="#909090">=96</font>)</dt><dd><tt>Generate&nbsp;the&nbsp;thumbnail&nbsp;from&nbsp;the&nbsp;file<br>
+inname&nbsp;-&nbsp;source&nbsp;file<br>
+outname&nbsp;-&nbsp;path&nbsp;to&nbsp;store&nbsp;thumbnail&nbsp;image,&nbsp;or&nbsp;None&nbsp;for&nbsp;default&nbsp;location<br>
+rsize&nbsp;-&nbsp;maximum&nbsp;size&nbsp;of&nbsp;thumbnail&nbsp;(in&nbsp;either&nbsp;axis)</tt></dd></dl>
+
+<dl><dt><a name="Thumbnailer-store_image"><strong>store_image</strong></a>(self, img, inname, outname, ow, oh)</dt><dd><tt>Store&nbsp;the&nbsp;thumbnail&nbsp;image&nbsp;it&nbsp;the&nbsp;correct&nbsp;location,&nbsp;adding<br>
+the&nbsp;extra&nbsp;data&nbsp;required&nbsp;by&nbsp;the&nbsp;thumbnail&nbsp;spec.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-generate"><strong>generate</strong></a>(path)</dt><dd><tt>Generate&nbsp;the&nbsp;thumbnail&nbsp;for&nbsp;a&nbsp;file.&nbsp;&nbsp;If&nbsp;a&nbsp;generator&nbsp;for&nbsp;the&nbsp;type&nbsp;of<br>
+path&nbsp;is&nbsp;not&nbsp;available&nbsp;then&nbsp;None&nbsp;is&nbsp;returned,&nbsp;otherwise&nbsp;an&nbsp;integer<br>
+which&nbsp;is&nbsp;the&nbsp;exit&nbsp;code&nbsp;of&nbsp;the&nbsp;generation&nbsp;process&nbsp;(0&nbsp;for&nbsp;success).</tt></dd></dl>
+ <dl><dt><a name="-get_image"><strong>get_image</strong></a>(fname)</dt><dd><tt>Given&nbsp;a&nbsp;file&nbsp;name&nbsp;return&nbsp;a&nbsp;GdkPixbuf&nbsp;of&nbsp;the&nbsp;thumbnail&nbsp;for&nbsp;that&nbsp;file.<br>
+If&nbsp;no&nbsp;thumbnail&nbsp;image&nbsp;exists&nbsp;return&nbsp;None.</tt></dd></dl>
+ <dl><dt><a name="-get_method"><strong>get_method</strong></a>(path<font color="#909090">=None</font>, mtype<font color="#909090">=None</font>)</dt><dd><tt>Look&nbsp;up&nbsp;the&nbsp;program&nbsp;for&nbsp;generating&nbsp;a&nbsp;thumbnail.&nbsp;&nbsp;Specify&nbsp;either<br>
+a&nbsp;path&nbsp;to&nbsp;a&nbsp;file&nbsp;or&nbsp;a&nbsp;MIME&nbsp;type.<br>
+&nbsp;<br>
+This&nbsp;returns&nbsp;False&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;defined&nbsp;method&nbsp;to&nbsp;generate&nbsp;the&nbsp;thumbnail,<br>
+True&nbsp;if&nbsp;the&nbsp;thumbnail&nbsp;would&nbsp;be&nbsp;generated&nbsp;internally&nbsp;using&nbsp;GdkPixbuf,&nbsp;or<br>
+a&nbsp;string&nbsp;giving&nbsp;the&nbsp;full&nbsp;path&nbsp;to&nbsp;a&nbsp;program&nbsp;called&nbsp;to&nbsp;generate&nbsp;the<br>
+thumbnail.</tt></dd></dl>
+ <dl><dt><a name="-get_path"><strong>get_path</strong></a>(fname)</dt><dd><tt>Given&nbsp;a&nbsp;file&nbsp;name&nbsp;return&nbsp;the&nbsp;full&nbsp;path&nbsp;of&nbsp;an&nbsp;existing&nbsp;thumbnail<br>
+image.&nbsp;&nbsp;If&nbsp;no&nbsp;thumbnail&nbsp;image&nbsp;exists,&nbsp;return&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-get_path_save"><strong>get_path_save</strong></a>(fname, ttype<font color="#909090">='normal'</font>)</dt><dd><tt>Given&nbsp;a&nbsp;file&nbsp;name&nbsp;return&nbsp;the&nbsp;full&nbsp;path&nbsp;of&nbsp;the&nbsp;location&nbsp;to&nbsp;store&nbsp;the<br>
+thumbnail&nbsp;image.<br>
+&nbsp;<br>
+ttype&nbsp;should&nbsp;be&nbsp;'normal'&nbsp;or&nbsp;'large'&nbsp;to&nbsp;specify&nbsp;the&nbsp;size,&nbsp;or&nbsp;'fail'&nbsp;when<br>
+thumbnail&nbsp;creation&nbsp;has&nbsp;failed</tt></dd></dl>
+ <dl><dt><a name="-md5hash"><strong>md5hash</strong></a>(s)</dt></dl>
+</td></tr></table>
+</body></html>

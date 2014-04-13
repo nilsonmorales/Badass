@@ -1,0 +1,39 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.session</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.session</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Contact&nbsp;ROX-Session&nbsp;via&nbsp;the&nbsp;DBus&nbsp;or&nbsp;XMLRPC&nbsp;interface.&nbsp;&nbsp;Using&nbsp;<a href="#-get_session">get_session</a>()<br>
+will&nbsp;return&nbsp;a&nbsp;proxy&nbsp;object&nbsp;on&nbsp;which&nbsp;you&nbsp;can&nbsp;make&nbsp;remote&nbsp;calls&nbsp;to&nbsp;control<br>
+the&nbsp;session.&nbsp;&nbsp;Similarly&nbsp;<a href="#-get_settings">get_settings</a>()&nbsp;will&nbsp;return&nbsp;an&nbsp;object&nbsp;to&nbsp;control<br>
+session&nbsp;settings,&nbsp;e.g.<br>
+&nbsp;<br>
+&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;settings&nbsp;=&nbsp;session.<a href="#-get_settings">get_settings</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;type,&nbsp;value&nbsp;=&nbsp;settings.GetSetting('Gtk/KeyThemeName')<br>
+&nbsp;&nbsp;except:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;No&nbsp;ROX-Session&nbsp;available,&nbsp;do&nbsp;something&nbsp;else<br>
+&nbsp;<br>
+In&nbsp;addition&nbsp;the&nbsp;Setting&nbsp;class&nbsp;is&nbsp;provided&nbsp;which&nbsp;derives&nbsp;from&nbsp;rox.options.Option<br>
+but&nbsp;has&nbsp;two&nbsp;important&nbsp;differences:&nbsp;it&nbsp;is&nbsp;not&nbsp;saved&nbsp;to&nbsp;the&nbsp;options&nbsp;file&nbsp;and<br>
+it&nbsp;is&nbsp;synchronized&nbsp;with&nbsp;a&nbsp;value&nbsp;of&nbsp;the&nbsp;same&nbsp;name&nbsp;in&nbsp;the&nbsp;ROX-Session&nbsp;settings.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_proxy"><strong>get_proxy</strong></a>(service_name, object_name, interface_name)</dt><dd><tt>Get&nbsp;a&nbsp;proxy&nbsp;object&nbsp;for&nbsp;the&nbsp;required&nbsp;service,&nbsp;object&nbsp;path&nbsp;and&nbsp;interface.<br>
+This&nbsp;selects&nbsp;an&nbsp;appropriate&nbsp;transport&nbsp;for&nbsp;you,&nbsp;either&nbsp;DBus&nbsp;or&nbsp;XMLRPC.</tt></dd></dl>
+ <dl><dt><a name="-get_session"><strong>get_session</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;proxy&nbsp;object&nbsp;for&nbsp;the&nbsp;ROX-Session&nbsp;settings&nbsp;interface</tt></dd></dl>
+ <dl><dt><a name="-get_settings"><strong>get_settings</strong></a>()</dt><dd><tt>Return&nbsp;a&nbsp;proxy&nbsp;object&nbsp;for&nbsp;the&nbsp;ROX-Session&nbsp;control&nbsp;interface</tt></dd></dl>
+ <dl><dt><a name="-running"><strong>running</strong></a>()</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;ROX-Session&nbsp;is&nbsp;detected&nbsp;as&nbsp;running</tt></dd></dl>
+</td></tr></table>
+</body></html>

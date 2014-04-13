@@ -1,0 +1,72 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.su</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.su</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>The&nbsp;su&nbsp;(switch&nbsp;user)&nbsp;module&nbsp;allows&nbsp;you&nbsp;to&nbsp;execute&nbsp;commands&nbsp;as&nbsp;root.<br>
+Typical&nbsp;usage:<br>
+&nbsp;<br>
+def&nbsp;fn():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy_maker&nbsp;=&nbsp;<a href="#SuProxyMaker">SuProxyMaker</a>('I&nbsp;need&nbsp;root&nbsp;access&nbsp;to&nbsp;change&nbsp;/etc/fstab')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;proxy_maker.blocker<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;=&nbsp;proxy_maker.get_root()<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;=&nbsp;root.open('/etc/fstab')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;call<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fd&nbsp;=&nbsp;call.result<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root.finish()<br>
+&nbsp;<br>
+tasks.Task(fn())<br>
+&nbsp;<br>
+See&nbsp;rox.suchild&nbsp;for&nbsp;a&nbsp;list&nbsp;of&nbsp;operations&nbsp;available&nbsp;on&nbsp;the&nbsp;'root'&nbsp;object.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.tasks.html#Blocker">rox.tasks.Blocker</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.su.html#SuProxyMaker">SuProxyMaker</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SuProxyMaker">class <strong>SuProxyMaker</strong></a>(<a href="rox.tasks.html#Blocker">rox.tasks.Blocker</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SuProxyMaker-__init__"><strong>__init__</strong></a>(self, message)</dt><dd><tt>Displays&nbsp;a&nbsp;box&nbsp;prompting&nbsp;the&nbsp;user&nbsp;for&nbsp;a&nbsp;password.<br>
+Creates&nbsp;a&nbsp;new&nbsp;master_proxy.MasterObject&nbsp;and&nbsp;starts&nbsp;the&nbsp;child<br>
+process.&nbsp;The&nbsp;user&nbsp;is&nbsp;prompted&nbsp;for&nbsp;the&nbsp;root<br>
+password.</tt></dd></dl>
+
+<dl><dt><a name="SuProxyMaker-get_root"><strong>get_root</strong></a>(self)</dt><dd><tt>Raises&nbsp;UserAbort&nbsp;if&nbsp;the&nbsp;user&nbsp;cancels.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_term_command"><strong>get_term_command</strong></a>()</dt></dl>
+</td></tr></table>
+</body></html>

@@ -3,8 +3,11 @@ UPDATEINFOTXT="20140430.pet
 Descripción del paquete:
 - información
 Adobe flash 11.2.202.346
+Agregando archivos necesarios para miniaturas de video
 
- probando POU (Puppy Online Updater)
+ POU (Puppy Online Updater)
  urgencia=baja
  
-Preguntas/Informacións => utilizar el foro."
+Preguntas/Información => utilizar el foro.
+      http://puppyes.com.ar/foros
+"

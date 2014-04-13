@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.uri_handler</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.uri_handler</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Look&nbsp;up&nbsp;or&nbsp;launch&nbsp;the&nbsp;handler&nbsp;for&nbsp;a&nbsp;URI.&nbsp;&nbsp;URIs&nbsp;are&nbsp;in&nbsp;the&nbsp;form&nbsp;scheme:other<br>
+and&nbsp;the&nbsp;handler&nbsp;for&nbsp;a&nbsp;given&nbsp;scheme&nbsp;is&nbsp;&lt;Choices&gt;.rox.sourceforge.net/URI/scheme<br>
+&nbsp;<br>
+To&nbsp;open&nbsp;up&nbsp;a&nbsp;web&nbsp;page&nbsp;in&nbsp;the&nbsp;user's&nbsp;prefered&nbsp;web&nbsp;browser:<br>
+&nbsp;<br>
+import&nbsp;rox.uri_handler<br>
+try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pid=rox.uri_handler.<a href="#-launch">launch</a>('<a href="http://rox.sourceforge.net/">http://rox.sourceforge.net/</a>')<br>
+except:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Try&nbsp;firefox&nbsp;instead<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pid=os.spawnlp(os.P_NOWAIT,&nbsp;'firefox',&nbsp;'firefox',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://rox.sourceforge.net/">http://rox.sourceforge.net/</a>')<br>
+&nbsp;<br>
+os.waitpid(pid)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get"><strong>get</strong></a>(scheme)</dt><dd><tt>Return&nbsp;the&nbsp;handler&nbsp;for&nbsp;URI's&nbsp;of&nbsp;the&nbsp;named&nbsp;scheme&nbsp;(e.g.&nbsp;http,&nbsp;file,&nbsp;ftp,<br>
+etc.)&nbsp;&nbsp;The&nbsp;handler&nbsp;for&nbsp;file&nbsp;is&nbsp;always&nbsp;rox,&nbsp;otherwise&nbsp;it&nbsp;obtained&nbsp;from<br>
+the&nbsp;configuration&nbsp;directory&nbsp;rox.sourceforge.net/URI.&nbsp;&nbsp;None&nbsp;is&nbsp;returned&nbsp;if<br>
+no&nbsp;handler&nbsp;is&nbsp;defined.<br>
+&nbsp;<br>
+The&nbsp;returned&nbsp;string&nbsp;may&nbsp;contain&nbsp;%s&nbsp;in&nbsp;which&nbsp;case&nbsp;it&nbsp;should&nbsp;be&nbsp;replaced<br>
+with&nbsp;the&nbsp;URI,&nbsp;otherwise&nbsp;append&nbsp;the&nbsp;URI&nbsp;(after&nbsp;a&nbsp;space).</tt></dd></dl>
+ <dl><dt><a name="-launch"><strong>launch</strong></a>(uri)</dt><dd><tt>For&nbsp;a&nbsp;given&nbsp;URI&nbsp;pass&nbsp;it&nbsp;to&nbsp;the&nbsp;appropriate&nbsp;launcher.<br>
+rox.uri_handler.<a href="#-get">get</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;look&nbsp;up&nbsp;the&nbsp;launcher&nbsp;command&nbsp;which&nbsp;is<br>
+executed.&nbsp;&nbsp;The&nbsp;process&nbsp;id&nbsp;of&nbsp;the&nbsp;command&nbsp;is&nbsp;returned&nbsp;(see&nbsp;os.wait()),&nbsp;or<br>
+None&nbsp;if&nbsp;no&nbsp;launcher&nbsp;is&nbsp;defined&nbsp;for&nbsp;that&nbsp;URI.</tt></dd></dl>
+</td></tr></table>
+</body></html>

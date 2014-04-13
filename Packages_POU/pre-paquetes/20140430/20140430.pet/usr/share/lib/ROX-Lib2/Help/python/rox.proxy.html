@@ -1,0 +1,105 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module rox.proxy</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="rox.html"><font color="#ffffff">rox</font></a>.proxy</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="rox.html">index</a><br></font></td></tr></table>
+    <p><tt>Given&nbsp;a&nbsp;pair&nbsp;of&nbsp;pipes&nbsp;with&nbsp;a&nbsp;python&nbsp;process&nbsp;at&nbsp;each&nbsp;end,&nbsp;this&nbsp;module<br>
+allows&nbsp;one&nbsp;end&nbsp;to&nbsp;make&nbsp;calls&nbsp;on&nbsp;the&nbsp;other.&nbsp;This&nbsp;is&nbsp;used&nbsp;by&nbsp;the&nbsp;su&nbsp;module<br>
+to&nbsp;allow&nbsp;control&nbsp;of&nbsp;a&nbsp;subprocess&nbsp;running&nbsp;as&nbsp;another&nbsp;user,&nbsp;but&nbsp;it&nbsp;may&nbsp;also<br>
+be&nbsp;useful&nbsp;in&nbsp;other&nbsp;situations.&nbsp;The&nbsp;caller&nbsp;end&nbsp;should&nbsp;use&nbsp;the&nbsp;master_proxy<br>
+module.<br>
+&nbsp;<br>
+EXPERIMENTAL.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="rox.proxy.html#Proxy">Proxy</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="rox.proxy.html#SlaveProxy">SlaveProxy</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Proxy">class <strong>Proxy</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2>&nbsp;</td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Proxy-__init__"><strong>__init__</strong></a>(self, to_peer, from_peer, slave_object<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Proxy-enable_read_watch"><strong>enable_read_watch</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Proxy-enable_write_watch"><strong>enable_write_watch</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Proxy-finish"><strong>finish</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Proxy-lost_connection"><strong>lost_connection</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Proxy-read_ready"><strong>read_ready</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Proxy-write_object"><strong>write_object</strong></a>(self, object)</dt></dl>
+
+<dl><dt><a name="Proxy-write_ready"><strong>write_ready</strong></a>(self)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;buffer&nbsp;is&nbsp;not&nbsp;empty&nbsp;on&nbsp;exit.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SlaveProxy">class <strong>SlaveProxy</strong></a>(<a href="rox.proxy.html#Proxy">Proxy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Methods&nbsp;invoked&nbsp;on&nbsp;MasterProxy.root&nbsp;will&nbsp;be&nbsp;invoked&nbsp;on<br>
+slave_object.&nbsp;The&nbsp;result&nbsp;is&nbsp;a&nbsp;master_proxy.RequestBlocker.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SlaveProxy-__init__"><strong>__init__</strong></a>(self, to_master, from_master, slave_object)</dt></dl>
+
+<dl><dt><a name="SlaveProxy-lost_connection"><strong>lost_connection</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-select"><strong>select</strong></a>(...)</dt><dd><tt><a href="#-select">select</a>(rlist,&nbsp;wlist,&nbsp;xlist[,&nbsp;timeout])&nbsp;-&gt;&nbsp;(rlist,&nbsp;wlist,&nbsp;xlist)<br>
+&nbsp;<br>
+Wait&nbsp;until&nbsp;one&nbsp;or&nbsp;more&nbsp;file&nbsp;descriptors&nbsp;are&nbsp;ready&nbsp;for&nbsp;some&nbsp;kind&nbsp;of&nbsp;I/O.<br>
+The&nbsp;first&nbsp;three&nbsp;arguments&nbsp;are&nbsp;sequences&nbsp;of&nbsp;file&nbsp;descriptors&nbsp;to&nbsp;be&nbsp;waited&nbsp;for:<br>
+rlist&nbsp;--&nbsp;wait&nbsp;until&nbsp;ready&nbsp;for&nbsp;reading<br>
+wlist&nbsp;--&nbsp;wait&nbsp;until&nbsp;ready&nbsp;for&nbsp;writing<br>
+xlist&nbsp;--&nbsp;wait&nbsp;for&nbsp;an&nbsp;``exceptional&nbsp;condition''<br>
+If&nbsp;only&nbsp;one&nbsp;kind&nbsp;of&nbsp;condition&nbsp;is&nbsp;required,&nbsp;pass&nbsp;[]&nbsp;for&nbsp;the&nbsp;other&nbsp;lists.<br>
+A&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;either&nbsp;a&nbsp;socket&nbsp;or&nbsp;file&nbsp;object,&nbsp;or&nbsp;a&nbsp;small&nbsp;integer<br>
+gotten&nbsp;from&nbsp;a&nbsp;fileno()&nbsp;method&nbsp;call&nbsp;on&nbsp;one&nbsp;of&nbsp;those.<br>
+&nbsp;<br>
+The&nbsp;optional&nbsp;4th&nbsp;argument&nbsp;specifies&nbsp;a&nbsp;timeout&nbsp;in&nbsp;seconds;&nbsp;it&nbsp;may&nbsp;be<br>
+a&nbsp;floating&nbsp;point&nbsp;number&nbsp;to&nbsp;specify&nbsp;fractions&nbsp;of&nbsp;seconds.&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;absent<br>
+or&nbsp;None,&nbsp;the&nbsp;call&nbsp;will&nbsp;never&nbsp;time&nbsp;out.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;a&nbsp;tuple&nbsp;of&nbsp;three&nbsp;lists&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;first&nbsp;three<br>
+arguments;&nbsp;each&nbsp;contains&nbsp;the&nbsp;subset&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;file&nbsp;descriptors<br>
+that&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+***&nbsp;IMPORTANT&nbsp;NOTICE&nbsp;***<br>
+On&nbsp;Windows&nbsp;and&nbsp;OpenVMS,&nbsp;only&nbsp;sockets&nbsp;are&nbsp;supported;&nbsp;on&nbsp;Unix,&nbsp;all&nbsp;file<br>
+descriptors&nbsp;can&nbsp;be&nbsp;used.</tt></dd></dl>
+</td></tr></table>
+</body></html>
