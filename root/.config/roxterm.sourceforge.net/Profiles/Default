@@ -1,0 +1,21 @@
+
+[roxterm profile]
+always_show_tabs=1
+font=Monospace 16
+background_type=2
+saturation=0,217749
+width=102
+height=26
+init_tabs=1
+maximise=0
+use_custom_command=1
+sel_by_word=-A-Za-z0-9,./?%&#_
+color_term=
+term=
+browser=/opt/seamonkey/seamonkey 
+mailer=
+command=bash
+title_string=%s
+win_title=%s
+hide_menubar=0
+full_screen=0
