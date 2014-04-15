@@ -1,0 +1,8 @@
+#!/bin/bash
+#used by firewallstate
+#as a restart copy file
+#to Startup folder
+
+cp /usr/local/firewallstate/firewallstaterun  /root/Startup/
+
+exec /usr/local/firewallstate/firewallstate &

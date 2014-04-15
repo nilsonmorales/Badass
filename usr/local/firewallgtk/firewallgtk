@@ -1,0 +1,48 @@
+#!/bin/bash
+#Firewall Control
+#Rob Lane (tasmod) 2009-2011 GPL
+#110826 rodin.s: adding gettext
+
+export TEXTDOMAIN=firewallgtk
+export TEXTDOMAINDIR=/usr/share/locale
+export OUTPUT_CHARSET=UTF-8
+
+cd $HOME
+export firewall="
+<window title=\"$(gettext 'Firewall on/off')\">
+ <vbox>
+   <frame $(gettext 'Only use On/Off if firewall already installed with wizard')>
+   <hbox>
+   <button>
+   <label>$(gettext 'Firewall On')</label>
+   <input file icon=\"gtk-apply\"></input>
+   <action>/usr/local/firewallgtk/firewallfunc firewallstart</action>
+   <action>exit:gtkdialog</action>
+   </button>
+   <button>
+   <label>$(gettext 'Firewall Off')</label>
+   <input file icon=\"gtk-cancel\"></input>
+   <action>/usr/local/firewallgtk/firewallfunc firewallstop</action>
+   <action>exit:gtkdialog</action>
+   </button>
+   <button>
+   <label>$(gettext 'Firewall Remove')</label>
+   <input file icon=\"gtk-cancel\"></input>
+   <action>/etc/rc.d/rc.firewall stop</action>
+   <action>/usr/local/firewallgtk/firewallfunc firewallkill</action>
+   <action>exit:gtkdialog</action> 
+   </button>
+   </hbox>
+   </frame>
+   <hbox>
+   <button>
+   <input file icon=\"gtk-info\"></input>
+   <label>    $(gettext 'Exit')     </label>
+   </button>
+   </hbox>
+   </vbox>
+</window>"
+
+#execute gtkdialog
+gtkdialog3 -c -p  firewall
+

@@ -1,0 +1,24 @@
+#!/bin/bash
+#Firewall Control
+#Rob Lane (tasmod) 2009-2011 GPL
+export TEXTDOMAIN=firewallgtk 
+case "$1" in
+firewallstop)
+#	echo /etc/rc.d/rc.firewall stop 
+	/etc/rc.d/rc.firewall stop
+	Xdialog --msgbox "$(gettext 'Firewall off')" 5 20 &
+	;;
+firewallstart)  
+#	echo /etc/rc.d/rc.firewall start 
+	/etc/rc.d/rc.firewall start
+	Xdialog --msgbox "$(gettext 'Firewall on')" 5 20 &
+	;;
+firewallkill)
+
+     rm /etc/rc.d/rc.firewall 
+
+    Xdialog --msgbox "$(gettext 'Firewall removed from boot')" 5 30 &
+     
+	;;
+esac
+

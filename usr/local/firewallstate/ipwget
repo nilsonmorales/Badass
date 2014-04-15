@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#used by firewallstate to get
+#external ip from site
+
+`wget -O /tmp/ipis.txt -q icanhazip.com`
+
+# alternative  
+# `wget -qO- whatismyip.org`
+
