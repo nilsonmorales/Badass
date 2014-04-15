@@ -1,0 +1,563 @@
+#!/bin/bash
+#Pfind - File finder
+#Copyright 2007-2014
+#Sigmund Berglund
+
+#------------------------------
+#This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation version 2.
+
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. <http://www.gnu.org/licenses/>.
+#------------------------------
+
+export VERSION="5.12"
+export TEXTDOMAIN=pfind
+
+CURDIR="`pwd`"
+export PROGPID=$$ #every tmp-file gets a tail of PID. This seperates different instances of Pfind
+export PROGPATH=`dirname "$0"`
+
+#define svg colors
+#TMP="`grep -m1 -F include ${HOME}/.gtkrc-2.0 | cut -d'"' -f2`" #' #active gtk-theme
+#export THEME_COLOR="`grep -Fi fg $TMP | grep -m1 -Fi normal | cut -d'"' -f2`" #'
+export THEME_COLOR=black #'#077507'
+
+#check if pfilesearch has been installed
+[ ! -e $HOME/.pfilesearch/tmp ] && pfilesearch -i
+
+#reset
+echo false > /tmp/pfind-done$PROGPID
+echo -n > /tmp/pfind-treeitems$PROGPID
+
+build_svg_buttons (){
+#build svg-button-code
+TMP='
+<action>'$PROGPATH'/func -build_treeitems; '$PROGPATH'/func -build_svg</action>
+<action>refresh:TREE</action>
+<action>refresh:BUTTON_ALL</action>
+<action>refresh:BUTTON_DOC</action>
+<action>refresh:BUTTON_PIC</action>
+<action>refresh:BUTTON_MUSIC</action>
+<action>refresh:BUTTON_VIDEO</action>
+<action>refresh:BUTTON_ZIP</action>
+<action>refresh:BUTTON_CODE</action>'
+
+echo '
+<vbox spacing="0" space-expand="false" space-fill="false">
+ <text height-request="25"><label>""</label></text>
+ <button relief="2" tooltip-text="'$(gettext "Total")'">
+  <variable>BUTTON'$1'_ALL</variable>
+  <input file>/tmp/pfind-svg_ALL_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_all</action>
+  '$TMP'
+ </button>
+ <text height-request="15"><label>""</label></text> 
+ <button relief="2" tooltip-text="'$(gettext "Documents")'">
+  <variable>BUTTON'$1'_DOC</variable>
+  <input file>/tmp/pfind-svg_DOC_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_doc</action>
+  '$TMP'
+ </button>
+ <button relief="2" tooltip-text="'$(gettext "Pictures")'">
+  <variable>BUTTON'$1'_PIC</variable>
+  <input file>/tmp/pfind-svg_PIC_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_pic</action>
+  '$TMP'
+ </button>
+ <button relief="2" tooltip-text="'$(gettext "Sound files")'">
+  <variable>BUTTON'$1'_MUSIC</variable>
+  <input file>/tmp/pfind-svg_MUSIC_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_music</action>
+  '$TMP'
+ </button>
+ <button relief="2" tooltip-text="'$(gettext "Videos")'">
+  <variable>BUTTON'$1'_VIDEO</variable>
+  <input file>/tmp/pfind-svg_VIDEO_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_video</action>
+  '$TMP'
+ </button>
+ <button relief="2" tooltip-text="'$(gettext "Compressed")'">
+  <variable>BUTTON'$1'_ZIP</variable>
+  <input file>/tmp/pfind-svg_ZIP_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_zip</action>
+  '$TMP'
+ </button>
+ <button relief="2" tooltip-text="'$(gettext "Code files")'">
+  <variable>BUTTON'$1'_CODE</variable>
+  <input file>/tmp/pfind-svg_CODE_'$PROGPID'.svg</input>
+  <action>'$PROGPATH'/func -view_code</action>
+  '$TMP'
+ </button>
+</vbox>'
+}
+
+overview (){
+#clear hit-buttons to make default gui as small as possible
+. $PROGPATH/func -svg_button_empty ALL
+. $PROGPATH/func -svg_button_empty DOC
+. $PROGPATH/func -svg_button_empty PIC
+. $PROGPATH/func -svg_button_empty MUSIC
+. $PROGPATH/func -svg_button_empty VIDEO
+. $PROGPATH/func -svg_button_empty ZIP
+. $PROGPATH/func -svg_button_empty CODE
+#---
+[ $RADIOBUTTON_PATH_PUPPY = true ] && echo "$PATH_PUPPY" > $HOME/.pfilesearch/tmp/SEARCHPATHS
+[ $RADIOBUTTON_PATH_MNT = true ] && echo "$PATH_MNT" > $HOME/.pfilesearch/tmp/SEARCHPATHS
+[ $RADIOBUTTON_PATH_CURRENT = true ] && echo "$CURDIR" > $HOME/.pfilesearch/tmp/SEARCHPATHS
+[ $RADIOBUTTON_PATH_ALL = true ] && echo '/' > $HOME/.pfilesearch/tmp/SEARCHPATHS
+SEARCHPATHS="$(<$HOME/.pfilesearch/tmp/SEARCHPATHS)"
+echo 0 > /tmp/pfind-tabnr$PROGPID
+#---
+
+
+export Pfind='
+<window title="Pfind '$VERSION'" icon-name="gtk-find" default_width="600" default_height="400">
+ <vbox>
+  <menubar>
+   <menu label="'$(gettext "File")'">
+    <menuitem stock="gtk-edit" label="'$(gettext "Export searchresult to text editor")'..."><action>'$TEXTEDITOR' /tmp/pfind-view'$PROGPID' &</action></menuitem>
+    <menuitem stock="gtk-preferences" label="'$(gettext "Configure")'"><action type="exit">98</action></menuitem>
+    <separator></separator>
+    <menuitem stock="gtk-quit"><action type="exit">exit</action></menuitem>
+   </menu>
+   <menu label="'$(gettext "Action")'">
+    <menu label="'$(gettext "Open with")'">
+     <menuitem stock="gtk-open" label="'$(gettext "FileManager")'"><action>'$PROGPATH'/func -open_with_filemanager</action></menuitem>
+     <menuitem stock="gtk-edit" label="'$(gettext "TextEditor")'"><action>'$PROGPATH'/func -open_with_texteditor</action></menuitem>
+     <menuitem stock="gtk-select-color" label="'$(gettext "ImageBrowser")'"><action>'$PROGPATH'/func -open_with_imagebrowser</action></menuitem>
+     <menuitem stock="gtk-select-color" label="'$(gettext "Slideshow")'"><action>'$PROGPATH'/func -open with_slideshow</action></menuitem>
+     <menuitem stock="gtk-media-play" label="'$(gettext "MusicPlayer")'"><action>'$PROGPATH'/func -open_with_musicplayer</action></menuitem>
+     <menuitem stock="gtk-media-play" label="'$(gettext "VideoPlayer")'"><action>'$PROGPATH'/func -open_with_videoplayer</action></menuitem>
+    <separator></separator>
+     <menuitem label="'$(gettext "Open with")'..."><action>'$PROGPATH'/func -open_with</action></menuitem>
+    </menu>
+    
+    <separator></separator>
+    <menuitem stock="gtk-copy" label="'$(gettext "Copy")'..."><action>'$PROGPATH'/func -copy_files</action></menuitem>
+    <menuitem label="'$(gettext "Move")'..."><action>. '$PROGPATH'/func -move</action><action>Refresh:TREE</action></menuitem>
+    <menuitem stock="gtk-cdrom" label="'$(gettext "Burn")'..."><action>'$PROGPATH'/func -burn</action></menuitem>
+    <menuitem stock="gtk-execute" label="'$(gettext "Execute command")'..."><action>'$PROGPATH'/func -execute_command</action></menuitem>
+    <menuitem stock="gtk-delete" label="'$(gettext "Send to trash")'..."><action>. '$PROGPATH'/func -trash</action><action>Refresh:TREE</action></menuitem>
+    <separator></separator>
+    <menuitem stock="gtk-open" label="'$(gettext "Show location")'..."><action>'$PROGPATH'/func -show_location &</action></menuitem>
+    <menuitem stock="gtk-convert" label="'$(gettext "Rename")'..."><action>'$PROGPATH'/func -rename</action><action>Refresh:TREE</action></menuitem>
+    <menuitem label="'$(gettext "Link")'..."><action>. '$PROGPATH'/func -link</action></menuitem>
+    <menuitem stock="gtk-cancel" label="'$(gettext "Delete")'..."><action>. '$PROGPATH'/func -delete</action><action>Refresh:TREE</action></menuitem>
+    <sensitive>false</sensitive>
+    <variable>MENU_SELECTION</variable>
+   </menu>
+   <menu label="'$(gettext "Help")'">
+    <menuitem stock="gtk-about" label="'$(gettext "About")'"><action>'$PROGPATH'/func -about &</action></menuitem>
+    <menuitem stock="gtk-help" label="'$(gettext "Help")'">
+     <action>echo 0 > /tmp/pfind-tabnr'$PROGPID'</action>
+     <action>refresh:NOTEBOOK</action>
+    </menuitem>
+   </menu>
+  </menubar>
+
+ 
+  <hbox>
+   <hbox space-expand="true" space-fill="true">
+    <frame '$(gettext "Define (part of) filename")'>
+     <vbox>
+      <text height-request="10"><label>""</label></text>
+      <entry activates-default="true" width-request="350">
+       <variable>SEARCHSTRING</variable>
+       <input>echo "$SEARCHSTRING"</input>
+       <action signal="activate">. '$PROGPATH'/func -search</action>
+      </entry>
+     </vbox>
+      <text height-request="5"><label>""</label></text>
+      <hbox>
+       <checkbox draw_indicator="false">
+        <label>" '$(gettext "Advanced")' "</label>
+        <action>if true show:GUI_ADVANCED</action>
+        <action>if false hide:GUI_ADVANCED</action>
+       </checkbox>
+       <button>
+        <input file stock="gtk-find"></input>
+        <label>'$(gettext "Search")'</label>
+		<action>. '$PROGPATH'/func -search</action>
+       </button>
+      </hbox>
+    </frame>
+   </hbox>
+   <hbox space-expand="false" space-fill="false">
+    <frame '$(gettext "Where to search")'>
+     <vbox spacing="1" space-expand="false" space-fill="false">
+      <radiobutton tooltip-text="'$PATH_PUPPY'">
+       <variable>RADIOBUTTON_PATH_PUPPY</variable>
+       <label>'$(gettext "System files")'</label>
+       <default>'$RADIOBUTTON_PATH_PUPPY'</default>
+       <action>if true echo "'$PATH_PUPPY'" > '$HOME'/.pfilesearch/tmp/SEARCHPATHS</action>
+       <action>if true refresh:SEARCHPATHS</action>
+      </radiobutton>
+      <radiobutton tooltip-text="'$PATH_MNT'">
+       <variable>RADIOBUTTON_PATH_MNT</variable>
+       <label>'$(gettext "Personal files")'</label>
+       <default>'$RADIOBUTTON_PATH_MNT'</default>
+       <action>if true echo "'$PATH_MNT'" > '$HOME'/.pfilesearch/tmp/SEARCHPATHS</action>
+       <action>if true refresh:SEARCHPATHS</action>
+      </radiobutton>
+      <radiobutton tooltip-text="'$CURDIR'">
+       <variable>RADIOBUTTON_PATH_CURRENT</variable>
+       <label>'$(gettext "Current directory")'</label>
+       <default>'$RADIOBUTTON_PATH_CURRENT'</default>
+       <action>if true echo "'$CURDIR'" > '$HOME'/.pfilesearch/tmp/SEARCHPATHS</action>
+       <action>if true refresh:SEARCHPATHS</action>
+      </radiobutton>
+      <radiobutton>
+       <variable>RADIOBUTTON_PATH_ALL</variable>
+       <label>'$(gettext "All files")' ('$(gettext "slow")')</label>
+       <default>'$RADIOBUTTON_PATH_ALL'</default>
+       <action>if true echo "/" > '$HOME'/.pfilesearch/tmp/SEARCHPATHS</action>
+       <action>if true refresh:SEARCHPATHS</action>
+      </radiobutton>
+     </vbox>
+    </frame>
+   </hbox>
+  </hbox>
+ 
+
+
+  <hbox space-expand="true" space-fill="true">
+  <notebook show-tabs="false" show-border="false" page="0" labels="'$(gettext "Info")'|'$(gettext "Hits")'|'$(gettext "Advanced")'" space-expand="true" space-fill="true">
+   <vbox scrollable="true" spacing="0" width="230" width-request="10">
+    <text><label>""</label></text>
+    <hbox>
+     <vbox space-expand="false" space-fill="false">
+      <pixmap icon_size="6"><input file stock="gtk-dialog-info"></input></pixmap>
+     </vbox>
+     <text width-request="5" label="" space-expand="false" space-fill="false"></text>
+     <text use-markup="true" label="'$(gettext "I N F O R M A T I O N
+<i>Pfind is a tool to find files on your harddisks. You don't need to know the exact name of the file to find it. It is enough to specify a part of the filename as search-text.
+
+
+For more options, please try the Advanced button.</i>
+
+
+
+
+R E G U L A R   E X P R E S S I O N S
+<i>To define an exact search, you can use the following terms:</i>
+
+<b>[OR]</b>
+<i>Filename/content must contain either 'this [OR] that'. This will give more results.</i>
+
+<b>[AND]</b>
+<i>Filename/content must contain both 'this [AND] that'. This will give less results.</i>
+
+<b>*</b>
+<i>Means anything. 'pup*back' finds both 'PuppyBackup' and 'Puppies are back'.</i>
+
+<b>?</b>
+<i>Means any char. 'pup??back' finds only 'PuppyBackup'. '??' represent only two chars.</i>")'" space-expand="false" space-fill="false"></text>
+     <hbox space-expand="true" space-fill="true">
+      <text><label>""</label></text>
+     </hbox>
+    </hbox>
+   </vbox>
+
+
+   <vbox space-expand="true" space-fill="true">
+    <hbox spacing="0" space-expand="true" space-fill="true">
+
+     '`build_svg_buttons`'
+
+     <tree rules_hint="true" exported_column="1" selection-mode="3" column-sort-function="0|0|1|1|0|0" file-monitor="true" auto-refresh="true">
+      <label>'$(gettext "Filename")'|'$(gettext "Path")'|'$(gettext "Size")'|'$(gettext "Last modified")'|'$(gettext "Permissions")'|'$(gettext "User")'</label>
+      <input file icon_column="0">/tmp/pfind-treeitems'$PROGPID'</input>
+      <variable>TREE</variable>
+      <height>10</height><width>10</width>
+	  <action signal="button-press-event">. '$PROGPATH'/func -rightclick_menu</action>
+	  <action signal="button-release-event">echo "$TREE" > /tmp/pfind-TREE'$PROGPID'</action>
+      <action>'$PROGPATH'/func -execute "$TREE" &</action>
+     </tree>
+
+     <checkbox visible="false" file-monitor="true" auto-refresh="true">
+      <label>a</label>
+      <variable>UPDATE_RESULT</variable>
+      <input file>/tmp/pfind-done'$PROGPID'</input>
+      <action>if true sort -u --output=/tmp/pfind-files'$PROGPID' '$HOME'/.pfilesearch/hits</action>
+      <action>if true mv -f /tmp/pfind-files'$PROGPID' '$HOME'/.pfilesearch/hits</action>
+      <action>if true cp '$HOME'/.pfilesearch/hits /tmp/pfind-files'$PROGPID'</action>
+      <action>if true cp '$HOME'/.pfilesearch/hits /tmp/pfind-view'$PROGPID'</action>
+      <action>if true echo ALL > /tmp/pfind-category'$PROGPID'</action>
+      <action>if true '$PROGPATH'/func -build_svg</action>
+      <action>if true '$PROGPATH'/func -build_treeitems</action>
+      <action>if true refresh:STATUSBAR</action>
+      <action>if true enable:MENU_SELECTION</action>
+      <action>if true enable:MENU_LIST</action>
+      <action>if true refresh:UPDATE_RESULT</action>
+      <action>if true echo 1 > /tmp/pfind-tabnr'$PROGPID'</action>
+      <action>if true refresh:NOTEBOOK</action>
+      <action>if true refresh:BUTTON_ALL</action>
+      <action>if true refresh:BUTTON_DOC</action>
+      <action>if true refresh:BUTTON_PIC</action>
+      <action>if true refresh:BUTTON_MUSIC</action>
+      <action>if true refresh:BUTTON_VIDEO</action>
+      <action>if true refresh:BUTTON_ZIP</action>
+      <action>if true refresh:BUTTON_CODE</action>
+      <action>if true echo false > /tmp/pfind-done'$PROGPID'</action>
+     </checkbox>
+     
+    </hbox>
+   </vbox>
+   <input file>/tmp/pfind-tabnr'$PROGPID'</input>
+   <variable>NOTEBOOK</variable>
+  </notebook>
+     <vbox visible="false">
+      <vbox scrollable="true">
+       '"$(pfilesearch -ee -d "$SEARCHPATHS")"'
+      </vbox>
+      <vbox space-expand="false" space-fill="false">
+       <statusbar>
+        <input file>'$HOME'/.pfilesearch/tmp/pfilesearch-execfind</input>
+        <variable>STATUSBAR</variable>
+       </statusbar>
+      </vbox>
+      <variable>GUI_ADVANCED</variable>
+     </vbox>
+    </hbox>
+ </vbox>
+ <action signal="hide">. '$PROGPATH'/func -write_config</action>
+ <action signal="hide">exit:Exit</action>
+</window>'
+#echo "$Pfind" > /root/gtk
+I=$IFS; IFS=""
+for STATEMENTS in  $(gtkdialog -p Pfind); do
+	eval $STATEMENTS
+done
+IFS=$I
+case $EXIT in
+	98) configure
+		pfind &
+		;;
+	*)	rm -dr /tmp/searchresult$PROGPID 2> /dev/null
+		rm /tmp/pfind*$PROGPID*
+		;;
+esac
+exit 0
+}
+
+configure () {
+#PROFILE=`grep PROFILE $HOME/.pfind/pfindrc | sed -e s/^.*\=//g`
+export Pfind_preferences="
+<window title=\"Pfind\"icon-name=\"gtk-find\">
+<vbox>
+ <notebook labels=\" $(gettext 'General') | $(gettext 'Settings') | $(gettext 'Commands') \">
+  <vbox>
+   <frame $(gettext 'Search options / MIME settings')>
+     <hbox>
+      <button>
+       <input file stock=\"gtk-find\"></input>
+       <label>$(gettext 'Search options / MIME settings')</label>
+       <action>. pfilesearch -p</action>
+      </button>
+     </hbox>
+     <text><label>\"\"</label></text>
+     <text><label>$(gettext 'Pfind uses 'Pfilesearch' as its file-search-engine. All search settings are global, and will affect other programs that uses Pfilesearch.')</label></text>
+   </frame>
+   <frame $(gettext "Language")>
+    <hbox>
+     <text><label>$(gettext "Choose language and restart Pfind")</label></text>
+     <combobox>
+      <variable>NEW_LANGUAGE</variable>
+      <item>$LANGUAGE</item>
+      $LANGUAGES
+     </combobox>
+    </hbox>
+   </frame>
+  </vbox>
+  <vbox>
+   <frame $(gettext "Filename")>
+    <text use-markup=\"true\"><label>\"$(gettext "Filenames in searchresult can be shown in 3 different ways:
+<b>Short</b> - Just filename (file.txt). Similar files (/tmp/file.txt and /root/file.txt) will be (file.txt) and (file~.txt).
+<b>Long</b> - Filename with path (-tmp-file.txt). Never similar files.
+<b>Hybrid</b> - As 'short', but 'long' when similar files.")\"</label></text>
+    <combobox>
+     <variable>FILENAME</variable>
+     <item>$FILENAME</item>
+     <item>Short</item>
+     <item>Long</item>
+     <item>Hybrid</item>
+    </combobox>
+   </frame>
+   <frame>
+    <checkbox>
+     <label>\"$(gettext "Allow filenames with < or >. Trouble if not compatible with UTF-8")\"</label>
+     <variable>ACCEPT_ARROW</variable>
+     <default>$ACCEPT_ARROW</default>
+    </checkbox>
+   </frame>
+   <frame $(gettext "External programs")>
+    <hbox>
+     <text><label>$(gettext "Default File manager")</label></text>
+     <entry><variable>FILEMANAGER</variable><input>echo '$FILEMANAGER'</input></entry>
+    </hbox>
+    <hbox>
+     <text><label>$(gettext "Default Text editor")</label></text>
+     <entry><variable>TEXTEDITOR</variable><input>echo '$TEXTEDITOR'</input></entry>
+    </hbox>
+   </frame>
+  </vbox>
+  <vbox>
+   <text><label>$(gettext "FileManager")</label></text>
+   <combobox>
+    <variable>EXEC_FILEMANAGER_X</variable>
+    <item>\"$EXEC_FILEMANAGER\"</item>
+    <item>\"rox /tmp/searchresult/\"</item>
+    <item>\"Thunar /tmp/searchresult/\"</item>
+   </combobox>
+   <text><label>$(gettext "TextEditor")</label></text>
+   <combobox>
+    <variable>EXEC_TEXTEDITOR_X</variable>
+    <item>\"$EXEC_TEXTEDITOR\"</item>
+    <item>\"defaulttexteditor /tmp/searchresult/*\"</item>
+    <item>\"geany /tmp/searchresult/*\"</item>
+    <item>\"leafpad /tmp/searchresult/*\"</item>
+   </combobox>
+   <text><label>$(gettext "ImageBrowser")</label></text>
+   <combobox>
+    <variable>EXEC_IMAGEBROWSER_X</variable>
+    <item>\"$EXEC_IMAGEBROWSER\"</item>
+    <item>\"fotoxx -i /tmp/searchresult\"</item>
+    <item>\"geeqie /tmp/searchresult/\"</item>
+    <item>\"gimv -d /tmp/searchresult/\"</item>
+    <item>\"gpicview /tmp/searchresult/\"</item>
+    <item>\"gqview /tmp/searchresult/\"</item>
+    <item>\"gtksee -R /tmp/searchresult\"</item>
+    <item>\"viewnior /tmp/searchresult\"</item>
+   </combobox>
+   <text><label>$(gettext "Slideshow")</label></text>
+   <combobox>
+    <variable>EXEC_SLIDESHOW_X</variable>
+    <item>\"$EXEC_SLIDESHOW\"</item>
+    <item>\"gimv -dS /tmp/searchresult/\"</item>
+    <item>\"qiv -ftsNF /tmp/pfind-links\"</item>
+    <item>\"gpicview /tmp/searchresult/\"</item>
+    <item>\"gqview -s /tmp/searchresult/\"</item>
+    <item>\"viewnior /tmp/searchresult\"</item>
+   </combobox>
+   <text><label>$(gettext "MusicPlayer")</label></text>
+   <combobox>
+    <variable>EXEC_MUSICPLAYER_X</variable>
+    <item>\"$EXEC_MUSICPLAYER\"</item>
+    <item>\"aqualung /tmp/pfind-music.m3u\"</item>
+    <item>\"gmplayer -playlist /tmp/pfind-music.m3u\"</item>
+    <item>\"gxine /tmp/searchresult/*\"</item>
+    <item>\"pmusic /tmp/pfind-music.m3u\"</item>
+    <item>\"xine -P /tmp/pfind-music.m3u\"</item>
+    <item>\"xmms -p /tmp/pfind-music.m3u\"</item>
+   </combobox>
+   <text><label>$(gettext "VideoPlayer")</label></text>
+   <combobox>
+    <variable>EXEC_VIDEOPLAYER_X</variable>
+    <item>\"$EXEC_VIDEOPLAYER\"</item>
+    <item>\"gmplayer -playlist /tmp/pfind-video.m3u\"</item>
+    <item>\"gxine /tmp/searchresult/*\"</item>
+    <item>\"xine -P /tmp/pfind-music.m3u\"</item>
+   </combobox>
+   <text><label>$(gettext "Burn")</label></text>
+   <combobox>
+    <variable>EXEC_BURNER_X</variable>
+    <item>\"$EXEC_BURNER\"</item>
+    <item>\"grafburn -f /tmp/pfind-links\"</item>
+    <item>\"pburn -i /tmp/pfind-links\"</item>
+   </combobox>
+  </vbox>
+ </notebook>
+ <hbox>
+  <button cancel><input file stock=\"gtk-cancel\"></input></button>
+  <button ok><input file stock=\"gtk-ok\"></input><action type=\"exit\">OK</action></button>
+ </hbox>
+</vbox>
+</window>"
+I=$IFS; IFS=""
+for STATEMENTS in  $(gtkdialog -p Pfind_preferences --center); do
+	eval $STATEMENTS
+done
+IFS=$I
+if [ $EXIT = OK ]; then
+   [ "$NEW_LANGUAGE" = "English" ] && NEW_LANGUAGE=en
+   [ "$NEW_LANGUAGE" ] && export LANGUAGE="$NEW_LANGUAGE"
+
+	EXEC_FILEMANAGER="$EXEC_FILEMANAGER_X"
+	EXEC_TEXTEDITOR="$EXEC_TEXTEDITOR_X"
+	EXEC_EXPORT_LIST_TO_TEXTEDITOR="$EXEC_EXPORT_LIST_TO_TEXTEDITOR_X"
+	EXEC_IMAGEBROWSER="$EXEC_IMAGEBROWSER_X"
+	EXEC_SLIDESHOW="$EXEC_SLIDESHOW_X"
+	EXEC_MUSICPLAYER="$EXEC_MUSICPLAYER_X"
+	EXEC_VIDEOPLAYER="$EXEC_VIDEOPLAYER_X"
+	EXEC_BURNER="$EXEC_BURNER_X"
+	. $PROGPATH/func -write_config
+fi
+}
+
+
+
+#========================== PROGRAM =============================
+#version upgrade
+if [ "`grep VERSION $HOME/.pfind/pfindrc 2> /dev/null | cut -d= -f2`" != "$VERSION" ]; then
+	mkdir -p $HOME/.pfind
+	cp -f $PROGPATH/pfindrc $HOME/.pfind/
+fi
+#---
+echo -n > $HOME/.pfilesearch/tmp/SEARCHPATHS #cleanup
+. $HOME/.pfind/pfindrc #read config file
+# and sets LANGUAGE=auto #### no more auto as variable now, there is LANG 
+[ "$LANGUAGE" ] || LANGUAGE="${LANG%%_*}" # ex: ru for ru_RU.UTF-8
+
+#parameters
+while [ $# != 0 ]; do
+	I=1
+	while [ $I -le `echo $# | wc -c` ]; do #check -xft
+		if [ `echo $1 | grep v` ]; then echo "Pfind $VERSION"; exit; fi
+		if [ `echo $1 | grep h` ]; then
+echo 'Options
+  -d [DIR]    Search in a specific directory.
+  -h          show this help message.
+  -v          show Pfind version.'
+  			exit
+		fi
+		#all parameters that 'shifts'
+		if [ `echo $1 | grep d` ]; then
+			export OVERRIDE_SEARCHPATHS="$2"
+			export CURDIR="$2"
+			export RADIOBUTTON_PATH_PUPPY=false
+			export RADIOBUTTON_PATH_MNT=false
+			export RADIOBUTTON_PATH_CURRENT=true
+			export RADIOBUTTON_PATH_ALL=false
+			shift
+		fi
+		shift
+		I=$[$I+1]
+	done
+done
+
+export LANGUAGES="<item>English</item>`find /usr/share/locale -name $TEXTDOMAIN.mo | cut -d'/' -f5 | awk '{print "<item>"$1"</item>"}' | sort`"
+
+export SEARCHSTRING="$(gettext "Search text")"
+#---
+export EXTDOC=`grep document= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+#'$' makes the end of word (extension) '\|' makes grep either
+export EXTPIC=`grep picture= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+export EXTMUSIC=`grep music= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+export EXTVIDEO=`grep video= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+export EXTZIP=`grep zip= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+export EXTCODE=`grep code= $HOME/.pfilesearch/pfilesearchMIMErc | sed -e s/^.*\=//g | sed -e 's/ ./$\\\|\\\./g'`
+#choose browser for helpfile
+if which defaultbrowser >/dev/null ; then export BROWSER=defaultbrowser
+	elif which hv3 >/dev/null ;   then export BROWSER=hv3
+	elif which dillo >/dev/null ; then export BROWSER=dillo
+	elif which mozilla >/dev/null ; then export BROWSER=mozilla
+	elif which opera >/dev/null ; then export BROWSER=opera
+	elif which netscape >/dev/null ; then export BROWSER=netscape
+	elif which firefox >/dev/null ;   then export BROWSER=firefox
+	elif which konqueror >/dev/null; then export BROWSER=konqueror
+fi
+#---
+sort -u --output=/tmp/pfind-files$PROGPID $HOME/.pfilesearch/hits
+mv -f /tmp/pfind-files$PROGPID $HOME/.pfilesearch/hits
+cp $HOME/.pfilesearch/hits /tmp/pfind-files$PROGPID
+cp $HOME/.pfilesearch/hits /tmp/pfind-view$PROGPID
+overview
