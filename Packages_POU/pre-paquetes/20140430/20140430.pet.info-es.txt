@@ -4,6 +4,12 @@ Descripción del paquete:
 - información
 Adobe flash 11.2.202.350
 Agregando archivos necesarios para miniaturas de video
+Traducciones petspec, xinitrc_test
+Configuraciones varias lxpanel, pidgin, roxterm, pinboard, pcur, openbox
+Temas de punteros del ratón agregados
+Traducción del cortafuegos en bandeja systray
+Actualización de pfind-5.12
+Controlador de redes inalambricas rtl8192cu
 
  POU (Puppy Online Updater)
  urgencia=baja
