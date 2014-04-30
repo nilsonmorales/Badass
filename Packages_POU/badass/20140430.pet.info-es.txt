@@ -1,0 +1,21 @@
+UPDATEINFOTXT="20140430.pet
+
+Descripción del paquete:
+- información
+Adobe flash 11.2.202.356
+Agregando archivos necesarios para miniaturas de video
+Traducciones petspec, xinitrc_test
+Configuraciones varias lxpanel, pidgin, roxterm, pinboard, pcur, openbox
+Temas de punteros del ratón agregados
+Traducción del cortafuegos en bandeja systray
+Actualización de pfind-5.12
+Controlador de redes inalambricas rtl8192cu
+Cambio en /etc/issue
+SeaMonkey 2.25
+
+ POU (Puppy Online Updater)
+ urgencia=baja
+ 
+Preguntas/Información => utilizar el foro.
+      http://puppyes.com.ar/foros
+"
